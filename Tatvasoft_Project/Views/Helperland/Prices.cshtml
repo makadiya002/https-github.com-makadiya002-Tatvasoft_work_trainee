@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="~/css/style2.css">
+</head>
+<body>
+    <div id="prices_head">
+        <nav class="navbar navbar-expand-lg contact_navbar fixed-top" style="background-color: #525252; ">
+            <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto con_nav_ul">
+                    <li class="nav-item active">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_booknow">Book now <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Prices" id="con_nav_item_price">Prices & Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_war">Warranty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Contact" id="con_nav_item_con">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_login" data-toggle="modal" data-target="#exampleModal">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Become_helper" id="con_nav_item_bah">Become a helper</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login to your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        </div>
+                        <button style="width: 90%;margin-top:10px; center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                            <a href="#" style="color: white;font-size: 18px;">Login</a>
+                        </button>
+                    </form>
+
+                    <a href="#" id="id_FP" class="F_p" onclick="f1()" data-toggle="modal" data-target="#forgotpassword">Forgot Password?</a>
+                    <div class="c_a">Don't have an Account? <a href="/Helperland/New_user">Create an Account</a></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: gray;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                        </div>
+
+                        <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                            <a href="#" style="color: white;font-size: 18px;">Send</a>
+                        </button>
+                    </form>
+
+                    <a href="#" class="LN" data-toggle="modal" data-target="#forgotpassword">Login now</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="prices_faq_scnd">
+        <img src="~/images/prices_first.png">
+    </div>
+
+    <div class="faq">
+        Prices
+    </div>
+
+    <div class="prices_fb">
+        <div class="prices_fb_inner">
+            <div class="prices_fb_inner_1">
+                One Time
+            </div>
+            <div class="prices_fb_inner_2">
+                $ 20<span style="font-size: 24px;">/hr</span>
+            </div>
+            <div class="prices_bx_imgs">
+                <img src="~/images/prices_box_arw.png">
+                <div> Lower prices</div>
+            </div>
+            <div class="prices_bx_imgs">
+                <img src="~/images/prices_box_arw.png">
+                <div> Easy online & secure payment </div>
+            </div>
+            <div class="prices_bx_imgs">
+                <img src="~/images/prices_box_arw.png">
+                <div> Easy amendment</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="prices_first_hr" style="">
+
+    <div class="faq">
+        Extra services
+    </div>
+
+    <div class="es_main">
+        <div class="es_inner">
+            <div class="es_inner_bdr"><img style="margin-left:13px;" class="es_inner_img1" src="~/images/price_es_1.png"></div>
+            <div class="prices_es_txt">Inside cabinets</div>
+            <div class="es_inner_last" style="text-align: center;">30 minutes</div>
+        </div>
+        <div class="es_inner">
+            <div class="es_inner_bdr"><img class="es_inner_img1" src="~/images/price_es_2.png"></div>
+            <div class="prices_es_txt">Inside fridge</div>
+            <div class="es_inner_last" style="text-align: center;">30 minutes</div>
+        </div>
+        <div class="es_inner">
+            <div class="es_inner_bdr_oven"><img style="height: 33px;width: 52px;" class="es_inner_img1" src="~/images/price_es_3.png"></div>
+            <div class="prices_es_txt" style="margin-top: 16px;">Inside oven</div>
+            <div class="es_inner_last" style="text-align: center;">30 minutes</div>
+        </div>
+        <div class="es_inner">
+            <div class="es_inner_bdr_wash"><img style="margin-left:33px;height: 46px;width: 39px;" class="es_inner_img4" src="~/images/price_es_4.png"></div>
+            <div class="prices_es_txt_wash">Laundry wash & dry</div>
+            <div class="es_inner_last" style="text-align: center;">30 minutes</div>
+        </div>
+        <div class="es_inner">
+            <div class="es_inner_bdr"><img style="margin-left:13px;height: 46px;width: 47px;" class="es_inner_img1" src="~/images/price_es_5.png"></div>
+            <div class="prices_es_txt" style="margin-top: 11px;">Interior windows</div>
+            <div class="es_inner_last" style="text-align: center;">30 minutes</div>
+        </div>
+    </div>
+
+    <div class="prices_cleaning_main">
+        <div class="price_clean_hd">
+            What we include in cleaning
+        </div>
+        <div class="price_crd_main">
+            <div class="price_crd">
+                <img class="price_crd_img" src="~/images/prices_cleaning_1.png">
+                <div class="price_crd_title">Bedroom and Living Room</div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Dust all accessible surfaes</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Wipe down all mirrors and glass fixtures</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Clean all floor surfaces</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Take out garbage and recycling</div>
+                </div>
+            </div>
+
+
+            <div class="price_crd">
+                <img class="price_crd_img" src="~/images/prices_cleaning_2.png">
+                <div class="price_crd_title">Bathrooms</div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Wash and sanitize the toilet, shower, tub, sink</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Dust all accessible surfaces</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Wipe down all mirrors and glass fixtures</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Clean all floor surfaces</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Take out garbage and recycling</div>
+                </div>
+            </div>
+
+
+            <div class="price_crd">
+                <img class="price_crd_img" src="~/images/prices_cleaning_3.png">
+                <div class="price_crd_title">Kitchen</div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Dust all accessible surfaces</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Empty sink and load up dishwasher</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Wipe down exterior of stove, oven and fridge</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Clean all floor surfaces</div>
+                </div>
+                <div class="prices_card_lst">
+                    <img src="~/images/right_arw.png">
+                    <div>Take out garbage and recycling</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prices_wh">
+        Why Helperland
+    </div>
+
+    <div class="prices_wh_main">
+        <div class="prices_wh_left">
+            <div class="wh_left1">
+                <div style="" class="wh_left_hd">Experienced and vetted professionals</div>
+                <div class="wh_left_txt1">dominate the industry in scale and scope with an adaptable, extensive network that consistently delivers exceptional results.</div>
+            </div>
+            <div class="wh_left2">
+                <div style="margin-top: 35px;" class="wh_left_hd">Dedicated customer service</div>
+                <div class="wh_left_txt1">
+                    to our customers and are guided in all we do by their needs. The team is always happy to support you and offer all the information.
+                </div>
+            </div>
+        </div>
+
+        <div class="wh_mid">
+            <img src="~/images/prices_best_cleaning.png">
+        </div>
+
+        <div class="prices_wh_right">
+            <div class="wh_right1">
+                <div class="wh_right_hd">Every cleaning is insured</div>
+                <div class="wh_right_txt">
+                    and seek to provide exceptional service and engage in proactive behavior. We‘d be happy to clean your homes.
+                </div>
+            </div>
+            <div class="wh_right_2">
+                <div style="margin-top: 35px;" class="wh_right_hd">Secure online payment</div>
+                <div style="" class="wh_right_txt">Payment is processed securely online. Customers pay safely online and manage the booking.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ftr_with_igs">
+
+        <a href="#prices_head"><div class="one_cls">^</div></a>
+        <div style="display: flex;flex-direction: column;">
+            <div class="n_l">GET OUR NEWSLETTER</div>
+            <div style="display: flex;flex-wrap: wrap;">
+                <form style="display: flex;width: 100%; flex-wrap: wrap;text-align:center;">
+                    <form style="display: flex;">
+                        <input type="Email" class="mail f_1" placeholder="Your Email">
+                        <input type="Email" class="mail f_2" placeholder="Email">
+                        <button class="bb_tt_nn">Submit</button>
+                    </form>
+                </form>
+            </div>
+        </div>
+
+        <img class="two_cls" src="~/images/last_ig.png">
+    </div>
+
+    <div class="faq_ff_main">
+        <div class="faq_ff_2 final_footer">
+            <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <ul>
+                <li><a style="color: white;" href="/Home">HOME</a></li>
+                <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+            </ul>
+            <div>
+                <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+            </div>
+        </div>
+
+        <hr class="prices_hr">
+
+        <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

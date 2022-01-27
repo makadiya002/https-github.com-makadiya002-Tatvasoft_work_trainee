@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+          href="~/css/style2.css">
+</head>
+<body>
+
+    <div id="faq_main_nav">
+        <nav class="navbar navbar-expand-lg contact_navbar fixed-top" style="background-color: #525252;">
+            <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto con_nav_ul">
+                    <li class="nav-item active">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_booknow">Book now <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Prices" id="con_nav_item_price">Prices & Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_war">Warranty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Contact" id="con_nav_item_con">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="#" id="con_nav_item_login" data-toggle="modal" data-target="#exampleModal">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link" href="/Helperland/Become_helper" id="con_nav_item_bah">Become a helper</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login to your Account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form style="margin-bottom: 15px;">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                            </div>
+                            <button style="width: 90%;margin-top:10px; center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                                <a href="#" style="color: white;font-size: 18px;">Login</a>
+                            </button>
+                        </form>
+
+                        <a href="#" id="id_FP" class="F_p" onclick="f1()" data-toggle="modal" data-target="#forgotpassword">Forgot Password?</a>
+                        <div class="c_a">Don't have an Account? <a href="/Helperland/New_user">Create an Account</a></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: gray;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form style="margin-bottom: 15px;">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                            </div>
+
+                            <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                                <a href="#" style="color: white;font-size: 18px;">Send</a>
+                            </button>
+                        </form>
+
+                        <a href="#" class="LN" data-toggle="modal" data-target="#forgotpassword">Login now</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="faq_scnd">
+            <img src="~/images/faq_main_img.png">
+        </div>
+
+        <div class="faq">
+            FAQs
+        </div>
+
+
+
+        <div class="faq_sp">
+            Whether you are Customer or Service provider,<br>
+            We have tried our best to solve all your queries and questions.
+        </div>
+
+        <div class="faq_tgl">
+            <ul class="nav nav-pills row container-fluid" id="pills-tab" role="tablist">
+                <li class="nav-item col-6" style="background-color: #f6f6f6;">
+                    <a class="nav-link active faq_item faq_ul" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="margin-left: 10%;min-height: 66px;">For Customer</a>
+                </li>
+                <li class="nav-item col-6" style="background-color: #f6f6f6;">
+                    <a class="nav-link faq_item faq_ul" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" style="min-height: 66px;" aria-controls="pills-profile" aria-selected="false">For Service Provider</a>
+                </li>
+            </ul>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo2">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo2" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo3">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo3" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo4">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo4" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo5">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo5" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <button style="background-color: transparent;margin-left: 5%;" type="button" class="btn" data-toggle="collapse" data-target="#demo6">
+                <div style="display: flex;width:100%;flex-wrap: wrap; margin-top: 20px;margin-bottom: 12px;">
+                    <div class="faq_text_da">
+                        <img src="~/images/down_arw.png">
+                    </div>
+                </div>
+            </button>
+            <div class="faq_text_first">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl nunc, iaculis mattis tellus ac ut non imperdiet velit?
+            </div>
+            <div id="demo6" class="collapse faq_text_scnd">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam tincidunt, fringilla ante vitae, dapibus velit. Vivamus id tortor rhoncus, efficitur quam at, suscipit tortor. Integer fermentum convallis eros vel semper. Ut non imperdiet velit. Praesent eu dui vel lacus porta eleifend eget quis dui. Integer tempus massa in gravida tincidunt. Fusce in libero tristique, euismod nisi vel, luctus urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec et placerat arcu. Suspendisse lacinia tristique massa. Etiam risus justo, scelerisque id arcu eu, sodales tempor eros. Aliquam efficitur pretium urna, sit amet congue risus malesuada rutrum. Donec id massa vel velit ullamcorper accumsan ut eget nisl. Fusce viverra commodo lacus, sit amet facilisis leo luctus dictum.
+
+            </div>
+        </div>
+
+        <div class="ftr_with_igs">
+
+            <a href="#faq_main_nav"><div class="one_cls">^</div></a>
+            <div style="display: flex;flex-direction: column;">
+                <div class="n_l">GET OUR NEWSLETTER</div>
+                <div style="display: flex;flex-wrap: wrap;">
+                    <form style="display: flex;width: 100%; flex-wrap: wrap;text-align:center;">
+                        <form style="display: flex;">
+                            <input type="Email" class="mail f_1" placeholder="Your Email">
+                            <input type="Email" class="mail f_2" placeholder="Email">
+                            <button class="bb_tt_nn">Submit</button>
+                        </form>
+                    </form>
+                </div>
+            </div>
+
+            <img class="two_cls" src="~/images/last_ig.png">
+        </div>
+
+        <div class="faq_ff_main">
+            <div class="faq_ff_2 final_footer">
+                <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+                <ul>
+                    <li><a style="color: white;" href="/Home">HOME</a></li>
+                    <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                    <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                    <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                    <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                    <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+                </ul>
+                <div>
+                    <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                    <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+                </div>
+            </div>
+
+            <hr class="prices_hr">
+
+            <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

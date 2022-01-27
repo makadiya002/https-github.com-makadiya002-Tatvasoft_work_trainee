@@ -1,0 +1,170 @@
+﻿@model User
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="../css/style2.css">
+</head>
+<body>
+    <h1 style="text-align: center;margin-top: 15px;">Create an account</h1>
+    <div class="contact_arw">
+        <div class="dec_lines">_______</div>&nbsp;
+        <img class="dec_img" src="~/images/contact_arr.png">&nbsp;
+        <div class="dec_lines">_______</div>
+    </div>
+
+    <form asp-controller="Helperland" asp-action="Register" method="post" class="container-fluid" style="margin-top: 30px;">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputEmail4" asp-for="FirstName" placeholder="First Name">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputPassword4" asp-for="LastName" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <input type="Email" class="form-control" id="inputPassword4" asp-for="Email" placeholder="Email address">
+            </div>
+            <div class="form-group col-md-1">
+                <input type="text" readonly class="form-control" id="inputEmail4" placeholder="+49">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" class="form-control" id="inputPassword4" asp-for="Mobile" placeholder="Mobile number">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="password" class="form-control" id="inputEmail4" asp-for="Password" placeholder="Password">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Confirm Password">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="inputEmail4" asp-for="ZipCode" placeholder="Zipcode">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="date" class="form-control" id="inputPassword4" asp-for="DateOfBirth" placeholder="Date of Birth">
+            </div>
+        </div>
+
+        <input type="checkbox" required name="cb"> I have read the <a href="#" data-toggle="modal" data-target="#exampleModalLong">Privacy Policy</a>
+        <br><input type="checkbox" name="pets" asp-for="WorksWithPets"> I have pets at home
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn_register_demo" style=" width: 130px; border-radius: 20px; margin-top: 7px; ">Register</button>
+        </div>
+    </form>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login to your Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        </div>
+                        <button style="width: 90%;margin-top:10px; center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                            <a href="#" style="color: white;font-size: 18px;">Login</a>
+                        </button>
+                    </form>
+
+                    <a href="#" id="id_FP" class="F_p" onclick="f1()" data-toggle="modal" data-target="#forgotpassword">Forgot Password?</a>
+                    <div class="c_a">Don't have an Account? <a href="/Helperland/New_user">Create an Account</a></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: gray;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin-bottom: 15px;">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                        </div>
+
+                        <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                            <a href="#" style="color: white;font-size: 18px;">Send</a>
+                        </button>
+                    </form>f
+
+                    <a href="#" class="LN" data-toggle="modal" data-target="#forgotpassword">Login now</a>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid temp_lst_lgin_now" style=" text-align: center; margin-top: 10px; ">Already registered? 
+    <a href="#" data-toggle="modal" data-target="#exampleModal">Login now</a></div>
+
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

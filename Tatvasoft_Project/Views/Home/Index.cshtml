@@ -1,0 +1,446 @@
+﻿@model User
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <title>HomePage</title>
+    <link rel="stylesheet" type="text/css"
+          href="~/css/style2.css">
+</head>
+<body>
+
+    <div id="temp_main" style="background-image: url('../images/homepage_main_img.png');">
+
+        <div class="sp_nav">
+            <nav class="navbar navbar-expand-lg contact_navbar fixed-top">
+                <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto con_nav_ul">
+                        <li class="nav-item active">
+                            <a style="" class="nav-link" href="#" id="sp_nav_item_booknow">Book a Cleaner <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sp_nav_item_price" href="/Helperland/Prices">Prices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="#" id="sp_nav_item_war">Our Guarantee</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="#" id="sp_nav_item_blog">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="/Helperland/Contact" id="sp_nav_item_con">Contact us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="#" id="sp_nav_item_login" data-toggle="modal" data-target="#exampleModal">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="/Helperland/Become_helper" id="sp_nav_item_bah">Become a helper</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="" class="nav-link" href="#" id="sp_nav_item_flag"><img src="~/images/flag@2x.png"></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        @if (ViewBag.err != null)
+        {
+            <h4 style="color:red;text-align:center;">Username and/or Password is Incorrect, <a href="#" style="color:blue;" data-toggle="modal" data-target="#exampleModal">Try again</a></h4>
+        }
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login to your Account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form asp-controller="Helperland" asp-action="Login" method="post" style="margin-bottom: 15px;">
+                            <div class="form-group">
+                                <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                            </div>
+                            <button style="width: 90%;margin-top:10px; center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                                <a style="color: white;font-size: 18px;">Login</a>
+                            </button>
+                        </form>
+
+                        <a href="#" id="id_FP" class="F_p" onclick="f1()" data-toggle="modal" data-target="#forgotpassword">Forgot Password?</a>
+                        <div class="c_a">Don't have an Account? <a href="/Helperland/New_user">Create an Account</a></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="forgotpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: gray;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form asp-action="Forgot_password" asp-controller="Helperland" method="post" style="margin-bottom: 15px;">
+                            <div class="form-group">
+                                <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                            </div>
+
+                            <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
+                                <a href="#" style="color: white;font-size: 18px;">Send</a>
+                            </button>
+                        </form>
+
+                        <a href="#" class="LN" data-toggle="modal" data-target="#forgotpassword">Login now</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="txt_hd">Do not feel like<br>Housework?</div>
+
+        <div class="txt_hd_inner">
+            <div class="txt_hd_inner_sml" style="margin-left: 58px;margin-bottom: 10px;">
+                Great! book now for helperland<br>and enjoy
+                the benifits
+            </div>
+        </div>
+        <div class="txt_hd_inner">
+            <img src="~/images/forma-1-copy-10@2x.png">
+            <div class="txt_hd_inner_sml">Certified and insured helper</div>
+        </div>
+        <div class="txt_hd_inner">
+            <img src="~/images/forma-1-copy-10@2x.png">
+            <div class="txt_hd_inner_sml">Easy booking procedure</div>
+        </div>
+
+        <div class="txt_hd_inner">
+            <img src="~/images/forma-1-copy-10@2x.png">
+            <div class="txt_hd_inner_sml">Friendly customer service</div>
+        </div>
+
+        <div class="txt_hd_inner">
+            <img src="~/images/forma-1-copy-10@2x.png">
+            <div class="txt_hd_inner_sml">Secured online payment method</div>
+        </div>
+
+        <div class="btn_bac" style="width: 10px;">
+            <button style="">
+                Let’s Book a Cleaner
+            </button>
+        </div>
+
+        <div id="last_imgs">
+            <div class="syp">
+                <img style="height: 55px;width: 52px;" src="~/images/first.png">
+                <div style="margin-top: 10px; color:white;">Enter your postcode</div>
+            </div>
+            <div class="imaage_1"><img style="height: 13px;width: 55px;" src="~/images/arr_1.png"></div>
+            <div class="syp">
+                <img style="height: 55px;width: 52px;" src="~/images/second.png">
+                <div style="margin-top: 10px; color:white;">Select your date</div>
+            </div>
+            <div class="imaage_1">
+                <img style="height: 13px;width: 55px;margin-top: 10px;" src="~/images/arr_2.png">
+            </div>
+            <div class="syp">
+                <img style="height: 54px;width: 54px;" src="~/images/third.png">
+                <div style="margin-top: 10px; color:white;">Pay securely online</div>
+            </div>
+            <div class="imaage_1"><img style="height: 13px;width: 55px;" src="~/images/arr_1.png"></div>
+            <div class="syp">
+                <img style="height: 53px;width: 62px;" src="~/images/fourth.png">
+                <div style="margin-top: 10px; color:white;">Enjoy amazing service</div>
+            </div>
+        </div>
+
+        <div class="sp_da">
+            <a href="#w_hh">
+                <img src="~/images/sp_down_arw.png" style="margin-top: 0px;
+		margin-bottom: 35px;">
+            </a>
+        </div>
+
+    </div>
+
+    <div id="second">
+        <div id="w_hh" class="w_h">Why Helperland</div>
+
+        <div id="scnd_imgs">
+            <div style="display: flex;flex-direction: column;">
+                <img src="~/images/img_1.png">
+                <div style="height: 59px;width: 280px;font-size: 25px;
+				text-align: center;margin-top: 20px;font-weight: bold;">
+                    Experience & Vetted Professionals
+                </div>
+                <div style=" font-size: 13px;margin-top: 25px;background-color: transparent;border:none;margin-bottom: 25px;">dominate the industry in scale and scope<br>with an adaptable, extensive network that<br>consistently delivers exceptional results.</div>
+            </div>
+            <div style="display: flex;flex-direction: column;">
+                <img style="" src="~/images/img_2.png">
+                <div style="height: 59px;width: 280px; font-size: 25px;margin-top: 38px;font-weight: bold;">Secure Online Payment</div>
+                <div style="background-color: transparent;border:none; margin-top: 8px;font-size: 13px;text-align: center;margin-bottom: 25px;">
+                    Payment is processed securely online.
+                    <br>  Customers pay safely online and<br>         manage the booking.
+                </div>
+            </div>
+            <div style="display: flex;flex-direction: column;">
+                <img style="" src="~/images/img_3.png">
+                <div style="height: 59px;width: 270px;font-size: 25px;
+				text-align: center;margin-top: 20px;font-weight: bold;">Dedicated Customer Service</div>
+                <div style="margin-top: 25px;font-size: 13px;background-color: transparent;border:none;margin-bottom: 25px;">to our customers and are guided in all we do<br>by their needs. The team is always happy to<br> support you and offer all the information.</div>
+            </div>
+        </div>
+
+
+        <div class="after_wh">
+            <div style="margin-top: 90px;">
+                <div class="after_wh_top">Lorem ipsum dolor sit amet, consectetur</div>
+                <div class="after_wh_scnd">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisi sapien, sus-<br>cipit ut accumsan vitae, pulvinar ac libero.<br><br>
+
+                    Aliquam erat volutpat. Nullam quis ex odio. Nam bibendum cursus purus, vel efficitur urna finibus vitae. Nullam finibus aliquet pharetra. Morbi in sem dolor.Integer pretium hendrerit ante quis vehicula.<br><br>
+
+                    Mauris consequat ornare enim, sed lobortis quam ultrices sed.
+                </div>
+            </div>
+
+            <div class="r_i">
+                <div class="r_i_1"><img src="~/images/i_1.png"></div>
+                <div class="r_i_2"><img src="~/images/i_2.png"></div>
+                <div class="r_i_3">
+                    <img style="height: 170px;width: 170px;margin-left: 190px;"
+                         src="~/images/i__3.png">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="blog">
+        Our Blog
+    </div>
+
+    <div class="crds">
+
+        <div class="card">
+            <img class="card-img-top" src="~/images/card_img_1.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
+                <p style="font-size: 13px;color:#a3a3a3;">January 28, 2019</p>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br>pulvinar aliquet.</p>
+                <p class="card_p">Read the Post &nbsp; <img class="arw_ig" src="~/images/crd_arw.png"></p>
+            </div>
+        </div>
+
+
+        <div class="card" style="">
+            <img class="card-img-top" src="~/images/card_img_2.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
+                <p style="font-size: 13px;color:#a3a3a3;">January 28, 2019</p>
+                <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br>pulvinar aliquet.</div>
+
+                <p class="card_p">Read the Post &nbsp; <img class="arw_ig" src="~/images/crd_arw.png"></p>
+            </div>
+        </div>
+
+        <div class="card" style="">
+            <img class="card-img-top" src="~/images/card_img_3.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
+                <p style="font-size: 13px;color:#a3a3a3;">January 28, 2019</p>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br> pulvinar aliquet.</p>
+                <p class="card_p">Read the Post &nbsp; <img class="arw_ig" src="~/images/crd_arw.png"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="crds_2">
+        <div id="c_s">What Our Customers Say</div>
+
+        <div class="per_img_main">
+            <div class="per_img">
+                <div style="display: flex;">
+                    <img class="rnd_img" src="~/images/person_img_1.png">
+                    <div class="rnd_img_name">
+                        Lary Watson <div style="font-size: 14px;
+						color: #8e8e8e;">
+                            Manchester
+                        </div>
+                    </div>
+                </div>
+
+                <div class="per_img_txt">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br>pulvinar aliquet consequat. Praesent nec<br>malesuada nibh.<br><br>
+
+                    Nullam et metus congue, auctor augue sit amet, consectetur tortor.
+                </div><br>
+
+                <div class="per_arr">
+                    Read More &nbsp;<img class="arw_ig" src="~/images/crd_arw.png">
+                </div>
+            </div>
+
+            <div class="per_img" style="">
+                <div style="display: flex;">
+                    <img class="rnd_img" src="~/images/person_img_2.png">
+                    <div class="rnd_img_name">
+                        John Smith <div style="font-size: 14px;
+						color: #8e8e8e;">
+                            Manchester
+                        </div>
+                    </div>
+                </div>
+
+                <div class="per_img_txt">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br>pulvinar aliquet consequat. Praesent nec<br>malesuada nibh.<br><br>
+
+                    Nullam et metus congue, auctor augue sit amet, consectetur tortor.
+                </div><br>
+
+                <div class="per_arr">
+                    Read More &nbsp;<img class="arw_ig" src="~/images/crd_arw.png">
+                </div>
+
+            </div>
+
+            <div class="per_img" style="">
+                <div style="display: flex;">
+                    <img class="rnd_img" src="~/images/person_img_3.png">
+                    <div class="rnd_img_name">
+                        Lars Johnson <div style="font-size: 14px;
+						color: #8e8e8e;">
+                            Manchester
+                        </div>
+                    </div>
+                </div>
+
+                <div class="per_img_txt">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum metus<br>pulvinar aliquet consequat. Praesent nec<br>malesuada nibh.<br><br>
+
+                    Nullam et metus congue, auctor augue sit amet, consectetur tortor.
+                </div><br>
+
+                <div class="per_arr">
+                    Read More &nbsp;<img class="arw_ig" src="~/images/crd_arw.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="ftr_with_igs">
+
+            <a class="temp_a" href="#temp_main" style="text-decoration:none;"><div class="one_cls">^</div></a>
+            <div style="display: flex;flex-direction: column;">
+                <div class="n_l">GET OUR NEWSLETTER</div>
+                <div style="display: flex;flex-wrap: wrap;">
+                    <form style="display: flex;width: 100%; flex-wrap: wrap;text-align:center;">
+                        <form style="display: flex;">
+                            <input type="Email" class="mail f_1" placeholder="Your Email">
+                            <input type="Email" class="mail f_2" placeholder="Email">
+                            <button class="bb_tt_nn">Submit</button>
+                        </form>
+                    </form>
+                </div>
+            </div>
+
+            <img class="two_cls" src="~/images/last_ig.png">
+        </div>
+
+
+        <div class="faq_ff_main">
+            <div class="faq_ff_2 final_footer">
+                <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+                <ul>
+                    <li><a style="color: white;" href="/Home">HOME</a></li>
+                    <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                    <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                    <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                    <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                    <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+                </ul>
+                <div>
+                    <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                    <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+                </div>
+            </div>
+
+            <div id="final_ftr_2">
+                <div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat nunc libero, ac malesuada ligula aliquam ac. <span style="color:#6eabef;">Privacy Policy</span>
+                </div>
+
+                <button id="bn_ok" onclick="myFunction()">OK!</button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+
+        function myFunction() {
+            document.getElementById("final_ftr_2").style.display = "none";
+            document.getElementById("final_ftr_2").style.height = "10px";
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(window).scroll(function () {
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 10);
+        });
+    </script>
+
+    @if (ViewBag.msg != null)
+    {
+        <script>
+                alert("@ViewBag.msg");
+        </script>
+    }
+    @if (ViewBag.err_email != null)
+    {
+        <script>
+                alert("@ViewBag.err_email");
+        </script>
+    }
+
+</body>
+</html>
