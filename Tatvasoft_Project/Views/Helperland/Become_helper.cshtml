@@ -121,17 +121,17 @@
             <div class="sp_inner_div_hd">
                 Register Now!
             </div>
-            <form asp-controller="Helperland" asp-action="Register_sp" method="post" class="sp_form">
+            <form onsubmit="return validation()" asp-controller="Helperland" asp-action="Register_sp" method="post" class="sp_form">
                 <div class="form-group">
-                    <input asp-for="FirstName" type="text" class="form-control" id="formGroupExampleInput"
+                    <input required asp-for="FirstName" type="text" class="form-control" id="firstname"
                            placeholder="First name">
                 </div>
                 <div class="form-group">
-                    <input asp-for="LastName" type="text" class="form-control" id="formGroupExampleInput2"
+                    <input required asp-for="LastName" type="text" class="form-control" id="lastname"
                            placeholder="Last name">
                 </div>
                 <div class="form-group">
-                    <input asp-for="Email" type="Email" class="form-control" id="formGroupExampleInput2"
+                    <input required asp-for="Email" type="Email" class="form-control" id="email"
                            placeholder="Email Address">
                 </div>
                 <div class="form-row">
@@ -139,25 +139,25 @@
                         <input style="background-color: #f4f4f4;color: #4f4f4f;" type="text" class="form-control" id="inputEmail4" value="+46">
                     </div>
                     <div class="form-group col-md-8 sp_mn">
-                        <input asp-for="Mobile" type="text" class="form-control" id="inputPassword4" placeholder="Mobile number">
+                        <input required asp-for="Mobile" type="text" class="form-control" id="mobile" placeholder="Mobile number">
                     </div>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Password" type="password" class="form-control" id="formGroupExampleInput2"
+                    <input required asp-for="Password" type="password" class="form-control" id="password"
                            placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <input asp-for="Password" type="password" class="form-control" id="formGroupExampleInput2"
+                    <input required asp-for="Password" type="password" class="form-control" id="confirmpassword"
                            placeholder="Confirm Password">
                 </div>
                 <div class="form-group">
-                    <input asp-for="ZipCode" type="text" class="form-control" id="formGroupExampleInput2"
+                    <input required asp-for="ZipCode" type="text" class="form-control" id="zipcode"
                            placeholder="Zipcode">
                 </div>
 
                 <div class="form-group">
-                    <input asp-for="DateOfBirth" type="date" class="form-control" id="formGroupExampleInput2"
-                           placeholder="Date of birth">
+                    <input required asp-for="DateOfBirth" type="date" class="form-control" id="dob"
+                           placeholder="dob">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input sp_cb" type="checkbox" value=""
@@ -319,6 +319,56 @@
         });
     </script>
 
+    <script>
+        function validation()
+        {
+            var firstname = document.getElementById('firstname').value;
+            var lastname = document.getElementById('lastname').value;
+            var email = document.getElementById('email').value;
+            var mobile = document.getElementById('mobile').value;
+            var password = document.getElementById('password').value;
+            var confirmpassword = document.getElementById('confirmpassword').value;
+            var zipcode = document.getElementById('zipcode').value;
+            var dob = document.getElementById('dob').value;
+
+            if(firstname.length < 5 || lastname.length < 5)
+            {
+                alert("Minimum Length of first name and last name must be 5");
+                return false;
+            }
+            if(mobile.length != 10)
+            {
+                alert("Length of mobile number must be 10");
+                return false;
+            }
+            if(password.length < 5 || confirmpassword.length < 5)
+            {
+                alert("Minimum length of password and confirm password must be 5");
+                return false;
+            }
+            if(zipcode.length != 6)
+            {
+                alert("length of zipcode must be 6");
+                return false;
+            }
+            if(password != confirmpassword)
+            {
+                alert("Password and Confirm password must be same");
+                return false;
+            }
+            if(isNaN(mobile))
+            {
+                alert("mobile number must only contain digits");
+                return false;
+            }
+            if(isNaN(zipcode))
+            {
+                alert("zipcode must only contain digits");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 </body>
 </html>

@@ -135,7 +135,7 @@ namespace Tatvasoft_Project.Controllers
         public IActionResult Forgot_password(Models.User model)
         {
             var email = model.Email;
-            MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", email);
+            MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", "princemakadiya4@gmail.com");
             mm.Subject = "Reset Your Password from Helperland";
             _helperlandcontext = new HelperlandContext();
             var p = _helperlandcontext.Users.Where(x => x.Email == email).ToList();
