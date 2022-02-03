@@ -320,8 +320,7 @@
     </script>
 
     <script>
-        function validation()
-        {
+        function validation() {
             var firstname = document.getElementById('firstname').value;
             var lastname = document.getElementById('lastname').value;
             var email = document.getElementById('email').value;
@@ -331,44 +330,44 @@
             var zipcode = document.getElementById('zipcode').value;
             var dob = document.getElementById('dob').value;
 
-            if(firstname.length < 5 || lastname.length < 5)
-            {
+            if (firstname.length < 5 || lastname.length < 5) {
                 alert("Minimum Length of first name and last name must be 5");
                 return false;
             }
-            if(mobile.length != 10)
-            {
+            if (mobile.length != 10) {
                 alert("Length of mobile number must be 10");
                 return false;
             }
-            if(password.length < 5 || confirmpassword.length < 5)
-            {
+            if (password.length < 5 || confirmpassword.length < 5) {
                 alert("Minimum length of password and confirm password must be 5");
                 return false;
             }
-            if(zipcode.length != 6)
-            {
+            if (zipcode.length != 6) {
                 alert("length of zipcode must be 6");
                 return false;
             }
-            if(password != confirmpassword)
-            {
+            if (password != confirmpassword) {
                 alert("Password and Confirm password must be same");
                 return false;
             }
-            if(isNaN(mobile))
-            {
+            if (isNaN(mobile)) {
                 alert("mobile number must only contain digits");
                 return false;
             }
-            if(isNaN(zipcode))
-            {
+            if (isNaN(zipcode)) {
                 alert("zipcode must only contain digits");
                 return false;
             }
             return true;
         }
     </script>
+
+    @if (ViewBag.err != null)
+    {
+        <script>
+            alert("@ViewBag.err");
+        </script>
+    }
 
 </body>
 </html>

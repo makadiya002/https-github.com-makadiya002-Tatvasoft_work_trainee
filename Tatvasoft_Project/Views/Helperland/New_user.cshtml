@@ -160,6 +160,12 @@
         </div>
     </div>
 
+    @if(ViewBag.err != null)
+            {
+               <script>
+                   alert("@ViewBag.err");
+               </script>
+            }
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

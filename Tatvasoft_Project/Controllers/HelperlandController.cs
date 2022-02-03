@@ -9,6 +9,8 @@ using Tatvasoft_Project.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlTypes;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace Tatvasoft_Project.Controllers
 {
@@ -17,10 +19,13 @@ namespace Tatvasoft_Project.Controllers
         private HelperlandContext _helperlandcontext;
         private object userManager;
 
-       
-        
+
+        public object Session { get; set; }
+    
+
         public IActionResult Index()
         {
+            ViewBag.person = HttpContext.Session.GetString("user");
             return View();
         }
 
@@ -51,7 +56,7 @@ namespace Tatvasoft_Project.Controllers
         {
             return View();
         }
-        public ViewResult Register(Models.User model)
+        public IActionResult Register(Models.User model)
         {
             Models.User obj = new Models.User();
             obj.FirstName = model.FirstName;
@@ -74,6 +79,15 @@ namespace Tatvasoft_Project.Controllers
             obj.ResetKey = "h" + key;
             _helperlandcontext = new HelperlandContext();
             obj.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            var p = _helperlandcontext.Users.Where(x => x.Email == model.Email).ToList();
+            if (p.Count >= 1)
+            {
+                ViewBag.err = "Email ID Already Exist, Please use different Email ID";
+                return View("~/Views/Helperland/New_user.cshtml");
+            }
+            string user = model.FirstName;
+            HttpContext.Session.SetString("user", user);
+            ViewBag.user = HttpContext.Session.GetString("user");
             _helperlandcontext.Users.Add(obj);
             _helperlandcontext.SaveChanges();
             return View();
@@ -101,6 +115,13 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext = new HelperlandContext();
             obj.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
             obj.ResetKey = (Guid.NewGuid()).ToString();
+            var p = _helperlandcontext.Users.Where(x => x.Email == model.Email).ToList();
+            if (p.Count >= 1)
+            {
+                ViewBag.err = "Email ID Already Exist, Please use different Email ID";
+                return View("~/Views/Helperland/Become_helper.cshtml");
+            }
+            
             _helperlandcontext.Users.Add(obj);
             _helperlandcontext.SaveChanges();
             return View();

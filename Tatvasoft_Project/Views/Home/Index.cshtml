@@ -54,6 +54,8 @@
                 </div>
             </nav>
         </div>
+            
+        hello, Welcome @ViewBag.person
 
         @if (ViewBag.err != null)
         {
@@ -72,10 +74,10 @@
 
                         <form asp-controller="Helperland" asp-action="Login" method="post" style="margin-bottom: 15px;">
                             <div class="form-group">
-                                <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                                <input required asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <input required asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                             </div>
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -108,11 +110,11 @@
 
                         <form asp-action="Forgot_password" asp-controller="Helperland" method="post" style="margin-bottom: 15px;">
                             <div class="form-group">
-                                <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                                <input required type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
                             </div>
 
                             <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
-                                <a href="#" style="color: white;font-size: 18px;">Send</a>
+                                <a href="#" style="color: white;font-size: 18px;">Send Email</a>
                             </button>
                         </form>
 

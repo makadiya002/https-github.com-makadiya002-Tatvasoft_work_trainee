@@ -26,6 +26,8 @@ namespace Tatvasoft_Project
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddDistributedMemoryCache();//To Store session in Memory, This is default implementation of IDistributedCache    
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +49,7 @@ namespace Tatvasoft_Project
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
