@@ -44,11 +44,11 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <div style="margin-left: 10px;">Welcome,<br>Sandip Patel</div>
+                            <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item cus_settings" href="#">Dashboard</a>
                             <a class="dropdown-item cus_settings" href="#">My Settings</a>
-                            <a class="dropdown-item cus_settings" href="#">Logout</a>
+                            <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -57,7 +57,7 @@
     </nav>
 
     <div class="us_name" style="margin-top: 100px;">
-        Welcome, <span style="font-weight: bold;">Sandip!</span>
+        Welcome, <span style="font-weight: bold;">@ViewBag.user</span>
     </div>
 
     <div class="us_table_main">

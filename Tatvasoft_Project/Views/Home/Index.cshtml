@@ -41,21 +41,44 @@
                         <li class="nav-item">
                             <a style="" class="nav-link" href="/Helperland/Contact" id="sp_nav_item_con">Contact us</a>
                         </li>
-                        <li class="nav-item">
-                            <a style="" class="nav-link" href="#" id="sp_nav_item_login" data-toggle="modal" data-target="#exampleModal">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="" class="nav-link" href="/Helperland/Become_helper" id="sp_nav_item_bah">Become a helper</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="" class="nav-link" href="#" id="sp_nav_item_flag"><img src="~/images/flag@2x.png"></a>
-                        </li>
+                        @if (ViewBag.user == null)
+                        {
+                            <li class="nav-item">
+                                <a style="" class="nav-link" href="#" id="sp_nav_item_login" data-toggle="modal" data-target="#exampleModal">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="" class="nav-link" href="/Helperland/Become_helper" id="sp_nav_item_bah">Become a helper</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="" class="nav-link" href="#" id="sp_nav_item_flag"><img src="~/images/flag@2x.png"></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
+                            </li>
+                            <li class="nav-item" style="margin-top: 4px;margin-right: 50px;">
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" style="background-color: transparent;margin-top: 0px;border:none;">
+                                        <img id="us_nav_pro" src="~/images/us_icon2.png">
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item cus_settings" href="#">Dashboard</a>
+                                        <a class="dropdown-item cus_settings" href="#">My Settings</a>
+                                        <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>
         </div>
-            
-        hello, Welcome @ViewBag.person
+      
 
         @if (ViewBag.err != null)
         {
@@ -443,6 +466,12 @@
                 alert("@ViewBag.err_email");
         </script>
     }
+    @if(ViewBag.logout != null)
+            {
+                <script>
+                    alert("@ViewBag.logout");
+                </script>
+            }
 
 </body>
 </html>

@@ -17,39 +17,47 @@ namespace Tatvasoft_Project.Controllers
     public class HelperlandController : Controller
     {
         private HelperlandContext _helperlandcontext;
+        private Models.Session ssn;
         private object userManager;
 
 
         public object Session { get; set; }
-    
+        
+        
 
         public IActionResult Index()
         {
-            ViewBag.person = HttpContext.Session.GetString("user");
-            return View();
+            ViewBag.user = HttpContext.Session.GetString("user");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public ViewResult Prices()
         {
+            ViewBag.user = HttpContext.Session.GetString("user");
+
             return View();
         }
 
         public ViewResult Contact()
         {
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View();
         }
 
         public ViewResult FAQ()
         {
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View();
         }
 
         public ViewResult About()
         {
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View();
         }
         public ViewResult Become_helper()
         {
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View();
         }
         public ViewResult New_user()
@@ -85,7 +93,7 @@ namespace Tatvasoft_Project.Controllers
                 ViewBag.err = "Email ID Already Exist, Please use different Email ID";
                 return View("~/Views/Helperland/New_user.cshtml");
             }
-            string user = model.FirstName;
+            var user = model.FirstName;
             HttpContext.Session.SetString("user", user);
             ViewBag.user = HttpContext.Session.GetString("user");
             _helperlandcontext.Users.Add(obj);
@@ -121,7 +129,9 @@ namespace Tatvasoft_Project.Controllers
                 ViewBag.err = "Email ID Already Exist, Please use different Email ID";
                 return View("~/Views/Helperland/Become_helper.cshtml");
             }
-            
+            var user = model.FirstName;
+            HttpContext.Session.SetString("user", user);
+            ViewBag.user = HttpContext.Session.GetString("user");
             _helperlandcontext.Users.Add(obj);
             _helperlandcontext.SaveChanges();
             return View();
@@ -132,6 +142,7 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext = new HelperlandContext();
             string email = model.Email;
             var p = _helperlandcontext.Users.Where(x => x.Email == email).ToList();
+            
             if (p.Count == 1)
             {
                 bool is_pass_valid = BCrypt.Net.BCrypt.Verify(model.Password, p.FirstOrDefault().Password);
@@ -139,10 +150,16 @@ namespace Tatvasoft_Project.Controllers
                 {
                     if (p.FirstOrDefault().UserTypeId == 1)
                     {
+                        var user = p.FirstOrDefault().FirstName;
+                        HttpContext.Session.SetString("user", user);
+                        ViewBag.user = HttpContext.Session.GetString("user");
                         return View("~/Views/Helperland/Register.cshtml");
                     }
                     else if (p.FirstOrDefault().UserTypeId == 2)
                     {
+                        var user = p.FirstOrDefault().FirstName;
+                        HttpContext.Session.SetString("user", user);
+                        ViewBag.user = HttpContext.Session.GetString("user");
                         return View("~/Views/Helperland/Register_sp.cshtml");
                     }
                 }
@@ -204,6 +221,13 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext.Entry(model).State = EntityState.Modified;
             _helperlandcontext.SaveChanges();
             ViewBag.msg = "Password Reset Succesful, Now you can login to your account.";
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("user");
+            ViewBag.logout = "Logout Succesfully!";
             return View("~/Views/Home/Index.cshtml");
         }
 

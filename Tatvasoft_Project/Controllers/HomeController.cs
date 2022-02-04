@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Tatvasoft_Project.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Tatvasoft_Project.Controllers
 {
@@ -20,7 +21,8 @@ namespace Tatvasoft_Project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ViewBag.user = HttpContext.Session.GetString("user");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public ViewResult Prices()
