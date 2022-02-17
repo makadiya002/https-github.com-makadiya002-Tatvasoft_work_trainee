@@ -236,6 +236,7 @@ namespace Tatvasoft_Project.Controllers
 
         public IActionResult Booknow()
         {
+            ViewBag.Logged_user = HttpContext.Session.GetString("user");
             ViewBag.zipcode_found = "no";
             ViewBag.from_main = "yes";
             return View();
@@ -255,6 +256,7 @@ namespace Tatvasoft_Project.Controllers
             {
                 ViewBag.zipcode_found = "no";
             }
+            ViewBag.Logged_user = HttpContext.Session.GetString("user");
             return View("~/Views/Helperland/Booknow.cshtml");
         }
         
@@ -269,7 +271,10 @@ namespace Tatvasoft_Project.Controllers
             HttpContext.Session.SetString("Cabinate", (model.Cabinate).ToString());
             HttpContext.Session.SetString("Oven", (model.Oven).ToString());
             HttpContext.Session.SetString("Windows", (model.Windows).ToString());
-            HttpContext.Session.SetString("Suggestion", model.Suggestion);
+            if(model.Suggestion != null)
+            {
+                HttpContext.Session.SetString("Suggestion", model.Suggestion);
+            }
             HttpContext.Session.SetString("Pets", (model.Pets).ToString());
 
             ViewBag.suggestions = HttpContext.Session.GetString("Booking_instruction");
@@ -298,6 +303,7 @@ namespace Tatvasoft_Project.Controllers
             ViewBag.second_done = "yes";
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
+            ViewBag.Logged_user = HttpContext.Session.GetString("user");
             return View("Views/Helperland/Booknow.cshtml");
         }
 
@@ -345,6 +351,7 @@ namespace Tatvasoft_Project.Controllers
             ViewBag.second_done = "yes";
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
+            ViewBag.Logged_user = HttpContext.Session.GetString("user");
             return View("Views/Helperland/Booknow.cshtml");
         }
 
@@ -352,6 +359,7 @@ namespace Tatvasoft_Project.Controllers
         {
             HttpContext.Session.SetString("Address_ID", (model.ID).ToString());
             ViewBag.third_done = "yes";
+            ViewBag.Logged_user = HttpContext.Session.GetString("user");
             return View("Views/Helperland/Booknow.cshtml");
         }
 
