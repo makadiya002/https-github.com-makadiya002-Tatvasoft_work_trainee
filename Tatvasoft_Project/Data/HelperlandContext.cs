@@ -31,6 +31,7 @@ namespace Tatvasoft_Project.Data
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserAddress> UserAddresses { get; set; }
         public virtual DbSet<Zipcode> Zipcodes { get; set; }
+        public virtual DbSet<Zipcode> Book_now_Table { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

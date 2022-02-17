@@ -1,0 +1,730 @@
+﻿@model Book_now_Table;
+@{ 
+    var n = 1;
+    var val = 0;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="~/css/style2.css">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg us_navbar fixed-top">
+        <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto con_nav_ul">
+                <li class="nav-item active">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_price">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_war">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_blog">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
+                </li>
+                <li class="nav-item" style="margin-top: 4px;margin-right: 50px;">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" style="background-color: transparent;margin-top: 0px;border:none;">
+                            <img id="us_nav_pro" src="~/images/us_icon2.png">
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div style="margin-left: 10px;">Welcome,<br>Sandip Patel</div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cus_settings" href="#">Dashboard</a>
+                            <a class="dropdown-item cus_settings" href="#">My Settings</a>
+                            <a class="dropdown-item cus_settings" href="#">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="cont" style="margin-top: 120px;color: #646464;">
+        Book your cleaning service
+    </div>
+
+    <div class="contact_arw">
+        <div class="dec_lines">_______</div>&nbsp;
+        <img class="dec_img" src="~/images/contact_arr.png">&nbsp;
+        <div class="dec_lines">_______</div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="bn_main_table">
+
+            <div class="bn_table1">
+
+                <div id="bn_book_service">
+                    <table class="bn_t1_hd">
+
+                        <tr>
+                            <td class="bn_t1_hd_inner" onclick="fun1()">
+                                <img src="~/images/bn_book.png">
+                                <div>Book now</div>
+                            </td>
+                            <td class="bn_t1_hd_inner" onclick="fun2()">
+                                <img src="~/images/bn_time.png">
+                                <div>Time schedule</div>
+                            </td>
+                            <td class="bn_t1_hd_inner" onclick="fun3()">
+                                <img src="~/images/bn_data.png">
+                                <div>Your data</div>
+                            </td>
+                            <td class="bn_t1_hd_inner" onclick="fun4()">
+                                <img src="~/images/bn_payment.png">
+                                <div>Pay now</div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div id="bn_book">
+                        <div class="bn_zc">Please enter your zip code:</div>
+                        <form asp-action="Booknow_first" asp-controller="Helperland" style="display: flex;">
+                            <input required asp-for="Zipcode" type="text" placeholder="Zip code" class="bn_tb_zc">
+                            <input type="hidden" asp-for="to_check" value=1 />
+                            <button type="submit" class="bn_ca_btn">check availability</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="bn_time" class="container-fluid">
+                    <div class="bn_inner1_main">
+                        <div class="bn_inner1" style="width: 45%;">
+                            When do you want your helper to be with you?
+                        </div>
+                        <div class="bn_inner1" style="text-align: center;">
+                            How long do you need your helper?
+                        </div>
+                    </div>
+                    <form method="post" asp-action="Booknow_second" asp-controller="Helperland" style="margin-top: 10px;">
+                        <div style="display:flex;">
+                            <div style="width: 50%;margin-top:10px;">
+                                <input required id="book_date" asp-for="Booking_date" type="date" style="color: rgba(0,0,0,0.8);">
+                                <select id="book_time" asp-for="Booking_time" class="bn_date_tm ml-auto" style="color: rgba(0,0,0,0.8);">
+                                    <option value="8.00">8:00 am</option>
+                                    <option value="8.30">8:30 am</option>
+                                    <option value="9.00">9:00 am</option>
+                                    <option value="9.30">9:30 am</option>
+                                    <option value="10.00">10:00 am</option>
+                                    <option value="10.30">10:30 am</option>
+                                    <option value="11.00">11:00 am</option>
+                                    <option value="11.30">11:30 am</option>
+                                    <option value="12.00">12:00 pm</option>
+                                    <option value="12.30">12:30 pm</option>
+                                    <option value="1.00">1:00 pm</option>
+                                    <option value="1.30">1:30 pm</option>
+                                    <option value="2.00">2:00 pm</option>
+                                    <option value="2.30">2:30 pm</option>
+                                    <option value="3.00">3:00 pm</option>
+                                    <option value="3.30">3:30 pm</option>
+                                    <option value="4.00">4:00 pm</option>
+                                    <option value="4.30">4:30 pm</option>
+                                    <option value="5.00">5:00 pm</option>
+                                    <option value="5.30">5:30 pm</option>
+                                    <option value="6.00">6:00 pm</option>
+                                </select>
+
+                            </div>
+                            <div style="text-align: center;margin-top:10px;">
+                                <select type="text" id="book_dur" asp-for="Booking_duration" class="bn_dur" style="text-align: center;color: rgba(0,0,0,0.8);">
+                                    <option value="3.0">3.0 hrs</option>
+                                    <option value="3.5">3.5 hrs</option>
+                                    <option value="4.0">4.0 hrs</option>
+                                    <option value="4.5">4.5 hrs</option>
+                                    <option value="5.0">5.0 hrs</option>
+                                    <option value="5.5">5.5 hrs</option>
+                                    <option value="6.0">6.0 hrs</option>
+                                    <option value="6.5">6.5 hrs</option>
+                                    <option value="7.0">7.0 hrs</option>
+                                    <option value="7.5">7.5 hrs</option>
+                                    <option value="8.0">8.0 hrs</option>
+                                    <option value="8.5">8.5 hrs</option>
+                                    <option value="9.0">9.0 hrs</option>
+                                    <option value="9.5">9.5 hrs</option>
+                                    <option value="10.0">10.0 hrs</option>
+                                    <option value="10.5">10.5 hrs</option>
+                                    <option value="11.0">11.0 hrs</option>
+                                    <option value="11.5">11.5 hrs</option>
+                                    <option value="12.0">12.0 hrs</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <hr style="margin-top: 30px;margin-bottom: 20px;">
+                        <div style="color: rgba(0,0,0,0.7);font-size: 18px;
+                        font-weight: bold;">
+                            Additional services
+                        </div>
+
+                        <div class="es_main" style="margin-top: 30px;display:flex;flex-wrap:wrap;">
+                            <div class="es_inner" onclick="as_1()">
+                                <div class="es_inner_bdr" id="as_id_1"><img style="margin-left:13px;" class="es_inner_img1" src="~/images/price_es_1.png"></div>
+                                <div class="prices_es_txt">Inside cabinets</div>
+                                <div class="es_inner_last" style="text-align: center;"></div>
+                            </div>
+                            <div class="es_inner" onclick="as_2()">
+                                <div class="es_inner_bdr" id="as_id_2" style="border-radius: 50%;padding-left: 32px;padding-right: 32px;"><img class="es_inner_img1" src="~/images/price_es_2.png"></div>
+                                <div class="prices_es_txt">Inside fridge</div>
+                                <div class="es_inner_last" style="text-align: center;"></div>
+                            </div>
+                            <div class="es_inner" onclick="as_3()">
+                                <div class="es_inner_bdr_oven" id="as_id_3" style="border-radius: 50%;padding-left: 28px;padding-right: 28px;padding-top: 28px;padding-bottom: 28px;"><img style="height: 33px;width: 52px;" class="es_inner_img1" src="~/images/price_es_3.png"></div>
+                                <div class="prices_es_txt" style="">Inside oven</div>
+                                <div class="es_inner_last" style="text-align: center;"></div>
+                            </div>
+                            <div class="es_inner" onclick="as_4()">
+                                <div id="as_id_4" style="border-radius: 50%;padding-left: 32px;padding-right: 32px;" class="es_inner_bdr"><img class="es_inner_img1" src="~/images/price_es_4.png"></div>
+                                <div class="prices_es_txt">Inside fridge</div>
+                                <div class="es_inner_last" style="text-align: center;"></div>
+                            </div>
+                            <div class="es_inner_frm" onclick="as_5()">
+                                <div class="es_inner_bdr" id="as_id_5"><img style="margin-left:13px;height: 46px;width: 47px;" class="es_inner_img1" src="~/images/price_es_5.png"></div>
+                                <div class="prices_es_txt" style="margin-top: 11px;">Interior windows</div>
+                                <div class="es_inner_last" style="text-align: center;"></div>
+                            </div>
+                        </div>
+
+                        <hr style="margin-top: 20px;margin-bottom: 28px;">
+                        <div style="color: rgba(0,0,0,0.7);font-size: 18px;
+        font-weight: bold;">
+                            Do you want to tell your helper something?
+                        </div>
+
+                        <div>
+                            <input id="sugg" asp-for="Suggestion" class="bn_tell_hl" type="text" placeholder="Do you want to tell your helper something?">
+                        </div>
+
+                        <div style="display: flex;">
+                            <input asp-for="Pets" type="checkbox" id="keep_pets" onclick="fun_pets()" name="" style="height: 15px;width: 15px;margin-top: 22px">&nbsp;&nbsp;
+                            <div style="margin-top: 18px;"> I keep pets</div>
+                        </div>
+                        <hr style="margin-top: 20px;margin-bottom: 28px;">
+
+                        <input asp-for="Cabinate" type="hidden" id="as_h1" />
+                        <input asp-for="Fridge" type="hidden" id="as_h2" />
+                        <input asp-for="Oven" type="hidden" id="as_h3" />
+                        <input asp-for="Laundry" type="hidden" id="as_h4" />
+                        <input asp-for="Windows" type="hidden" id="as_h5" />
+                        <input type="hidden" asp-for="to_check" value=0 />
+
+                        <div style="margin-left: 68%;">
+                            <button type="submit" class="bn_lst_cnt_bn ml-auto">
+                                Continue
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div id="bn_data">
+
+                        @if (ViewBag.model_to_pass != null)
+                        {
+                            foreach (var item in ViewBag.model_to_pass)
+                            {
+
+                                <div class="container-fluid" style="margin-top: 15px;margin-bottom: 15px;">
+                                    @{
+                                        n = n + 1;
+                                    }
+                                    <div class="form-check">
+
+                                        <input onclick="radiobtnclick()" class="form-check-input" type="radio" name="flexRadioDefault" id="@item.ID" style="margin-top: 25px;">
+                                        <label class="form-check-label" for="@item.ID" style="color: rgba(0,0,0,0.8);padding: 10px;border: 2px solid rgba(0,0,0,0.6);">
+                                            <span style="font-weight: bold;">Address: </span>@item.Street @item.House_number @item.Location @item.Zipcode<br>
+                                            Phone number: @item.Phone
+                                        </label>
+                                    </div>
+                                    <input id="itemid" type="hidden" value="@item.ID"/>
+
+                                </div>
+                            }
+                        }
+
+                        <button class="bn_add_add" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
+                            + Add new address
+                        </button>
+                        <div class="collapse" id="dddd">
+
+                            <form onsubmit="return validate()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Street</label>
+                                        <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">House number</label>
+                                        <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
+                                               placeholder="House number">
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="margin-top: 3px;">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Postcode</label>
+                                        <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode" placeholder="Postcode">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Location</label>
+                                        <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
+                                               placeholder="Location">
+                                    </div>
+                                </div>
+
+                                <label style="margin-top: 3px;" for="inputEmail4">Phone number</label>
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-2">
+                                        <input style="text-align: left;" type="text" readonly class="form-control" id="inputEmail4" value="+49">
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        <input required asp-for="Phone" type="text" class="form-control" id="phone" placeholder="Phone number">
+                                    </div>
+
+                                </div>
+
+                                <input type="hidden" asp-for="to_check" value=1 />
+
+                                <div style="display: flex;">
+                                    <button type="submit" class="btn btn-primary bn_add_add_sv">Save</button>
+                                    <button class="bn_add_add_dc" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
+                                        Discard
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <form style="margin-top: 10px;">
+                            <input type="checkbox" id="bn_cbb" name="" data-toggle="collapse" data-target="#dd" aria-controls="dd" aria-expanded="false" aria-label="Toggle"> <label for="bn_cbb">My billing address differs from the given address.</label>
+                        </form>
+
+                        <div id="dd" class="collapse">
+                            <form onsubmit="return validate2()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Street</label>
+                                        <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">House number</label>
+                                        <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
+                                               placeholder="House number">
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="margin-top: 3px;">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Postcode</label>
+                                        <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode2" placeholder="Postcode">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Location</label>
+                                        <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
+                                               placeholder="Location">
+                                    </div>
+                                </div>
+
+                                <button class="bn_soc" type="submit">Save on computer</button>
+
+                            </form>
+                        </div>
+
+
+                        <hr style="margin-top: 16px;margin-bottom: 16px;">
+                        <form asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
+                            <input id="actualid" type="hidden" asp-for="ID"/>
+                            <button class="bn_cnt_sl" type="submit">Continue</button>
+                        </form>
+                </div>
+
+                <div id="bn_payment">
+                    <form asp-action="Booknow_final" asp-controller="Helperland" class="container-fluid" style="width: 97%;">
+                        <div class="form-check">
+                            <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                I accept the terms and conditions , the cancellation policy and the data protection regulations . I confirm that Helperland will start executing the contract before the end of the cancellation period and that I will lose my right of cancellation as a consumer once the contract has been fully performed
+                            </label>
+                        </div>
+                        <hr style="margin-top: 15px;margin-bottom: 25px;">
+
+                        <button class="bn_bwc_lsst" type="submit">
+                            Book with costs
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="bn_table2">
+                <div class="bn_table2_inner">
+
+                    <div class="bn_t2_ps">&nbsp;&nbsp;&nbsp;Payment Summary</div>
+                    <div class="container-fluid" style="color: #646464;margin-top: 20px;font-size: 20px;">length of time</div>
+                    <div class="container-fluid" style="display: flex;color: #646464;">
+                        <div style="font-size: 18px;">
+                            Basic
+                        </div>
+                        <div class="ml-auto" style="font-size: 18px;">
+                            0 hrs.
+                        </div>
+                    </div>
+
+                    <div class="container-fluid" style="display: flex;color: #646464;font-weight: bold;margin-top: 8px;">
+                        <div style="font-size: 18px;">
+                            total service time
+                        </div>
+                        <div class="ml-auto" style="font-size: 18px;">
+                            3 hours.
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container-fluid" style="display: flex;margin-top: 8px;color: #646464;">
+                        <div style="font-size: 18px;">
+                            Per cleaning
+                        </div>
+                        <div class="ml-auto" style="font-size: 18px;">
+                            €0.00
+                        </div>
+                    </div>
+
+                    <div class="container-fluid" style="display: flex;margin-top: 8px;color: #006072;">
+                        <div style="font-size: 20px;margin-top: 20px;">
+                            total price
+                        </div>
+                        <div class="ml-auto" style="font-size: 40px;">
+                            €0.00
+                        </div>
+                    </div>
+
+                    <div class="container-fluid" style="color: #646464;">
+                        According to § 19 UStG no sales tax will be charged.
+                    </div>
+
+                    <div class="container-fluid" style="display: flex;margin-top: 11px;color: #646464;">
+                        <div style="font-size: 19px;">
+                            Effective price*
+                        </div>
+                        <div class="ml-auto" style="font-size: 19px;font-weight: bold;">
+                            €0.00
+                        </div>
+                    </div>
+
+                    <div class="container-fluid" style="font-size: 15px;margin-top: 15px;">
+                        <span style="color: red;">*</span>Save 20% according to § 35a Income Tax Act (EStG).
+                    </div>
+
+
+                    <div class="container-fluid bn_inner_lst">
+                        <a href="#">Take a look at our included basic services</a>
+                    </div>
+
+                </div>
+
+                <div class="bn_qus">Questions?</div>
+
+                <p>
+                    <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" style="color: rgba(0,0,0,0.8);">
+                        > &nbsp;What is included in the basic cleaning?
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample1">
+                    <div class="bn_ans">
+                        Living room, bedroom and bathroom, kitchen and common areas
+                    </div>
+                </div>
+
+                <p>
+                    <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" style="color: rgba(0,0,0,0.8);">
+                        > &nbsp;Can I skip or move bookings?
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample2">
+                    <div class="bn_ans">
+                        You can change a booking free of charge 48 hours before an assignment. If you want to skip an already booked assignment, we will credit the value of the booking to your account. You can use the credit for a future booking.
+                    </div>
+                </div>
+
+                <p>
+                    <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" style="color: rgba(0,0,0,0.8);">
+                        > &nbsp;Do I have to be at home during the &nbsp;&nbsp;&nbsp;&nbsp;cleaning?
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample3">
+                    <div class="bn_ans">
+                        We recommend that you be at home for the first cleaning. This way you get to know your helper personally. You can also show him the rooms and respond to your wishes. Of course you can arrange an appointment or place for the key handover with your helper. With frequent bookings, some customers choose to leave a spare key to their cleaner.
+                    </div>
+                </div>
+
+                <div>
+                    <a href="#" class="bn_mq">More questions and answers</a>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="faq_ff_main">
+        <div class="faq_ff_2 final_footer">
+            <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <ul>
+                <li><a style="color: white;" href="#">HOME</a></li>
+                <li><a style="color: white;" href="#">ABOUT</a></li>
+                <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                <li><a style="color: white;" href="#">FAQS</a></li>
+                <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+            </ul>
+            <div>
+                <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+            </div>
+        </div>
+
+        <hr class="prices_hr">
+
+        <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript">
+        as_h1
+        document.getElementById('bn_time').style.display = "none";
+        document.getElementById('bn_data').style.display = "none";
+        document.getElementById('bn_payment').style.display = "none";
+        document.getElementById('as_h1').setAttribute("value", 0);
+        document.getElementById('as_h2').setAttribute("value", 0);
+        document.getElementById('as_h3').setAttribute("value", 0);
+        document.getElementById('as_h4').setAttribute("value", 0);
+        document.getElementById('as_h5').setAttribute("value", 0);
+        document.getElementById('keep_pets').setAttribute("value", 0);
+
+        function fun1() {
+            document.getElementById('bn_book').style.display = "block";
+            document.getElementById('bn_time').style.display = "none";
+            document.getElementById('bn_data').style.display = "none";
+            document.getElementById('bn_payment').style.display = "none";
+        }
+        function fun2() {
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "block";
+            document.getElementById('bn_data').style.display = "none";
+            document.getElementById('bn_payment').style.display = "none";
+        }
+        function fun3() {
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "none";
+            document.getElementById('bn_data').style.display = "block";
+            document.getElementById('bn_payment').style.display = "none";
+        }
+        function fun4() {
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "none";
+            document.getElementById('bn_data').style.display = "none";
+            document.getElementById('bn_payment').style.display = "block";
+        }
+        function as_1() {
+            let a = document.getElementById('as_h1').value;
+            if (a == 0) {
+                document.getElementById('as_id_1').style.border = "2px solid blue";
+                document.getElementById('as_h1').value = 1;
+            }
+            else {
+                document.getElementById('as_id_1').style.border = "1px solid black";
+                document.getElementById('as_h1').value = 0;
+            }
+        }
+        function as_2() {
+            let a = document.getElementById('as_h2').value;
+            if (a == 0) {
+                document.getElementById('as_id_2').style.border = "2px solid blue";
+                document.getElementById('as_h2').value = 1;
+            }
+            else {
+                document.getElementById('as_id_2').style.border = "1px solid black";
+                document.getElementById('as_h2').value = 0;
+            }
+        }
+        function as_3() {
+            let a = document.getElementById('as_h3').value;
+            if (a == 0) {
+                document.getElementById('as_id_3').style.border = "2px solid blue";
+                document.getElementById('as_h3').value = 1;
+            }
+            else {
+                document.getElementById('as_id_3').style.border = "1px solid black";
+                document.getElementById('as_h3').value = 0;
+            }
+        }
+        function as_4() {
+            let a = document.getElementById('as_h4').value;
+            if (a == 0) {
+                document.getElementById('as_id_4').style.border = "2px solid blue";
+                document.getElementById('as_h4').value = 1;
+            }
+            else {
+                document.getElementById('as_id_4').style.border = "1px solid black";
+                document.getElementById('as_h4').value = 0;
+            }
+        }
+        function as_5() {
+            let a = document.getElementById('as_h5').value;
+            if (a == 0) {
+                document.getElementById('as_id_5').style.border = "2px solid blue";
+                document.getElementById('as_h5').value = 1;
+            }
+            else {
+                document.getElementById('as_id_5').style.border = "1px solid black";
+                document.getElementById('as_h5').value = 0;
+            }
+        }
+        function fun_pets() {
+            let a = document.getElementById('keep_pets').value;
+            if (a == 0) {
+                document.getElementById('keep_pets').value = true;
+            }
+            else {
+                document.getElementById('keep_pets').value = false;
+            }
+        }
+
+        function validate() {
+            var zipcode = document.getElementById('zipcode').value;
+            var phone = document.getElementById('phone').value
+            if (zipcode.length != 6) {
+                alert("zipcode must be of length 6");
+                return false;
+            }
+            if (isNaN(zipcode)) {
+                alert("zipcode must only contain digits");
+                return false;
+            }
+            if (isNaN(phone)) {
+                alert("Phone number must only contain digits");
+                return false;
+            }
+            if (phone.length != 10) {
+                alert("Phone number must be of length 10");
+                return false;
+            }
+            return true;
+        }
+
+        function validate2() {
+            var zipcode = document.getElementById('zipcode2').value;
+            //var phone = document.getElementById('phone').value
+            if (zipcode.length != 6) {
+                alert("zipcode must be of length 6");
+                return false;
+            }
+            if (isNaN(zipcode)) {
+                alert("zipcode must only contain digits");
+                return false;
+            }
+            return true;
+        }
+
+        function radiobtnclick() {
+            var val = $('input[type=radio][name=flexRadioDefault]:checked').attr('id');
+            alert("id is: " + val);
+            document.getElementById('actualid').value = val;
+           
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    @if(ViewBag.final_done != null)
+            {
+                <script>
+                    alert('Your Service request is Booked Succesfully!');
+                </script>
+            }
+
+    @if (ViewBag.zipcode_found != "no")
+    {
+        <script>
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "block";
+            document.getElementById('bn_data').style.display = "none";
+            document.getElementById('bn_payment').style.display = "none";
+        </script>
+
+    }
+    else if (ViewBag.from_main == null)
+    {
+        <script>
+            alert("zipcode not found");
+        </script>
+    }
+
+    @if (ViewBag.second_done != null)
+    {
+        <script>
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "none";
+            document.getElementById('bn_data').style.display = "block";
+            document.getElementById('bn_payment').style.display = "none";
+        </script>
+
+    }
+
+    @if (ViewBag.third_done != null)
+    {
+        <script>
+            document.getElementById('bn_book').style.display = "none";
+            document.getElementById('bn_time').style.display = "none";
+            document.getElementById('bn_data').style.display = "none";
+            document.getElementById('bn_payment').style.display = "block";
+        </script>
+
+    }
+
+    @if (ViewBag.suggestions != null)
+    {
+        <script>
+                    alert("@ViewBag.suggestions");
+        </script>
+    }
+
+
+</body>
+</html>

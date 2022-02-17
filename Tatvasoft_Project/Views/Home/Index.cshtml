@@ -26,9 +26,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto con_nav_ul">
-                        <li class="nav-item active">
-                            <a style="" class="nav-link" href="#" id="sp_nav_item_booknow">Book a Cleaner <span class="sr-only">(current)</span></a>
-                        </li>
+                        @if (ViewBag.user == null)
+                        {
+                            <li class="nav-item">
+                                <a style="" class="nav-link" href="#" id="sp_nav_item_booknow" data-toggle="modal" data-target="#exampleModal">Book a Cleaner</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item active">
+                                <a style="" class="nav-link" href="/Helperland/Booknow" id="sp_nav_item_booknow">Book a Cleaner <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" id="sp_nav_item_price" href="/Helperland/Prices">Prices</a>
                         </li>
@@ -470,6 +479,12 @@
             {
                 <script>
                     alert("@ViewBag.logout");
+                </script>
+            }
+    @if(ViewBag.sugg != null)
+            {
+                <script>
+                    alert("@ViewBag.Booking_instruction");
                 </script>
             }
 
