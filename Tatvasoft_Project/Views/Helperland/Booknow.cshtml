@@ -81,22 +81,29 @@
                     <table class="bn_t1_hd">
 
                         <tr>
-                            <td class="bn_t1_hd_inner" onclick="fun1()">
-                                <img src="~/images/bn_book.png">
-                                <div>Book now</div>
+                            <td style="background-color: #006072;" class="bn_t1_hd_inner" onclick="fun1()">
+                                <img src="~/images/setup-service-white.png">
+                                <div style="color:white;">Book now</div>
                             </td>
-                            <td class="bn_t1_hd_inner" onclick="fun2()">
-                                <img src="~/images/bn_time.png">
-                                <div>Time schedule</div>
+
+                            <td id="" class="bn_t1_hd_inner" onclick="fun2()">
+                                <img id="bn_time_img1" src="~/images/bn_time.png">
+                                <div id="bn_time_text">Time schedule</div>
                             </td>
-                            <td class="bn_t1_hd_inner" onclick="fun3()">
+
+                            
+
+
+                            <td id="" class="bn_t1_hd_inner" onclick="fun3()">
                                 <img src="~/images/bn_data.png">
                                 <div>Your data</div>
                             </td>
-                            <td class="bn_t1_hd_inner" onclick="fun4()">
+                            
+                            <td id="" class="bn_t1_hd_inner" onclick="fun4()">
                                 <img src="~/images/bn_payment.png">
                                 <div>Pay now</div>
                             </td>
+                           
                         </tr>
                     </table>
 
@@ -149,7 +156,7 @@
 
                             </div>
                             <div style="text-align: center;margin-top:10px;">
-                                <select type="text"  onchange="select_duration()" id="book_dur" asp-for="Booking_duration" class="bn_dur" style="text-align: center;color: rgba(0,0,0,0.8);">
+                                <select type="text" onchange="select_duration()" id="book_dur" asp-for="Booking_duration" class="bn_dur" style="text-align: center;color: rgba(0,0,0,0.8);">
                                     <option value="3.0">3.0 hrs</option>
                                     <option value="3.5">3.5 hrs</option>
                                     <option value="4.0">4.0 hrs</option>
@@ -242,124 +249,124 @@
 
                 <div id="bn_data">
 
-                        @if (ViewBag.model_to_pass != null)
+                    @if (ViewBag.model_to_pass != null)
+                    {
+                        foreach (var item in ViewBag.model_to_pass)
                         {
-                            foreach (var item in ViewBag.model_to_pass)
-                            {
 
-                                <div class="container-fluid" style="margin-top: 15px;margin-bottom: 15px;">
-                                    @{
-                                        n = n + 1;
-                                    }
-                                    <div class="form-check">
+                            <div class="container-fluid" style="margin-top: 15px;margin-bottom: 15px;">
+                                @{
+                                    n = n + 1;
+                                }
+                                <div class="form-check">
 
-                                        <input onclick="radiobtnclick()" class="form-check-input" type="radio" name="flexRadioDefault" id="@item.ID" style="margin-top: 25px;">
-                                        <label class="form-check-label" for="@item.ID" style="color: rgba(0,0,0,0.8);padding: 10px;border: 2px solid rgba(0,0,0,0.6);">
-                                            <span style="font-weight: bold;">Address: </span>@item.Street @item.House_number @item.Location @item.Zipcode<br>
-                                            Phone number: @item.Phone
-                                        </label>
-                                    </div>
-                                    <input id="itemid" type="hidden" value="@item.ID"/>
-
+                                    <input onclick="radiobtnclick()" class="form-check-input" type="radio" name="flexRadioDefault" id="@item.ID" style="margin-top: 25px;">
+                                    <label class="form-check-label" for="@item.ID" style="color: rgba(0,0,0,0.8);padding: 10px;border: 2px solid rgba(0,0,0,0.6);">
+                                        <span style="font-weight: bold;">Address: </span>@item.Street @item.House_number @item.Location @item.Zipcode<br>
+                                        Phone number: @item.Phone
+                                    </label>
                                 </div>
-                            }
+                                <input id="itemid" type="hidden" value="@item.ID" />
+
+                            </div>
                         }
+                    }
 
-                        <button class="bn_add_add" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
-                            + Add new address
-                        </button>
-                        <div class="collapse" id="dddd">
+                    <button class="bn_add_add" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
+                        + Add new address
+                    </button>
+                    <div class="collapse" id="dddd">
 
-                            <form onsubmit="return validate()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Street</label>
-                                        <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">House number</label>
-                                        <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
-                                               placeholder="House number">
-                                    </div>
+                        <form onsubmit="return validate()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Street</label>
+                                    <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">House number</label>
+                                    <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
+                                           placeholder="House number">
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top: 3px;">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Postcode</label>
+                                    <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode" placeholder="Postcode">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">Location</label>
+                                    <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
+                                           placeholder="Location">
+                                </div>
+                            </div>
+
+                            <label style="margin-top: 3px;" for="inputEmail4">Phone number</label>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-2">
+                                    <input style="text-align: left;" type="text" readonly class="form-control" id="inputEmail4" value="+49">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input required asp-for="Phone" type="text" class="form-control" id="phone" placeholder="Phone number">
                                 </div>
 
-                                <div class="form-row" style="margin-top: 3px;">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Postcode</label>
-                                        <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode" placeholder="Postcode">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Location</label>
-                                        <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
-                                               placeholder="Location">
-                                    </div>
-                                </div>
+                            </div>
 
-                                <label style="margin-top: 3px;" for="inputEmail4">Phone number</label>
-                                <div class="form-row">
+                            <input type="hidden" asp-for="to_check" value=1 />
 
-                                    <div class="form-group col-md-2">
-                                        <input style="text-align: left;" type="text" readonly class="form-control" id="inputEmail4" value="+49">
-                                    </div>
-                                    <div class="form-group col-md-5">
-                                        <input required asp-for="Phone" type="text" class="form-control" id="phone" placeholder="Phone number">
-                                    </div>
+                            <div style="display: flex;">
+                                <button type="submit" class="btn btn-primary bn_add_add_sv">Save</button>
+                                <button class="bn_add_add_dc" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
+                                    Discard
+                                </button>
+                            </div>
 
-                                </div>
-
-                                <input type="hidden" asp-for="to_check" value=1 />
-
-                                <div style="display: flex;">
-                                    <button type="submit" class="btn btn-primary bn_add_add_sv">Save</button>
-                                    <button class="bn_add_add_dc" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
-                                        Discard
-                                    </button>
-                                </div>
-
-                            </form>
-                        </div>
-
-                        <form style="margin-top: 10px;">
-                            <input type="checkbox" id="bn_cbb" name="" data-toggle="collapse" data-target="#dd" aria-controls="dd" aria-expanded="false" aria-label="Toggle"> <label for="bn_cbb">My billing address differs from the given address.</label>
                         </form>
+                    </div>
 
-                        <div id="dd" class="collapse">
-                            <form onsubmit="return validate2()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Street</label>
-                                        <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">House number</label>
-                                        <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
-                                               placeholder="House number">
-                                    </div>
+                    <form style="margin-top: 10px;">
+                        <input type="checkbox" id="bn_cbb" name="" data-toggle="collapse" data-target="#dd" aria-controls="dd" aria-expanded="false" aria-label="Toggle"> <label for="bn_cbb">My billing address differs from the given address.</label>
+                    </form>
+
+                    <div id="dd" class="collapse">
+                        <form onsubmit="return validate2()" asp-action="Booknow_third" asp-controller="Helperland" method="post" class="bn_frm_add_add container-fluid">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Street</label>
+                                    <input required asp-for="Street" type="text" class="form-control" id="inputEmail4" placeholder="street">
                                 </div>
-
-                                <div class="form-row" style="margin-top: 3px;">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Postcode</label>
-                                        <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode2" placeholder="Postcode">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Location</label>
-                                        <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
-                                               placeholder="Location">
-                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">House number</label>
+                                    <input required asp-for="House_number" type="text" class="form-control" id="inputPassword4"
+                                           placeholder="House number">
                                 </div>
+                            </div>
 
-                                <button class="bn_soc" type="submit">Save on computer</button>
+                            <div class="form-row" style="margin-top: 3px;">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Postcode</label>
+                                    <input required asp-for="Zipcode" type="text" class="form-control" id="zipcode2" placeholder="Postcode">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">Location</label>
+                                    <input required asp-for="Location" type="text" class="form-control" id="inputPassword4"
+                                           placeholder="Location">
+                                </div>
+                            </div>
 
-                            </form>
-                        </div>
+                            <button class="bn_soc" type="submit">Save on computer</button>
 
-
-                        <hr style="margin-top: 16px;margin-bottom: 16px;">
-                        <form asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
-                            <input id="actualid" type="hidden" asp-for="ID"/>
-                            <button class="bn_cnt_sl" type="submit">Continue</button>
                         </form>
+                    </div>
+
+
+                    <hr style="margin-top: 16px;margin-bottom: 16px;">
+                    <form asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
+                        <input id="actualid" type="hidden" asp-for="ID" />
+                        <button class="bn_cnt_sl" type="submit">Continue</button>
+                    </form>
                 </div>
 
                 <div id="bn_payment">
@@ -371,7 +378,8 @@
                             </label>
                         </div>
                         <hr style="margin-top: 15px;margin-bottom: 25px;">
-
+                        <input type="text" style="display:none;" id="ip_total_cost" asp-for="Total_cost" />
+                        <input type="text" style="display:none;" id="ip_disc_cost" asp-for="Discounted_cost" />
                         <button class="bn_bwc_lsst" type="submit">
                             Book with costs
                         </button>
@@ -585,7 +593,7 @@
         document.getElementById('oven_display').style.display = "none";
         document.getElementById('wash_display').style.display = "none";
         document.getElementById('windows_display').style.display = "none";
-
+        
 
         function fun1() {
             document.getElementById('bn_book').style.display = "block";
@@ -747,7 +755,7 @@
             var val = $('input[type=radio][name=flexRadioDefault]:checked').attr('id');
             alert("id is: " + val);
             document.getElementById('actualid').value = val;
-           
+
         }
 
         function select_duration() {
@@ -771,12 +779,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    @if(ViewBag.final_done != null)
-            {
-                <script>
-                    alert('Your Service request is Booked Succesfully!');
-                </script>
-            }
+    @if (ViewBag.final_done != null)
+    {
+        <script>
+            alert('Your Service request is Booked Succesfully!');
+        </script>
+    }
 
     @if (ViewBag.zipcode_found != "no")
     {
@@ -786,6 +794,8 @@
             document.getElementById('bn_data').style.display = "none";
             document.getElementById('bn_payment').style.display = "none";
         </script>
+
+      
 
     }
     else if (ViewBag.from_main == null)
@@ -802,6 +812,51 @@
             document.getElementById('bn_time').style.display = "none";
             document.getElementById('bn_data').style.display = "block";
             document.getElementById('bn_payment').style.display = "none";
+            var total_hrrs = 0.0;
+        </script>
+
+        if (ViewBag.laundry != 0)
+        {
+            <script>
+                document.getElementById('wash_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.cabinate != 0)
+        {
+            <script>
+                document.getElementById('cabinate_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.fridge != 0)
+        {
+            <script>
+                document.getElementById('fridge_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.oven != 0)
+        {
+            <script>
+                document.getElementById('oven_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.windows != 0)
+        {
+            <script>
+                document.getElementById('windows_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        <script>
+                document.getElementById('main_hours').innerHTML = @ViewBag.main_hrs;
+            total_hrrs = total_hrrs +  @ViewBag.main_hrs;
+            document.getElementById('total_time').innerHTML = (total_hrrs).toString();
+            document.getElementById('total_cost').innerHTML = (total_hrrs * 18.0).toString() + ".00";
+            document.getElementById('discounted_cost').innerHTML = (((total_hrrs * 18.0) * 80.0) / 100).toString();
+
         </script>
 
     }
@@ -813,6 +868,54 @@
             document.getElementById('bn_time').style.display = "none";
             document.getElementById('bn_data').style.display = "none";
             document.getElementById('bn_payment').style.display = "block";
+            var total_hrrs = 0.0;
+        </script>
+
+        if (ViewBag.laundry != 0)
+        {
+            <script>
+                document.getElementById('wash_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.cabinate != 0)
+        {
+            <script>
+                document.getElementById('cabinate_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.fridge != 0)
+        {
+            <script>
+                document.getElementById('fridge_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.oven != 0)
+        {
+            <script>
+                document.getElementById('oven_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        if (ViewBag.windows != 0)
+        {
+            <script>
+                document.getElementById('windows_display').style.display = "flex";
+                total_hrrs = total_hrrs + 0.5;
+            </script>
+        }
+        <script>
+                document.getElementById('main_hours').innerHTML = @ViewBag.main_hrs;
+            total_hrrs = total_hrrs +  @ViewBag.main_hrs;
+            document.getElementById('total_time').innerHTML = (total_hrrs).toString();
+            document.getElementById('total_cost').innerHTML = (total_hrrs * 18.0).toString() + ".00";
+            document.getElementById('discounted_cost').innerHTML = (((total_hrrs * 18.0) * 80.0) / 100).toString();
+
+            document.getElementById('ip_total_cost').value = (total_hrrs * 18.0).toString();
+            document.getElementById('ip_disc_cost').value = (((total_hrrs * 18.0) * 80.0) / 100).toString();
+
         </script>
 
     }

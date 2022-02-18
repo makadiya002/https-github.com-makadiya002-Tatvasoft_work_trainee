@@ -24,7 +24,8 @@ namespace Tatvasoft_Project.Models
         public string PLZ { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
-
         public int to_check { get; set; }
+        public float Total_cost { get; set; }
+        public float Discounted_cost { get; set; }
     }
 }

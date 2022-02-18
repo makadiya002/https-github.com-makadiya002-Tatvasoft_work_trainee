@@ -256,6 +256,7 @@ namespace Tatvasoft_Project.Controllers
             {
                 ViewBag.zipcode_found = "no";
             }
+            ViewBag.first_tab_done = "yes";
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
             return View("~/Views/Helperland/Booknow.cshtml");
         }
@@ -271,6 +272,8 @@ namespace Tatvasoft_Project.Controllers
             HttpContext.Session.SetString("Cabinate", (model.Cabinate).ToString());
             HttpContext.Session.SetString("Oven", (model.Oven).ToString());
             HttpContext.Session.SetString("Windows", (model.Windows).ToString());
+
+           
             if(model.Suggestion != null)
             {
                 HttpContext.Session.SetString("Suggestion", model.Suggestion);
@@ -299,7 +302,13 @@ namespace Tatvasoft_Project.Controllers
                     ID = temp.AddressId
                 });
             }
-
+            
+            ViewBag.main_hrs = float.Parse(model.Booking_duration);
+            ViewBag.laundry = model.Laundry;
+            ViewBag.fridge = model.Fridge;
+            ViewBag.cabinate = model.Cabinate;
+            ViewBag.oven = model.Oven;
+            ViewBag.windows = model.Windows;
             ViewBag.second_done = "yes";
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
@@ -348,6 +357,12 @@ namespace Tatvasoft_Project.Controllers
                 Location=temp.City, Zipcode=temp.PostalCode, Phone=temp.Mobile, ID=temp.AddressId});
             }
 
+            ViewBag.main_hrs = float.Parse(HttpContext.Session.GetString("Booking_duration"));
+            ViewBag.laundry = int.Parse(HttpContext.Session.GetString("Laundry"));
+            ViewBag.fridge = int.Parse(HttpContext.Session.GetString("Fridge"));
+            ViewBag.cabinate = int.Parse(HttpContext.Session.GetString("Cabinate"));
+            ViewBag.oven = int.Parse(HttpContext.Session.GetString("Oven")); ;
+            ViewBag.windows = int.Parse(HttpContext.Session.GetString("Windows"));
             ViewBag.second_done = "yes";
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
@@ -358,12 +373,19 @@ namespace Tatvasoft_Project.Controllers
         public IActionResult Booknow_select_address(Models.Book_now_Table model)
         {
             HttpContext.Session.SetString("Address_ID", (model.ID).ToString());
+            ViewBag.main_hrs = float.Parse(HttpContext.Session.GetString("Booking_duration"));
+            ViewBag.laundry = int.Parse(HttpContext.Session.GetString("Laundry"));
+            ViewBag.fridge = int.Parse(HttpContext.Session.GetString("Fridge"));
+            ViewBag.cabinate = int.Parse(HttpContext.Session.GetString("Cabinate"));
+            ViewBag.oven = int.Parse(HttpContext.Session.GetString("Oven")); ;
+            ViewBag.windows = int.Parse(HttpContext.Session.GetString("Windows"));
             ViewBag.third_done = "yes";
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
+
             return View("Views/Helperland/Booknow.cshtml");
         }
 
-        public IActionResult Booknow_final()
+        public IActionResult Booknow_final(Models.Book_now_Table model)
         {
 
             _helperlandcontext = new HelperlandContext();
@@ -388,12 +410,16 @@ namespace Tatvasoft_Project.Controllers
             obj.ZipCode = HttpContext.Session.GetString("zipcode");
             obj.ServiceHours = strt_time;
             obj.ExtraHours = str_dur;
-            obj.SubTotal = 0;
-            obj.TotalCost = 0;
+            obj.SubTotal = Convert.ToDecimal(model.Discounted_cost);
+            obj.TotalCost = Convert.ToDecimal(model.Total_cost);
             obj.HasPets = pts;
             obj.CreatedDate = DateTime.Now;
             obj.ModifiedDate = DateTime.Now;
             obj.Distance = 0;
+            if(HttpContext.Session.GetString("Suggestion") != null)
+            {
+                obj.Comments = HttpContext.Session.GetString("Suggestion");
+            }
 
             _helperlandcontext.ServiceRequests.Add(obj);
             _helperlandcontext.SaveChanges();
