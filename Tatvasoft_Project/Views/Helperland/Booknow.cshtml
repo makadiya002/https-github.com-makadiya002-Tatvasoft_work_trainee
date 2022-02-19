@@ -75,37 +75,48 @@
 
         <div class="bn_main_table">
 
-            <div class="bn_table1">
+            <div class="bn_table1 container-fluid">
 
-                <div id="bn_book_service">
-                    <table class="bn_t1_hd">
+                <div id="bn_book_service" style="background-color: white;">
+                    <div class="bn_t1_hd" style="">
 
-                        <tr>
-                            <td style="background-color: #006072;" class="bn_t1_hd_inner" onclick="fun1()">
-                                <img src="~/images/setup-service-white.png">
+                        <div style="display:flex;min-height:100px;">
+                            <div style="background-color: #006072;margin-right:4px;" class="bn_t1_hd_inner" onclick="fun1()">
+                                <img style="margin-top:20px;" src="~/images/setup-service-white.png">
                                 <div style="color:white;">Book now</div>
-                            </td>
+                            </div>
 
-                            <td id="" class="bn_t1_hd_inner" onclick="fun2()">
-                                <img id="bn_time_img1" src="~/images/bn_time.png">
+                            <div id="time1" style="margin-right: 4px;" class="bn_t1_hd_inner" onclick="fun2()">
+                                <img style="margin-top:20px;" id="bn_time_img1" src="~/images/bn_time.png">
                                 <div id="bn_time_text">Time schedule</div>
-                            </td>
+                            </div>
 
-                            
+                            <div style="background-color: #006072;margin-right:4px;" id="time2" class="bn_t1_hd_inner" onclick="fun2()">
+                                <img style="margin-top:20px;" id="bn_time_img1" src="~/images/schedule-white.png">
+                                <div style="color:white;" id="bn_time_text">Time schedule</div>
+                            </div>
 
 
-                            <td id="" class="bn_t1_hd_inner" onclick="fun3()">
-                                <img src="~/images/bn_data.png">
+                            <div style="margin-right: 4px;" id="data1" class="bn_t1_hd_inner" onclick="fun3()">
+                                <img style="margin-top:20px;" src="~/images/bn_data.png">
                                 <div>Your data</div>
-                            </td>
-                            
-                            <td id="" class="bn_t1_hd_inner" onclick="fun4()">
-                                <img src="~/images/bn_payment.png">
+                            </div>
+                            <div style="background-color: #006072;margin-right:4px;" id="data2" class="bn_t1_hd_inner" onclick="fun3()">
+                                <img style="margin-top:20px;" src="~/images/details-white.png">
+                                <div style="color:white;">Your data</div>
+                            </div>
+
+                            <div id="payment1" style="margin-right:3px;" class="bn_t1_hd_inner" onclick="fun4()">
+                                <img style="margin-top:20px;" src="~/images/bn_payment.png">
                                 <div>Pay now</div>
-                            </td>
-                           
-                        </tr>
-                    </table>
+                            </div>
+                            <div style="background-color: #006072;" id="payment2" class="bn_t1_hd_inner" onclick="fun4()">
+                                <img style="margin-top:20px;margin-right:3px;" src="~/images/payment-white.png">
+                                <div style="color:white;">Pay now</div>
+                            </div>
+
+                        </div>
+                    </div>
 
                     <div id="bn_book">
                         <div class="bn_zc">Please enter your zip code:</div>
@@ -540,7 +551,7 @@
                 </div>
 
                 <div>
-                    <a href="#" class="bn_mq">More questions and answers</a>
+                    <a href="/Helperland/FAQ" class="bn_mq">More questions and answers</a>
                 </div>
 
 
@@ -579,6 +590,9 @@
     <script type="text/javascript">
         var main_hrs = 3.00;
         var total_hrs = 3.00;
+        var first_done = "no";
+        var second_done = "no";
+        var third_done = "no";
         document.getElementById('bn_time').style.display = "none";
         document.getElementById('bn_data').style.display = "none";
         document.getElementById('bn_payment').style.display = "none";
@@ -593,31 +607,84 @@
         document.getElementById('oven_display').style.display = "none";
         document.getElementById('wash_display').style.display = "none";
         document.getElementById('windows_display').style.display = "none";
-        
+        document.getElementById('time2').style.display = "none";
+        document.getElementById('data2').style.display = "none";
+        document.getElementById('payment2').style.display = "none";
+
 
         function fun1() {
             document.getElementById('bn_book').style.display = "block";
             document.getElementById('bn_time').style.display = "none";
             document.getElementById('bn_data').style.display = "none";
             document.getElementById('bn_payment').style.display = "none";
+            document.getElementById('data1').style.display = "block";
+            document.getElementById('data2').style.display = "none";
+            document.getElementById('time1').style.display = "block";
+            document.getElementById('time2').style.display = "none";
+            document.getElementById('payment1').style.display = "block";
+            document.getElementById('payment2').style.display = "none";
         }
         function fun2() {
-            document.getElementById('bn_book').style.display = "none";
-            document.getElementById('bn_time').style.display = "block";
-            document.getElementById('bn_data').style.display = "none";
-            document.getElementById('bn_payment').style.display = "none";
+            if (first_done == "no")
+            {
+                fun1();
+            }
+            else {
+                document.getElementById('bn_book').style.display = "none";
+                document.getElementById('bn_time').style.display = "block";
+                document.getElementById('bn_data').style.display = "none";
+                document.getElementById('bn_payment').style.display = "none";
+                document.getElementById('time1').style.display = "none";
+                document.getElementById('time2').style.display = "block";
+                document.getElementById('data1').style.display = "block";
+                document.getElementById('data2').style.display = "none";
+                document.getElementById('payment1').style.display = "block";
+                document.getElementById('payment2').style.display = "none";
+            }
         }
         function fun3() {
-            document.getElementById('bn_book').style.display = "none";
-            document.getElementById('bn_time').style.display = "none";
-            document.getElementById('bn_data').style.display = "block";
-            document.getElementById('bn_payment').style.display = "none";
+            if (second_done == "yes") {
+                document.getElementById('bn_book').style.display = "none";
+                document.getElementById('bn_time').style.display = "none";
+                document.getElementById('bn_data').style.display = "block";
+                document.getElementById('bn_payment').style.display = "none";
+                document.getElementById('time1').style.display = "none";
+                document.getElementById('time2').style.display = "block";
+                document.getElementById('data1').style.display = "none";
+                document.getElementById('data2').style.display = "block";
+                document.getElementById('payment1').style.display = "block";
+                document.getElementById('payment2').style.display = "none";
+            }
+            else if (first_done == "yes") {
+                fun2();
+            }
+            else {
+                fun1();
+            }
         }
         function fun4() {
-            document.getElementById('bn_book').style.display = "none";
-            document.getElementById('bn_time').style.display = "none";
-            document.getElementById('bn_data').style.display = "none";
-            document.getElementById('bn_payment').style.display = "block";
+            if (third_done == "yes") {
+                document.getElementById('bn_book').style.display = "none";
+                document.getElementById('bn_time').style.display = "none";
+                document.getElementById('bn_data').style.display = "none";
+                document.getElementById('bn_payment').style.display = "block";
+                document.getElementById('time1').style.display = "none";
+                document.getElementById('time2').style.display = "block";
+                document.getElementById('data1').style.display = "none";
+                document.getElementById('data2').style.display = "block";
+                document.getElementById('payment1').style.display = "none";
+                document.getElementById('payment2').style.display = "block";
+            }
+
+            else if (second_done == "yes") {
+                fun3();
+            }
+            else if (first_done == "yes") {
+                fun2();
+            }
+            else {
+                fun1();ss
+            }
         }
         function as_1() {
             let a = document.getElementById('as_h1').value;
@@ -793,9 +860,16 @@
             document.getElementById('bn_time').style.display = "block";
             document.getElementById('bn_data').style.display = "none";
             document.getElementById('bn_payment').style.display = "none";
+            first_done = "yes";
         </script>
 
-      
+        if (ViewBag.first_tab_done != null)
+        {
+            <script>
+                document.getElementById('time2').style.display = "block";
+                document.getElementById('time1').style.display = "none";
+            </script>
+        }
 
     }
     else if (ViewBag.from_main == null)
@@ -812,8 +886,22 @@
             document.getElementById('bn_time').style.display = "none";
             document.getElementById('bn_data').style.display = "block";
             document.getElementById('bn_payment').style.display = "none";
+            second_done = "yes";
             var total_hrrs = 0.0;
+
         </script>
+
+        if(ViewBag.second_tab_done != null)
+                {
+                    <script>
+                        document.getElementById('data1').style.display = "none";
+                        document.getElementById('data2').style.display = "block";
+                        document.getElementById('time1').style.display = "none";
+                        document.getElementById('time2').style.display = "block";
+                    </script>
+                }
+
+
 
         if (ViewBag.laundry != 0)
         {
@@ -868,8 +956,21 @@
             document.getElementById('bn_time').style.display = "none";
             document.getElementById('bn_data').style.display = "none";
             document.getElementById('bn_payment').style.display = "block";
+            third_done = "yes";
             var total_hrrs = 0.0;
         </script>
+
+        if(ViewBag.third_tab_done != null)
+                {
+                    <script>
+                        document.getElementById('data1').style.display = "none";
+                        document.getElementById('data2').style.display = "block";
+                        document.getElementById('time1').style.display = "none";
+                        document.getElementById('time2').style.display = "block";
+                        document.getElementById('payment1').style.display = "none";
+                        document.getElementById('payment2').style.display = "block";
+                    </script>
+                }
 
         if (ViewBag.laundry != 0)
         {

@@ -176,7 +176,7 @@ namespace Tatvasoft_Project.Controllers
         public IActionResult Forgot_password(Models.User model)
         {
             var email = model.Email;
-            MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", "princemakadiya4@gmail.com");
+            MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", email);
             mm.Subject = "Reset Your Password from Helperland";
             _helperlandcontext = new HelperlandContext();
             var p = _helperlandcontext.Users.Where(x => x.Email == email).ToList();
@@ -310,6 +310,7 @@ namespace Tatvasoft_Project.Controllers
             ViewBag.oven = model.Oven;
             ViewBag.windows = model.Windows;
             ViewBag.second_done = "yes";
+            ViewBag.second_tab_done = "yes";
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
@@ -380,6 +381,8 @@ namespace Tatvasoft_Project.Controllers
             ViewBag.oven = int.Parse(HttpContext.Session.GetString("Oven")); ;
             ViewBag.windows = int.Parse(HttpContext.Session.GetString("Windows"));
             ViewBag.third_done = "yes";
+            ViewBag.second_done = "yes";
+            ViewBag.third_tab_done = "yes";
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
 
             return View("Views/Helperland/Booknow.cshtml");
@@ -447,7 +450,26 @@ namespace Tatvasoft_Project.Controllers
 
             _helperlandcontext.ServiceRequestAddresses.Add(address);
             _helperlandcontext.SaveChanges();
+            var z_code = HttpContext.Session.GetString("zipcode");
 
+            var sp_s = _helperlandcontext.Users.Where(x => x.ZipCode == z_code && x.UserTypeId == 2).ToList();
+
+            foreach (Models.User user_temp in sp_s)
+            {
+                MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", user_temp.Email);
+                mm.Subject = "New Service request.";
+                mm.Body = "New service request is booked in your area, Please check if you are interested!";
+                mm.IsBodyHtml = false;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = nc;
+                smtp.Send(mm);
+                //return View();
+            }
 
             ViewBag.user = HttpContext.Session.GetString("user");
             ViewBag.final_done = "yes";

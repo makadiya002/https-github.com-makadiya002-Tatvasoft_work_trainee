@@ -2797,11 +2797,12 @@ a{
     display: flex;
     width: 100%;
     margin-top: 30px;
+    height:100%;
 }
 
 .bn_table1 {
     width: 70%;
-    height: 200px;
+    min-height: 200px;
 }
 
 .bn_table2 {
