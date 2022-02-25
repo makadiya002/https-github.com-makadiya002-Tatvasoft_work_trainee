@@ -87,7 +87,7 @@
                 </div>
             </nav>
         </div>
-      
+
 
         @if (ViewBag.err != null)
         {
@@ -475,34 +475,46 @@
                 alert("@ViewBag.err_email");
         </script>
     }
-    @if(ViewBag.logout != null)
-            {
-                <script>
+    @if (ViewBag.logout != null)
+    {
+        <script>
                     alert("@ViewBag.logout");
-                </script>
-            }
-    @if(ViewBag.sugg != null)
-            {
-                <script>
+        </script>
+    }
+    @if (ViewBag.sugg != null)
+    {
+        <script>
                     alert("@ViewBag.Booking_instruction");
-                </script>
-            }
-    @if(ViewBag.pass_changed_fp != null)
-            {
-                <script>
+        </script>
+    }
+    @if (ViewBag.pass_changed_fp != null)
+    {
+        <script>
                     alert("@ViewBag.pass_changed_fp");
-                </script>
-            }
-    @if(ViewBag.is_address_updated_fm != null)
-            {
-                <script>
+        </script>
+    }
+    @if (ViewBag.is_address_updated_fm != null)
+    {
+        <script>
                     alert("@ViewBag.is_address_updated_fm");
-                </script>
-            }
-    @if(ViewBag.is_address_deleted_fm != null)
+        </script>
+    }
+    @if (ViewBag.is_address_deleted_fm != null)
+    {
+        <script>
+                    alert("@ViewBag.is_address_deleted_fm");
+        </script>
+    }
+    @if (ViewBag.is_service_modified != null)
+    {
+        <script>
+                    alert("@ViewBag.is_service_modified");
+        </script>
+    }
+    @if(ViewBag.is_service_Cancelled != null)
             {
                 <script>
-                    alert("@ViewBag.is_address_deleted_fm");
+                    alert("@ViewBag.is_service_Cancelled");
                 </script>
             }
 </body>

@@ -450,6 +450,48 @@ namespace Tatvasoft_Project.Controllers
 
             _helperlandcontext.ServiceRequestAddresses.Add(address);
             _helperlandcontext.SaveChanges();
+
+           if(int.Parse(HttpContext.Session.GetString("Laundry")) == 1)
+           {
+                Models.ServiceRequestExtra extraa_sr = new Models.ServiceRequestExtra();
+                extraa_sr.ServiceRequestId = id_val;
+                extraa_sr.ServiceExtraId = 1;
+                _helperlandcontext.ServiceRequestExtras.Add(extraa_sr);
+                _helperlandcontext.SaveChanges();
+            }
+            if (int.Parse(HttpContext.Session.GetString("Fridge")) == 1)
+            {
+                Models.ServiceRequestExtra extraa_sr = new Models.ServiceRequestExtra();
+                extraa_sr.ServiceRequestId = id_val;
+                extraa_sr.ServiceExtraId = 2;
+                _helperlandcontext.ServiceRequestExtras.Add(extraa_sr);
+                _helperlandcontext.SaveChanges();
+            }
+            if (int.Parse(HttpContext.Session.GetString("Cabinate")) == 1)
+            {
+                Models.ServiceRequestExtra extraa_sr = new Models.ServiceRequestExtra();
+                extraa_sr.ServiceRequestId = id_val;
+                extraa_sr.ServiceExtraId = 3;
+                _helperlandcontext.ServiceRequestExtras.Add(extraa_sr);
+                _helperlandcontext.SaveChanges();
+            }
+            if (int.Parse(HttpContext.Session.GetString("Oven")) == 1)
+            {
+                Models.ServiceRequestExtra extraa_sr = new Models.ServiceRequestExtra();
+                extraa_sr.ServiceRequestId = id_val;
+                extraa_sr.ServiceExtraId = 4;
+                _helperlandcontext.ServiceRequestExtras.Add(extraa_sr);
+                _helperlandcontext.SaveChanges();
+            }
+            if (int.Parse(HttpContext.Session.GetString("Windows")) == 1)
+            {
+                Models.ServiceRequestExtra extraa_sr = new Models.ServiceRequestExtra();
+                extraa_sr.ServiceRequestId = id_val;
+                extraa_sr.ServiceExtraId = 5;
+                _helperlandcontext.ServiceRequestExtras.Add(extraa_sr);
+                _helperlandcontext.SaveChanges();
+            }
+
             var z_code = HttpContext.Session.GetString("zipcode");
 
             var sp_s = _helperlandcontext.Users.Where(x => x.ZipCode == z_code && x.UserTypeId == 2).ToList();

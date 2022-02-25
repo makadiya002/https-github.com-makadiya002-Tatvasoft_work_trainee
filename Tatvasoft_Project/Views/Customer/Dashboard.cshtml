@@ -118,11 +118,12 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
+                    <form asp-controller="Customer" asp-action="Modify_Service_dt" method="post">
                         <label style="font-size: 18px;">Select New Date & Time</label>
+                        <input type="hidden" id="demo" asp-for="ID"/>
                         <div style="display: flex;margin-top: 4px;">
-                            <input style="width: 49%;border: 1px solid #646464;color: #646464;" type="date" name="">
-                            <select style="width: 49%;margin-left: 2%;border: 1px solid #646464;color: #646464;">
+                            <input required asp-for="Booking_date" style="width: 49%;border: 1px solid #646464;color: #646464;" type="date">
+                            <select asp-for="Booking_time" style="width: 49%;margin-left: 2%;border: 1px solid #646464;color: #646464;">
                                 <option value="8.00">8:00 am</option>
                                 <option value="8.30">8:30 am</option>
                                 <option value="9.00">9:00 am</option>
@@ -169,8 +170,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form asp-action="Cancel_sr" asp-controller="Customer" method="post">
                         <label style="font-size: 17px;">Why you want to cancel the service request?</label>
+                        <input asp-for="ID" type="hidden" id="id_cancel" />
                         <input type="text" name="" style="width: 100%;height: 100px;">
                         <button type="submit" class="btn btn-primary"
                                 style="width: 100%;border-radius: 30px;margin-top: 10px;font-size: 17px;" name="">
@@ -222,7 +224,7 @@
                         <div style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
                         <div>@temp.Booking_duration</div>
                     </div>
-                    
+
                     <div class="col-3 us_d1 cus_hat_txt">
                         &nbsp;
                     </div>
@@ -234,11 +236,11 @@
 
 
                     <div class="col-3 cus_rate" style="margin-top: 7px;">
-                        <button data-toggle="modal" onclick="hello()" data-target="#exampleModal_reschedule" style="width: 88px;background-color: #146371;
+                        <button onclick="Setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_reschedule" style="width: 88px;background-color: #146371;
   color:white;" class="Reschedule_idb">
                             Reschedule
                         </button>
-                        <button data-toggle="modal" data-target="#exampleModal_cancel" style="width: 60px;background-color: #ff6b6b;border: 1px solid #ff6b6b;">Cancel</button>
+                        <button onclick="Setid_forcancel(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel" style="width: 60px;background-color: #ff6b6b;border: 1px solid #ff6b6b;">Cancel</button>
                     </div>
 
                 </div>
@@ -248,14 +250,52 @@
         </div>
     </div>
 
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+
     <script>
-        function hello() {
-            alert("hello");
+        function Setid(id) {
+            document.getElementById("demo").value = id;
+            //alert(id);
+        }
+
+        function Setid_forcancel(id) {
+            document.getElementById("id_cancel").value = id;
         }
     </script>
+
+    <script>
+        function hello() {
+            var Student = {
+                Id: '10001',
+
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Customer/Fetch_Address",
+                data: JSON.stringify(Student),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    document.getElementById("demo").value = data.msg2;
+                    //alert(data.msg + " " + data.msg2);
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            });
+        }
+    </script>
+
+    @if(ViewBag.is_service_modified != null)
+            {
+                <script>
+                    alert("@ViewBag.is_service_modified");
+                </script>
+            }
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

@@ -152,7 +152,7 @@ namespace Tatvasoft_Project.Controllers
             var username = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid).ToList();
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status != 2).ToList();
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.ServiceRequest temp in model_to_pass)
             {
@@ -193,6 +193,52 @@ namespace Tatvasoft_Project.Controllers
 
             ViewBag.data = item;
             return View();
+        }
+
+        public IActionResult Modify_Service_dt(Models.Book_now_Table model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var p = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            p.ServiceStartDate = model.Booking_date;
+            p.ServiceHours = double.Parse(model.Booking_time);
+
+            _helperlandcontext.Entry(p).State = EntityState.Modified;
+            _helperlandcontext.SaveChanges();
+
+            ViewBag.is_service_modified = "Details Updated succesfully!";
+            ViewBag.user = HttpContext.Session.GetString("user");
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        public IActionResult Cancel_sr(Models.Book_now_Table model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var p = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            p.Status = 2;
+            _helperlandcontext.Entry(p).State = EntityState.Modified;
+            _helperlandcontext.SaveChanges();
+
+            ViewBag.is_service_Cancelled = "Service Cancelled succesfully!";
+            ViewBag.user = HttpContext.Session.GetString("user");
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult Fetch_Address(Models.ServiceRequestAddress st)
+        {
+            
+            try
+            {
+                return Json(new
+                {
+                    msg = "Successfully added ",
+                    msg2 = "Prince"
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
