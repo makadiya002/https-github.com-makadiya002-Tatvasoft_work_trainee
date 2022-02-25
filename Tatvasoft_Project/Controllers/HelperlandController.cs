@@ -18,8 +18,8 @@ namespace Tatvasoft_Project.Controllers
     public class HelperlandController : Controller
     {
         private HelperlandContext _helperlandcontext;
-        private Models.Session ssn;
-        private object userManager;
+        //private Models.Session ssn;
+        //private object userManager;
 
 
         public object Session { get; set; }
@@ -476,7 +476,9 @@ namespace Tatvasoft_Project.Controllers
             return View("~/Views/Helperland/Register.cshtml"); 
         }
 
-        public IActionResult Privacy()
+
+
+            public IActionResult Privacy()
         {
             return View();
         }

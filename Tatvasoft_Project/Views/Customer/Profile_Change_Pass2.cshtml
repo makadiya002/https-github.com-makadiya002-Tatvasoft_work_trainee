@@ -1,0 +1,74 @@
+﻿@model Password_Temp;
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+<body>
+    <!-- Button trigger modal -->
+
+   
+
+
+       
+
+
+
+
+            <div class="fs_address" style="font-size: 17px;font-weight: bold;color: rgba(0,0,0,0.6);margin-top: 35px;">
+                <form onsubmit="return validate()" asp-action="Password_Edit" asp-controller="Customer" method="post" class="container-fluid">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Old Password</label>
+                        <input required asp-for="Password" type="text" class="form-control" id="formGroupExampleInput" placeholder="Old Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">New Password</label>
+                        <input required asp-for="Confirm_Password" type="text" class="form-control" id="formGroupExampleInput2" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Confirm Password</label>
+                        <input required type="text" class="form-control" id="formGroupExampleInput3" placeholder="Confirm Password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="padding:10px; border-radius: 25px;font-size: 18px;margin-top: 10px;">Change Password</button>
+
+                </form>
+
+
+
+            </div>
+
+
+        <script>
+            alert("something went wrong!");
+        </script>
+
+        <script>
+            var val1 = document.getElementById("formGroupExampleInput2");
+            var val2 = document.getElementById("formGroupExampleInput3");
+            if (val1 != val2) {
+                alert("New Password and Confirm Password must be same");
+                return false;
+            }
+            return true;
+        </script>
+
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

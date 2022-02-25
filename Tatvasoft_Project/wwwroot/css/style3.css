@@ -1,0 +1,32 @@
+﻿
+.us_table_main .us_table2 .fs_tabs {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: space-evenly;
+}
+
+	.us_table_main .us_table2 .fs_tabs a, .fs_tabs button {
+		color: rgba(0,0,0,0.7);
+		font-weight: bold;
+		font-size: 18px;
+	}
+
+#my_add {
+	color: rgba(0,0,0,0.7);
+	font-weight: bold;
+	font-size: 18px;
+}
+#my_add:hover, #cha_pas:hover, #my_det:hover {
+	border-bottom: 2px solid #1d7a8c;
+	color: #1d7a8c;
+}
+
+.Reschedule_idb {
+	background-color: #146371;
+	color: white;
+}
+
+.modal_pu:hover {
+	cursor: pointer;
+}

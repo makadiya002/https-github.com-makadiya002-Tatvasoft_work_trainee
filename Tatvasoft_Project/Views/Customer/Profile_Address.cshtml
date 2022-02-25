@@ -1,0 +1,160 @@
+﻿@model UserAddress;
+
+       
+            
+
+            <div class="fs_address" style="font-size: 17px;font-weight: bold;color: rgba(0,0,0,0.6);margin-top:15px;">
+                <div class="row container-fluid" style="background-color: rgba(0,0,0,0.2);min-height: 30px;line-height: 30px;">
+                    <div class="col-md-3">Billing address</div>
+                    <div class="col-md-7">Addresses</div>
+                    <div class="col-md-2">Action</div>
+                </div>
+
+            </div>
+
+            <div class="modal fade" id="examplemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Address</h5>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <form asp-action="Edit_Address_from_modal" asp-controller="Customer" method="post">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">street</label>
+                                        <input required asp-for="AddressLine1" type="text" class="form-control" id="address1" placeholder="street">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">House number</label>
+                                        <input required asp-for="AddressLine2" type="text" class="form-control" id="address2" placeholder="house number">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>PLZ</label>
+                                        <input required asp-for="PostalCode" type="text" class="form-control" id="postalcode" placeholder="PLZ">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Location</label>
+                                        <input required asp-for="City" type="text" class="form-control" id="city" placeholder="Location">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Phone number</label>
+                                        <input required asp-for="Mobile" type="text" class="form-control" id="mobile" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <input required id="addressid" type="hidden" asp-for="AddressId" />
+                                <button type="submit" class="btn btn-primary" style="width: 100%;border-radius: 25px;text-align: center;">To Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this address?
+                            <form asp-action="Delete_Address_from_modal" asp-controller="Customer" method="post">
+                                <input type="hidden" asp-for="AddressId" id="addressIdDelete" />
+                                <button style="margin-top:12px;" type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @foreach (var temp in ViewBag.all_address)
+            {
+                <div class="container-fluid" style="margin-top: 10px;">
+
+                    <div class="row container-fluid" style="margin-top: 10px;margin-bottom:4px;border: 1px solid gray;">
+                        <div class="col-md-2" style="text-align: center;">
+                            <input onclick="radiobtnclick()"
+                                   class="form-check-input" type="radio" name="flexRadioDefault" id=""
+                                   style="margin-top: 25px;">
+                        </div>
+
+                        <div class="col-md-8" style="font-weight: normal;">
+                            <label class="form-check-label" for="" style="color: rgba(0,0,0,0.7);padding: 10px;">
+                                <span style="font-weight: bold;">Address: </span><span class="@temp.AddressId">@temp.AddressLine1</span> <span class="@temp.AddressId">@temp.AddressLine2</span>  <span class="@temp.AddressId">@temp.City</span>
+                                <span class="@temp.AddressId">@temp.PostalCode</span><br>
+                                <span style="font-weight: bold;">Phone number</span>: <span class="@temp.AddressId">@temp.Mobile</span>
+
+                                <input type="hidden" value="@temp.AddressId" class="@temp.AddressId" />
+                            </label>
+                        </div>
+
+
+                        <div class="col-md-2" style="display: flex;">
+
+                            <button style="border:none;background-color:transparent;" onclick="Edit_Add(@temp.AddressId)" data-toggle="modal" id="" data-target="#examplemodal"><img src="~/images/edit-icon.png" style="height: 24px;width: 24px;margin-top: 7px;"></button>
+                            <button style="border:none;background-color:transparent;" onclick="Delete_Add(@temp.AddressId)" data-toggle="modal" data-target="#exampleModalCenter2"><img src="~/images/delete-icon.png" style="height: 24px;width: 24px;margin-top: 7px;margin-left: 4px;"></button>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+
+
+                </div>
+
+            }
+
+        </div>
+   
+
+
+   
+    <script>
+        
+        function Edit_Add(id) {
+            var a = parseInt(id);
+            var address1 = document.getElementById("address1");
+            var address2 = document.getElementById("address2");
+            var postalcode = document.getElementById("postalcode");
+            var city = document.getElementById("city");
+            var mobile = document.getElementById("mobile");
+
+            document.getElementById("address1").value = document.getElementsByClassName(id)[0].innerHTML;
+            document.getElementById("address2").value = document.getElementsByClassName(id)[1].innerHTML;
+            document.getElementById("city").value = document.getElementsByClassName(id)[2].innerHTML;
+            document.getElementById("postalcode").value = document.getElementsByClassName(id)[3].innerHTML;
+            document.getElementById("mobile").value = document.getElementsByClassName(id)[4].innerHTML;
+            document.getElementById("addressid").value = document.getElementsByClassName(id)[5].value;
+
+           
+        }
+
+        function Delete_Add(id) {
+            document.getElementById("addressIdDelete").value = id;
+        }
+    </script>
+
+
+    

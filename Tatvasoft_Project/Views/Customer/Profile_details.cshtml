@@ -1,0 +1,224 @@
+﻿@model User;
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="~/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style3.css">
+
+</head>
+<body>
+    <!-- Button trigger modal -->
+
+    <nav class="navbar navbar-expand-lg us_navbar fixed-top">
+        <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto con_nav_ul">
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_Book_now">Book now</a>
+                </li>
+                <li class="nav-item active">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_price">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_war">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_blog">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
+                </li>
+                <li class="nav-item" style="margin-top: 4px;margin-right: 50px;">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" style="background-color: transparent;margin-top: 0px;border:none;">
+                            <img id="us_nav_pro" src="~/images/us_icon2.png">
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div style="margin-left: 10px;">Welcome,<br>Gaurang Patel</div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cus_settings" href="#">Dashboard</a>
+                            <a class="dropdown-item cus_settings" href="#">My Settings</a>
+                            <a class="dropdown-item cus_settings" href="#">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <li><img id="us_nav_pro" src="~/images/us_icon2.png"></li>
+    <li><img id="us_nav_opt" src="~/images/us_icon3.png"></li>
+
+    <div class="us_name">
+        Welcome, <span style="font-weight: bold;">Gaurang!</span>
+    </div>
+
+    <div class="us_table_main">
+
+        <div class="us_table1">
+            <div><a href="#" class="cus_side_items">Dashboard</a></div>
+            <div style="background-color: #146371;"><a href="#" class="cus_side_items">Service History</a></div>
+            <div><a href="#" class="cus_side_items">Service Schedule</a></div>
+            <div><a href="#" class="cus_side_items">Favourite Pros</a></div>
+            <div><a href="#" class="cus_side_items">Invoices</a></div>
+            <div><a href="#" class="cus_side_items">Notifications</a></div>
+        </div>
+
+
+        <div class="us_table2">
+            <div class="container-fluid fs_tabs" style="border-bottom: 1px solid gray;">
+                <a href="/Customer/Profile_details" id="my_det" style="padding-bottom: 7px;color: #1d7a8c;
+      border-bottom: 2px solid #1d7a8c;">My Details</a>
+                <button onclick="fun_address()" id="my_add" style="padding-bottom: 8px; border: none; background-color: transparent; color: rgba(0,0,0,0.7); font-weight: bold; font-size: 18px;">My Addresses</></button>
+                <button onclick="fun_password()" id="cha_pas" style="padding-bottom: 8px; border: none; background-color: transparent; color: rgba(0,0,0,0.7); font-weight: bold; font-size: 18px;">Change Password</></button>
+            </div>
+
+            <div id="user_details">
+                <form asp-action="Details_Edit" asp-controller="Customer" method="post" class="container-fluid" style="color: rgba(0,0,0,0.7);font-weight: bold;margin-top: 30px;">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">First Name</label>
+                            <input required asp-for="FirstName" type="text" value="@ViewBag.data.FirstName" class="form-control" id="inputEmail4" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">Last Name</label>
+                            <input required asp-for="LastName" type="text" value="@ViewBag.data.LastName" class="form-control" id="inputPassword4" placeholder="Password">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">Email</label>
+                            <input required asp-for="Email" type="email" value="@ViewBag.data.Email" readonly class="form-control" id="inputEmail4" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">Mobile Number</label>
+                            <input required type="text" asp-for="Mobile" value="@ViewBag.data.Mobile" class="form-control" id="inputEmail4" placeholder="Mobile">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4">Birth Date</label>
+                            <input required type="datetime" asp-for="DateOfBirth" onfocus="(this.type='date')" value="@ViewBag.data.DateOfBirth.Date" class="form-control" id="inputEmail4" placeholder="Birth Date">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputEmail4" style="">My preferred language</label>
+                            <select class="form-select" aria-label="Default select example" style="height: 35px;width: 120px;color: rgba(0,0,0,0.7);">
+                                <option value="Dutch">Deutsche</option>
+                                <option value="English">English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="UserId" value="@ViewBag.data.UserId " />
+                    <button type="submit" class="btn btn-primary" style="border-radius: 30px;height: 50px;width: 190px;font-size: 18px;margin-top: 10px;">Save on Computer</button>
+                </form>
+
+            </div>
+
+            <div id="user_address" style="width:100%;"></div>
+
+            <div id="user_password" style="width:100%;"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        var val1 = document.getElementById("formGroupExampleInput2");
+        var val2 = document.getElementById("formGroupExampleInput3");
+        if (val1 != val2) {
+            alert("New Password and Confirm Password must be same");
+            return false;
+        }
+        return true;
+    </script>
+
+    <script>
+
+        var val1 = 0;
+        var val2 = 0;
+    </script>
+
+
+
+
+    <script>
+        function fun_address() {
+            document.getElementById("my_add").style.color = "#1d7a8c";
+            document.getElementById("my_add").style.borderBottom = "2px solid #1d7a8c";
+            document.getElementById("my_det").style.color = "rgba(0,0,0,0.7)";
+            document.getElementById("my_det").style.borderBottom = "none";
+            document.getElementById("cha_pas").style.color = "rgba(0,0,0,0.7)";
+            document.getElementById("cha_pas").style.borderBottom = "none";
+            document.getElementById("my_add").style.color = "#1d7a8c";
+            document.getElementById("my_add").style.borderBottom = "2px solid #1d7a8c";
+            if (val1 == 0) {
+                val1 = 1;
+                document.getElementById("user_details").style.display = "none";
+                document.getElementById("user_password").style.display = "none";
+                $("#user_address").load('@Url.Action("Profile_Address", "Customer")');
+            }
+            else {
+                fun2();
+            }
+        }
+
+        function fun_password() {
+            document.getElementById("my_add").style.color = "rgba(0,0,0,0.7)";
+            document.getElementById("my_add").style.borderBottom = "none";
+            document.getElementById("my_det").style.color = "rgba(0,0,0,0.7)";
+            document.getElementById("my_det").style.borderBottom = "none";
+            document.getElementById("cha_pas").style.color = "#1d7a8c";
+            document.getElementById("cha_pas").style.borderBottom = "2px solid #1d7a8c";
+
+            if (val2 == 0) {
+                val2 = 1;
+                document.getElementById("user_details").style.display = "none";
+                document.getElementById("user_address").style.display = "none";
+                $("#user_password").load('@Url.Action("Profile_Change_Pass", "Customer")');
+            }
+            else {
+                fun3();
+            }
+
+        }
+    </script>
+
+    <script>
+        function fun2() {
+            document.getElementById("user_details").style.display = "none";
+            document.getElementById("user_password").style.display = "none";
+            document.getElementById("user_address").style.display = "block";
+        }
+        function fun3() {
+            document.getElementById("user_details").style.display = "none";
+            document.getElementById("user_password").style.display = "block";
+            document.getElementById("user_address").style.display = "none";
+        }
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
