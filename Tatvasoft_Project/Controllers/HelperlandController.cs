@@ -155,8 +155,63 @@ namespace Tatvasoft_Project.Controllers
                     {
                         var user = p.FirstOrDefault().FirstName;
                         HttpContext.Session.SetString("user", user);
+                        var username = HttpContext.Session.GetString("user");
+                        _helperlandcontext = new HelperlandContext();
+                        var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+                        var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status != 2).ToList();
+                        List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+                        foreach (Models.ServiceRequest temp in model_to_pass)
+                        {
+                            if (temp.ServiceRequestId >= 4)
+                            {
+                                var duration = (temp.ServiceHours).ToString();
+                                if (duration.Length <= 2)
+                                {
+                                    duration += ":00";
+                                }
+                                else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                                var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                                if (end_dur.ToString().Length <= 2)
+                                {
+                                    duration = duration + "-" + end_dur.ToString() + ":00";
+                                }
+                                else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                                item.Add(new Models.Book_now_Table
+                                {
+
+                                    ID = temp.ServiceRequestId,
+                                    Booking_date = (temp.ServiceStartDate).Date,
+                                    Booking_time = (temp.ExtraHours).ToString(),
+                                    Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                                    Booking_duration = duration,
+                                    Suggestion = temp.Comments,
+
+                                });
+                            }
+                        }
+                        int i = 0;
+                        foreach (Models.ServiceRequest temp2 in model_to_pass)
+                        {
+                            if (temp2.ServiceRequestId >= 4)
+                            {
+
+
+                                var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                                //int id = temp2.ServiceId;
+                                item[i].Street = address_obj[0].AddressLine1;
+                                item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                                item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                                item[i].Location = address_obj.FirstOrDefault().City;
+                                item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                                i++;
+                            }
+                        }
+
                         ViewBag.user = HttpContext.Session.GetString("user");
-                        return View("~/Views/Helperland/Register.cshtml");
+                        ViewBag.data = item;
+                        return View("~/Views/Customer/Dashboard.cshtml");
                     }
                     else if (p.FirstOrDefault().UserTypeId == 2)
                     {

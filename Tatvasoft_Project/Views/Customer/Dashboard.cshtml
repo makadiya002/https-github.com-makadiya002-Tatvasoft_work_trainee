@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/style2.css">
     <link rel="stylesheet" type="text/css" href="~/css/style3.css">
     <title>Hello, world!</title>
@@ -22,8 +23,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto con_nav_ul">
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="/Helperland/Booknow" id="us_nav_item_Book_now">Book now</a>
+                </li>
                 <li class="nav-item active">
-                    <a style="" class="nav-link" href="#" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
+                    <a style="" class="nav-link" href="/Helperland/Prices" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a style="" class="nav-link" href="#" id="us_nav_item_price">Warranty</a>
@@ -32,7 +36,7 @@
                     <a style="" class="nav-link" href="#" id="us_nav_item_war">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a style="" class="nav-link" href="#" id="us_nav_item_blog">Contact</a>
+                    <a style="" class="nav-link" href="/Helperland/Contact" id="us_nav_item_blog">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
@@ -44,11 +48,11 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <div style="margin-left: 10px;">Welcome,<br>Sandip Patel</div>
+                            <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item cus_settings" href="#">Dashboard</a>
-                            <a class="dropdown-item cus_settings" href="#">My Settings</a>
-                            <a class="dropdown-item cus_settings" href="#">Logout</a>
+                            <a class="dropdown-item cus_settings" href="/Customer/Profile_details">My Settings</a>
+                            <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -57,7 +61,7 @@
     </nav>
 
     <div class="us_name" style="margin-top: 100px;">
-        Welcome, <span style="font-weight: bold;">Sandip!</span>
+        Welcome, <span style="font-weight: bold;">@ViewBag.user</span>
     </div>
 
     <!-- Button trigger modal -->
@@ -73,23 +77,40 @@
                 </div>
                 <div class="modal-body" style="color: #646464;font-size: 17px;">
 
-                    <span style="font-size: 18px;font-weight: bold;">05/10/2021 8:00-11:00</span>
-                    <div><span style="font-weight: bold;">Duration:</span> 3.5 Hrs</div>
+
+
+                    <span id="Service_date" style="font-size: 18px;font-weight: bold;">05/10/2021</span>
+                    <span id="Service_time">8:00-11:00</span>
+                    <div><span style="font-weight: bold;">Duration:</span> <span id="Service_duration">3.5 Hrs</span></div>
                     <hr>
-                    <div><span style="font-weight: bold;">Service Id:</span> 1234</div>
-                    <div><span style="font-weight: bold;">Extras:</span> Inside Cabinate</div>
+                    <div><span style="font-weight: bold;">Service Id:</span> <span id="Service_id">1234</span></div>
+
                     <div style="display: flex;">
                         <div style="margin-top: 10px;">Net Amount</div>
-                        <div style="text-align: center;color: #1d7a8c;font-size: 32px;margin-left: 125px;"> €63</div>
+                        <div style="text-align: center;color: #1d7a8c;font-size: 32px;margin-left: 125px;">
+                            <span id="Service_cost">€63</span>
+                        </div>
                     </div>
                     <hr>
-                    <div><span style="font-weight: bold;">Service Address:</span> Street House_number, zipcode city</div>
+
+                    <div style="font-weight:bold;">Extra Services : </div>
+                    <div id="il">Inside Laundry</div>
+                    <div id="if">Inside Fridge</div>
+                    <div id="ic">Inside Cabinate</div>
+                    <div id="io">Inside Oven</div>
+                    <div id="iw">Inside Windows</div>
+                    <div>
+                        <span style="font-weight: bold;">Service Address:</span> <span id="Service_street">Street</span>
+                        <span id="Service_hn">House_number</span>
+                        , <span id="Service_zipcode">zipcode</span>
+                        <span id="Service_city"> city</span>
+                    </div>
                     <div><span style="font-weight: bold;">Billing Address:</span> Same as service address</div>
-                    <div><span style="font-weight: bold;">Phone:</span> 7837468947</div>
-                    <div><span style="font-weight: bold;">Email:</span> hello@gmail.com</div>
+                    <div><span style="font-weight: bold;">Phone:</span> <span id="Service_phone">7837468947</span></div>
+                    <div><span style="font-weight: bold;">Email:</span> <span id="Service_email">hello@gmail.com</span></div>
                     <hr>
                     <div><span style="font-weight: bold;">comments</span></div>
-                    <div>I don't have pets at home</div>
+                    <div><span id="Service_comment">I don't have pets at home</span></div>
                     <hr>
 
                     <div class="cus_rate" style="display: flex;">
@@ -120,7 +141,7 @@
 
                     <form asp-controller="Customer" asp-action="Modify_Service_dt" method="post">
                         <label style="font-size: 18px;">Select New Date & Time</label>
-                        <input type="hidden" id="demo" asp-for="ID"/>
+                        <input type="hidden" id="demo" asp-for="ID" />
                         <div style="display: flex;margin-top: 4px;">
                             <input required asp-for="Booking_date" style="width: 49%;border: 1px solid #646464;color: #646464;" type="date">
                             <select asp-for="Booking_time" style="width: 49%;margin-left: 2%;border: 1px solid #646464;color: #646464;">
@@ -170,6 +191,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+
+
                     <form asp-action="Cancel_sr" asp-controller="Customer" method="post">
                         <label style="font-size: 17px;">Why you want to cancel the service request?</label>
                         <input asp-for="ID" type="hidden" id="id_cancel" />
@@ -187,14 +211,12 @@
 
     <div class="us_table_main">
 
-        <div class="us_table1">
-            <div><a href="#" class="cus_side_items">Dashboard</a></div>
-            <div><a href="#" class="cus_side_items">New Service Requests</a></div>
-            <div style="background-color: #146371;"><a href="#" class="cus_side_items">Upcoming Services</a></div>
-            <div><a href="#" class="cus_side_items">Service Schedule</a></div>
+        <div class="us_table1" style="height:100%;">
+            <div class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
             <div><a href="#" class="cus_side_items">Service History</a></div>
-            <div><a href="#" class="cus_side_items">My Ratings</a></div>
-            <div><a href="#" class="cus_side_items">Block Customer</a></div>
+            <div><a href="#" class="cus_side_items">Favourite Pros</a></div>
+
+
         </div>
 
 
@@ -219,19 +241,29 @@
             @foreach (var temp in ViewBag.data)
             {
                 <div class="row us_table23" style="text-align: center;">
-                    <div class="col-2" style="font-weight: bold;font-size: 17px;margin-top: 25px;">@temp.ID</div>
-                    <div class="us_d1 col-2 modal_pu" data-toggle="modal" data-target="#exampleModal1">
-                        <div style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
-                        <div>@temp.Booking_duration</div>
+                    <div class="col-2 @temp.ID" style="font-weight: bold;font-size: 17px;margin-top: 25px;">@temp.ID</div>
+                    <div onclick="Set_Modal_Vals(@temp.ID)" class="us_d1 col-2 modal_pu" data-toggle="modal" data-target="#exampleModal1">
+                        <div class="@temp.ID" style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                        <div class="@temp.ID">@temp.Booking_duration</div>
                     </div>
 
                     <div class="col-3 us_d1 cus_hat_txt">
                         &nbsp;
                     </div>
 
-                    <div class="col-2 cus_pay" style="margin-top: 7px;">
+                    <div class="col-2 cus_pay @temp.ID" style="margin-top: 7px;">
                         €@temp.Discounted_cost
                     </div>
+
+                    <div style="display:none;" class="@temp.ID">@temp.Booking_time</div>
+
+                    <div style="display:none;" class="@temp.ID">@temp.Suggestion</div>
+                    <div style="display:none;" class="@temp.ID">@temp.Street</div>
+                    <div style="display:none;" class="@temp.ID">@temp.House_number</div>
+                    <div style="display:none;" class="@temp.ID">@temp.Zipcode</div>
+                    <div style="display:none;" class="@temp.ID">@temp.Location</div>
+                    <div style="display:none;" class="@temp.ID">@temp.Phone</div>
+
 
 
 
@@ -250,9 +282,107 @@
         </div>
     </div>
 
+
+    <div class="faq_ff_main">
+        <div class="faq_ff_2 final_footer">
+            <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <ul>
+                <li><a style="color: white;" href="/Home">HOME</a></li>
+                <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+            </ul>
+            <div>
+                <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+            </div>
+        </div>
+
+        <hr class="prices_hr">
+
+        <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+    </div>
+
     <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
     <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+
+    <script>
+        function Set_Modal_Vals(id) {
+            alert("hello" + id);
+            document.getElementById("il").style.display = "block";
+            document.getElementById("if").style.display = "block";
+            document.getElementById("ic").style.display = "block";
+            document.getElementById("io").style.display = "block";
+            document.getElementById("iw").style.display = "block";
+
+
+            var service_date = document.getElementById("Service_date");
+            var service_time = document.getElementById("Service_time");
+            var service_duration = document.getElementById("Service_duration");
+            var service_id = document.getElementById("Service_id");
+            var service_cost = document.getElementById("Service_cost");
+            var service_street = document.getElementById("Service_street");
+            var service_hn = document.getElementById("Service_hn");
+            var service_zipcode = document.getElementById("Service_zipcode");
+            var service_city = document.getElementById("Service_city");
+            var service_phone = document.getElementById("Service_phone");
+            var service_email = document.getElementById("Service_email");
+            var service_comment = document.getElementById("Service_comment");
+            var inside_ca = document.getElementById("inside_ca");
+            var inside_la = document.getElementById("inside_la");
+            var inside_fr = document.getElementById("inside_fr");
+            var inside_ov = document.getElementById("inside_ov");
+            var inside_wi = document.getElementById("inside_wi");
+
+            service_date.innerHTML = document.getElementsByClassName(id)[1].innerHTML;
+            service_time.innerHTML = document.getElementsByClassName(id)[2].innerHTML;
+            service_duration.innerHTML = document.getElementsByClassName(id)[4].innerHTML;
+            service_id.innerHTML = document.getElementsByClassName(id)[0].innerHTML;
+            service_cost.innerHTML = document.getElementsByClassName(id)[3].innerHTML;
+            service_street.innerHTML = document.getElementsByClassName(id)[6].innerHTML;
+            service_hn.innerHTML = document.getElementsByClassName(id)[7].innerHTML;
+            service_zipcode.innerHTML = document.getElementsByClassName(id)[8].innerHTML;
+            service_city.innerHTML = document.getElementsByClassName(id)[9].innerHTML;
+            service_phone.innerHTML = document.getElementsByClassName(id)[10].innerHTML;
+            service_comment.innerHTML = document.getElementsByClassName(id)[5].innerHTML;
+
+
+
+            var obj = {
+                "ServiceRequestId": id,
+
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Customer/Fetch_Address",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.laundry == 0)
+                        document.getElementById("il").style.display = "none";
+                    if (data.fridge == 0)
+                        document.getElementById("if").style.display = "none";
+                    if (data.cabinate == 0)
+                        document.getElementById("ic").style.display = "none";
+                    if (data.oven == 0)
+                        document.getElementById("io").style.display = "none";
+                    if (data.windows == 0)
+                        document.getElementById("iw").style.display = "none";
+
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    </script>
 
     <script>
         function Setid(id) {
@@ -266,33 +396,15 @@
     </script>
 
     <script>
-        function hello() {
-            var Student = {
-                Id: '10001',
 
-            };
-            $.ajax({
-                type: "POST",
-                url: "/Customer/Fetch_Address",
-                data: JSON.stringify(Student),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    document.getElementById("demo").value = data.msg2;
-                    //alert(data.msg + " " + data.msg2);
-                },
-                error: function () {
-                    alert("Error occured!!")
-                }
-            });
-        }
     </script>
 
-    @if(ViewBag.is_service_modified != null)
-            {
-                <script>
+    @if (ViewBag.is_service_modified != null)
+    {
+        <script>
                     alert("@ViewBag.is_service_modified");
-                </script>
-            }
+        </script>
+    }
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
