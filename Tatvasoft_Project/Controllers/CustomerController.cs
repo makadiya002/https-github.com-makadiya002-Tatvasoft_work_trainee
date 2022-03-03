@@ -348,10 +348,40 @@ namespace Tatvasoft_Project.Controllers
 
             ViewBag.user = HttpContext.Session.GetString("user");
             ViewBag.data = item;
+            var unme = HttpContext.Session.GetString("user");
+            ViewBag.uid = _helperlandcontext.Users.Where(x => x.FirstName == unme).ToList().FirstOrDefault().UserId;
             return View();
         }
 
+        public IActionResult Provide_Ratings(Models.Rating model)
+        {
+            Models.Rating data = new Models.Rating();
+            _helperlandcontext = new HelperlandContext();
 
+            data.ServiceRequestId = model.ServiceRequestId;
+            data.RatingFrom = model.RatingFrom;
+            data.RatingTo = model.RatingTo;
+            data.Ratings = model.Ratings;
+            data.Comments = model.Comments;
+            data.RatingDate = DateTime.Now;
+            data.VisibleOnHomeScreen = false;
+            data.OnTimeArrival = model.OnTimeArrival;
+            data.Friendly = model.Friendly;
+            data.QualityOfService = model.QualityOfService;
+
+            _helperlandcontext.Ratings.Add(data);
+            _helperlandcontext.SaveChanges();
+
+
+            try
+            {
+                return Json(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public ViewResult demo2()
         {
