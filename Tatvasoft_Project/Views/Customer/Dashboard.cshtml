@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="~/css/style2.css">
     <link rel="stylesheet" type="text/css" href="~/css/style3.css">
     <title>Hello, world!</title>
@@ -66,6 +76,94 @@
 
     <!-- Button trigger modal -->
     <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Rate Your Service Provider</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="us_d1 cus_hat_txt tenth_lw" style="margin-top: 0px;margin-bottom: 0px;">
+                        <div class="cus_ht" style="margin-bottom: 0px;">
+                            <button style="margin-bottom: 0px;"><img style="margin-bottom: 0px;" src="~/images/cus_hat.png"></button>
+                        </div>
+                        <div class="cus_ht_txt" style="margin-top: 0px;margin-bottom: 0px;">
+                            <div style="margin-left: 7px;font-size: 19px;color:#646464;">Sandip Patel</div>
+
+                            <ul style="display:flex;padding:2px;" class="container-fluid">
+                                <li id="16" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                <li id="17" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                <li id="18" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                <li id="19" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                <li id="20" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                <li style="list-style-type: none;margin-left: 7px;color: rgba(0,0,0,0.8);font-size: 17px;" id="avg2">0</li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                    <hr>
+
+                    <ul style="display:flex;padding:2px;" class="container-fluid">
+                        <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+             color: #646464;font-size: 18px;">On Time Arrival </li>
+                        <li id="1" onclick="Hello(1)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="2" onclick="Hello(2)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="3" onclick="Hello(3)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="4" onclick="Hello(4)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="5" onclick="Hello(5)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                    </ul>
+
+                    <ul style="display:flex;padding:2px;" class="container-fluid">
+
+                        <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+         color: #646464;font-size: 18px;"> Friendly </li>
+                        <li id="6" onclick="Hello2(6)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="7" onclick="Hello2(7)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="8" onclick="Hello2(8)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="9" onclick="Hello2(9)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="10" onclick="Hello2(10)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                    </ul>
+
+                    <ul style="display:flex;padding: 2px;" class="container-fluid">
+
+                        <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+        color: #646464;font-size: 18px;">Quality Of Service </li>
+                        <li id="11" onclick="Hello3(11)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="12" onclick="Hello3(12)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="13" onclick="Hello3(13)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="14" onclick="Hello3(14)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                        <li id="15" onclick="Hello3(15)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                    </ul>
+
+                    <form>
+                        <label style="margin-left: 7px; list-style-type: none;
+        color: #646464;font-size: 18px;">Feedback On Your Service Provider</label>
+                        <input type="text" style="height: 80px;width: 100%;" name="">
+                        <button onclick="return Sub_Rat()" class="btn btn-primary" style="margin-top: 10px;
+        font-size: 17px;border-radius: 15px;">
+                            Submit
+                        </button>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -93,7 +191,7 @@
                     </div>
                     <hr>
 
-                    <div style="font-weight:bold;">Extra Services : </div>
+                    <div id="esss" style="font-weight:bold;">Extra Services : </div>
                     <div id="il">Inside Laundry</div>
                     <div id="if">Inside Fridge</div>
                     <div id="ic">Inside Cabinate</div>
@@ -114,11 +212,11 @@
                     <hr>
 
                     <div class="cus_rate" style="display: flex;">
-                        <button data-toggle="modal" data-target="#exampleModal_reschedule" style="width: 115px;background-color: #146371;font-size: 17px;
+                        <button id="re_btn" data-toggle="modal" data-target="#exampleModal_reschedule" style="width: 115px;background-color: #146371;font-size: 17px;
   color:white;" class="Reschedule_idb">
                             Reschedule
                         </button>
-                        <button data-toggle="modal" data-target="#exampleModal_cancel" style="width: 85px;background-color: #ff6b6b;border: 1px solid #ff6b6b;font-size: 17px;margin-left: 7px;">Cancel</button>
+                        <button id="ca_btn" data-toggle="modal" data-target="#exampleModal_cancel" style="width: 85px;background-color: #ff6b6b;border: 1px solid #ff6b6b;font-size: 17px;margin-left: 7px;">Cancel</button>
                     </div>
 
                 </div>
@@ -212,8 +310,8 @@
     <div class="us_table_main">
 
         <div class="us_table1" style="height:100%;">
-            <div class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
-            <div><a href="#" class="cus_side_items">Service History</a></div>
+            <div onclick="Get_Asr()" class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
+            <div onclick="Get_Csr()"><a href="#" class="cus_side_items">Service History</a></div>
             <div><a href="#" class="cus_side_items">Favourite Pros</a></div>
 
 
@@ -221,62 +319,85 @@
 
 
         <div class="us_table2">
-
-            <div class="cus_sh_main">
-                <div class="cus_sh">Service History</div>
-                <button class="cus_export">Export</button>
-            </div>
-
-
-            <div class="row us_table22" style="text-align: center;font-size: 18px;font-weight: bold;">
-                <div class="col-2 one">Serv<span class="us_ser_br"></span>ice ID <img class="us_t2_arr" src="~/images/us_table2_arw.png"> </div>
-                <div class="col-2 two" style="text-align: center;">
-                    Serv<span class="us_ser_br"> </span>ice date
+            <div id="us_table_inner1">
+                <div class="cus_sh_main">
+                    <div class="cus_sh">Service History</div>
+                    <button class="cus_export">Export</button>
                 </div>
-                <div class="col-3 one" style="text-align: center;">Service Provider</div>
-                <div class="col-2 two" style="text-align: center;">Amou<span class="us_ser_br"></span>nt <img class="us_t2_arr" src="~/images/us_table2_arw.png"></div>
-                <div class="col-3 one" style="text-align: center;">Acti<span class="us_ser_br"></span>ons</div>
-            </div>
 
-            @foreach (var temp in ViewBag.data)
-            {
-                <div class="row us_table23" style="text-align: center;">
-                    <div class="col-2 @temp.ID" style="font-weight: bold;font-size: 17px;margin-top: 25px;">@temp.ID</div>
-                    <div onclick="Set_Modal_Vals(@temp.ID)" class="us_d1 col-2 modal_pu" data-toggle="modal" data-target="#exampleModal1">
-                        <div class="@temp.ID" style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
-                        <div class="@temp.ID">@temp.Booking_duration</div>
+
+                <div class="row us_table22" style="text-align: center;font-size: 18px;font-weight: bold;">
+                    <div class="col-2 one">Serv<span class="us_ser_br"></span>ice ID <img class="us_t2_arr" src="~/images/us_table2_arw.png"> </div>
+                    <div class="col-2 two" style="text-align: center;">
+                        Serv<span class="us_ser_br"> </span>ice date
                     </div>
+                    <div class="col-3 one" style="text-align: center;">Service Provider</div>
+                    <div class="col-2 two" style="text-align: center;">Amou<span class="us_ser_br"></span>nt <img class="us_t2_arr" src="~/images/us_table2_arw.png"></div>
+                    <div class="col-3 one" style="text-align: center;">Acti<span class="us_ser_br"></span>ons</div>
+                </div>
 
-                    <div class="col-3 us_d1 cus_hat_txt">
-                        &nbsp;
-                    </div>
+                @foreach (var temp in ViewBag.data)
+                {
+                    <div class="row us_table23" style="text-align: center;">
+                        <div class="col-2 @temp.ID" style="font-weight: bold;font-size: 17px;margin-top: 25px;">@temp.ID</div>
+                        <div onclick="Set_Modal_Vals(@temp.ID,1)" class="us_d1 col-2 modal_pu" data-toggle="modal" data-target="#exampleModal1">
+                            <div class="@temp.ID" style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                            <div class="@temp.ID">@temp.Booking_duration</div>
+                        </div>
 
-                    <div class="col-2 cus_pay @temp.ID" style="margin-top: 7px;">
-                        €@temp.Discounted_cost
-                    </div>
+                        <div class="col-3 us_d1 cus_hat_txt">
+                            &nbsp;
+                        </div>
 
-                    <div style="display:none;" class="@temp.ID">@temp.Booking_time</div>
+                        <div class="col-2 cus_pay @temp.ID" style="margin-top: 7px;">
+                            €@temp.Discounted_cost
+                        </div>
 
-                    <div style="display:none;" class="@temp.ID">@temp.Suggestion</div>
-                    <div style="display:none;" class="@temp.ID">@temp.Street</div>
-                    <div style="display:none;" class="@temp.ID">@temp.House_number</div>
-                    <div style="display:none;" class="@temp.ID">@temp.Zipcode</div>
-                    <div style="display:none;" class="@temp.ID">@temp.Location</div>
-                    <div style="display:none;" class="@temp.ID">@temp.Phone</div>
+                        <div style="display:none;" class="@temp.ID">@temp.Booking_time</div>
+
+                        <div style="display:none;" class="@temp.ID">@temp.Suggestion</div>
+                        <div style="display:none;" class="@temp.ID">@temp.Street</div>
+                        <div style="display:none;" class="@temp.ID">@temp.House_number</div>
+                        <div style="display:none;" class="@temp.ID">@temp.Zipcode</div>
+                        <div style="display:none;" class="@temp.ID">@temp.Location</div>
+                        <div style="display:none;" class="@temp.ID">@temp.Phone</div>
 
 
 
 
-                    <div class="col-3 cus_rate" style="margin-top: 7px;">
-                        <button onclick="Setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_reschedule" style="width: 88px;background-color: #146371;
+                        <div class="col-3 cus_rate" style="margin-top: 7px;">
+                            <button onclick="Setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_reschedule" style="width: 88px;background-color: #146371;
   color:white;" class="Reschedule_idb">
-                            Reschedule
-                        </button>
-                        <button onclick="Setid_forcancel(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel" style="width: 60px;background-color: #ff6b6b;border: 1px solid #ff6b6b;">Cancel</button>
+                                Reschedule
+                            </button>
+                            <button onclick="Setid_forcancel(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel" style="width: 60px;background-color: #ff6b6b;border: 1px solid #ff6b6b;">Cancel</button>
+                        </div>
+
+                    </div>
+                }
+
+                <div class="cus_last_row">
+                    <div class="cus_last_left">
+                        <div>
+                            show &nbsp;
+                        </div>
+                        <select class="cus_sel">
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                        </select>
+                        <div>&nbsp;&nbsp;entries &nbsp;Total Record: 20</div>
                     </div>
 
+                    <div class="cus_last_right">
+                        <button><</button>
+                        <button class="cus_b1">1</button>
+                        <button>></button>
+                    </div>
                 </div>
-            }
+            </div>
+
+            <div id="us_table_inner2">Hi</div>
 
 
         </div>
@@ -310,14 +431,55 @@
     <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
 
     <script>
-        function Set_Modal_Vals(id) {
-            alert("hello" + id);
-            document.getElementById("il").style.display = "block";
-            document.getElementById("if").style.display = "block";
-            document.getElementById("ic").style.display = "block";
-            document.getElementById("io").style.display = "block";
-            document.getElementById("iw").style.display = "block";
+        var val = 0;
+    </script>
 
+    <script>
+        function Get_Csr() {
+            //alert("hello");
+            document.getElementById("us_table_inner1").style.display = "none";
+            if (val == 0) {
+                val = 1;
+                $("#us_table_inner2").load('@Url.Action("Get_Done_Services", "Customer")');
+            }
+            else {
+
+                document.getElementById("us_table_inner1").style.display = "none";
+                document.getElementById("us_table_inner2").style.display = "block";
+            }
+        }
+        function Get_Asr() {
+            //alert("hello from first");
+            document.getElementById("us_table_inner1").style.display = "block";
+            document.getElementById("us_table_inner2").style.display = "none";
+        }
+    </script>
+
+    <script>
+        function Set_Modal_Vals(id, x) {
+            alert("hello" + id);
+            if (x == 1) {
+                document.getElementById("re_btn").style.display = "block";
+                document.getElementById("ca_btn").style.display = "block";
+
+                document.getElementById("esss").style.display = "block";
+                document.getElementById("il").style.display = "block";
+                document.getElementById("if").style.display = "block";
+                document.getElementById("ic").style.display = "block";
+                document.getElementById("io").style.display = "block";
+                document.getElementById("iw").style.display = "block";
+            }
+            else {
+                document.getElementById("re_btn").style.display = "none";
+                document.getElementById("ca_btn").style.display = "none";
+
+                document.getElementById("esss").style.display = "none";
+                document.getElementById("il").style.display = "none";
+                document.getElementById("if").style.display = "none";
+                document.getElementById("ic").style.display = "none";
+                document.getElementById("io").style.display = "none";
+                document.getElementById("iw").style.display = "none";
+            }
 
             var service_date = document.getElementById("Service_date");
             var service_time = document.getElementById("Service_time");
@@ -405,6 +567,9 @@
                     alert("@ViewBag.is_service_modified");
         </script>
     }
+
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

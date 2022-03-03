@@ -1,0 +1,339 @@
+﻿@model Book_now_Table;
+
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+
+            <style>
+                .ncc{
+                    display:none;
+                }
+            </style>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Data Tables</title>
+
+            <style>
+                li {
+                    color: rgba(0,0,0,0.2);
+                }
+            </style>
+
+            <link rel="stylesheet" type="text/css" href="style2.css">
+            <link rel="stylesheet" type="text/css" href="style3.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+            <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                    crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        </head>
+        <body>
+
+            <div class="container-fluid">
+                <table class="table table-fluid" id="myTable" style="color: rgba(0,0,0,0.7);">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Details</th>
+                            <th>Service Provider</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var temp in ViewBag.data)
+                        {
+                        <tr>
+                            <td class="@temp.ID"><div style="margin-top: 15px;font-size: 18px;">@temp.ID</div></td>
+                            <td onclick="Set_Modal_Vals(@temp.ID,2)" data-toggle="modal" data-target="#exampleModal1">
+                                <div class="us_d1">
+                                    <div class="@temp.ID" style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                                    <div class="@temp.ID">@temp.Booking_duration</div>
+                                </div>
+                            </td>
+                            <td>
+                                @if (temp.SP_ID != 0)
+                                {
+                                    <div class="us_d1 cus_hat_txt">
+                                        <div class="cus_ht">
+                                            <button><img src="~/images/cus_hat.png"></button>
+                                        </div>
+                                        <div class="cus_ht_txt">
+                                            <div class="cus_ht_txt1">@temp.SP_Name</div>
+                                            <div class="cus_ht_txt2">
+                                                <img src="images/cus_yellow_star.png">
+                                                <img src="images/cus_yellow_star.png">
+                                                <img src="images/cus_yellow_star.png">
+                                                <img src="images/cus_yellow_star.png">
+                                                <img src="images/cus_star.png">
+                                                <div>4</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                }
+                            </td>
+                            <td>
+                                <div style="font-size: 24px;
+  font-weight: bold;
+  color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
+                                    €@temp.Discounted_cost
+                                </div>
+                            </td>
+                            <td>
+                                @if (temp.Status == 1)
+                                {
+                                    <div>
+                                        <div class="cus_status">
+                                            <button><span class="cus_st_com">Completed</span> <i class="fa fa-check-circle cus_icon" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="cus_can" style="margin-top: 7px;">
+                                        <button><span class="cus_cnd">Cancelled</span><i class="fas fa-window-close cus_cls"></i></button>
+                                    </div>
+                                }
+                            </td>
+                            <td data-toggle="modal" data-target="#exampleModalCenter">
+                                @if (temp.Status == 1)
+                                {
+                                    <div class="cus_rate" style="margin-top: 5px;">
+                                        <button style="background-color: #1d7a8c;">Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="cus_rate" style="margin-top: 5px;">
+                                        <button disabled>Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                                    </div>
+                                }
+
+                                </td>
+
+
+
+
+                            </tr>
+                        }
+
+
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            @foreach (var temp in ViewBag.data)
+            {
+
+                <div style="display:none;" class="@temp.ID ncc">@temp.Booking_time</div>
+
+                <div style="display:none;" class="@temp.ID ncc">@temp.Suggestion</div>
+                <div style="display:none;" class="@temp.ID ncc">@temp.Street</div>
+                <div style="display:none;" class="@temp.ID ncc">@temp.House_number</div>
+                <div style="display:none;" class="@temp.ID ncc">@temp.Zipcode</div>
+                <div style="display:none;" class="@temp.ID ncc">@temp.Location</div>
+                <div style="display:none;" class="@temp.ID ncc">@temp.Phone</div>
+
+            }
+
+            <script>
+                $(document).ready(function () {
+                    $('#myTable').DataTable();
+                });
+            </script>
+            <script type="text/javascript">
+                var val1 = 0;
+                var val2 = 0;
+                var val3 = 0;
+                function Sub_Rat() {
+                    if (val1 == 0 || val2 == 0 || val3 == 0) {
+                        alert("Please Provide all ratings");
+                        return false;
+                    }
+                    else {
+                        var obj = {
+                            "ServiceRequestId": id,
+
+                        };
+                        $.ajax({
+                            type: "GET",
+                            url: "/Customer/Provide_Ratings",
+                            data: obj,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                alert("Done");
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    }
+                    return false;
+                }
+                function Hello(id) {
+                    for (let i = 1; i <= id; i++) {
+                        document.getElementById(i).style.color = "yellow";
+                    }
+                    for (let i = id + 1; i <= 5; i++) {
+
+                        document.getElementById(i).style.color = "rgba(0,0,0,0.2)";
+                    }
+                    val1 = id;
+                    fun4();
+                }
+                function Hello2(id) {
+                    for (let i = 6; i <= id; i++) {
+
+                        document.getElementById(i).style.color = "yellow";
+                    }
+                    for (let i = id + 1; i <= 10; i++) {
+
+                        document.getElementById(i).style.color = "rgba(0,0,0,0.2)";
+                    }
+                    val2 = id - 5;
+                    fun4();
+                }
+                function Hello3(id) {
+
+
+                    for (let i = 11; i <= id; i++) {
+
+                        document.getElementById(i).style.color = "yellow";
+                    }
+                    for (let i = id + 1; i <= 15; i++) {
+
+                        document.getElementById(i).style.color = "rgba(0,0,0,0.2)";
+                    }
+                    val3 = id - 10;
+                    fun4();
+                }
+                function fun4() {
+                    var val4 = (val1 + val2 + val3) / 3.0;
+                    document.getElementById("avg2").innerText = val4.toFixed(2);
+                    for (let i = 16; i <= Math.ceil(val4) + 15; i++) {
+                        document.getElementById(i).style.color = "yellow";
+                    }
+                    for (let i = Math.ceil(val4) + 16; i <= 20; i++) {
+                        document.getElementById(i).style.color = "rgba(0,0,0,0.2)";
+                    }
+                }
+            </script>
+        </body>
+</html>
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+
+<table class="table table-fluid us_table22" id="myTable" style="margin-top:100px;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Service Details</th>
+            <th>Service Provider</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Rate</th>
+        </tr>
+    </thead>
+    <tbody style="color: rgba(0,0,0,0.7);">
+
+        @foreach (var temp in ViewBag.data)
+        {
+            <tr class="us_table23">
+                <td class="@temp.ID" style="font-weight: bold;font-size: 17px;margin-top: 25px;">@temp.ID</td>
+                <td onclick="Set_Modal_Vals(@temp.ID)" class="us_d1 modal_pu" data-toggle="modal" data-target="#exampleModal1">
+                    <div class="@temp.ID" style="font-weight: bold;margin-top: 8px;"><img src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                    <div class="@temp.ID">@temp.Booking_duration</div>
+                </td>
+
+                <td class="us_d1 cus_hat_txt">
+                    &nbsp;
+                </td>
+
+                <td class="cus_pay @temp.ID" style="margin-top: 7px;">
+                    €@temp.Discounted_cost
+                </td>
+
+                @if (temp.Status == 1)
+                {
+                    <td class="cus_status" style="margin-top:7px;">
+                        <button><span class="cus_st_com">Completed</span> <i class="fa fa-check-circle cus_icon" aria-hidden="true"></i></button>
+                    </td>
+                }
+                else
+                {
+                    <td class="cus_can" style="margin-top: 7px;">
+                        <button><span class="cus_cnd">Cancelled</span><i class="fas fa-window-close cus_cls"></i></button>
+                    </td>
+                }
+                @if (temp.Status == 1)
+                {
+                    <td class="cus_rate" style="margin-top: 5px;">
+                        <button style="background-color: #1d7a8c;">Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                    </td>
+                }
+                else
+                {
+                    <td class="cus_rate" style="margin-top: 5px;">
+                        <button disabled>Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                    </td>
+                }
+
+
+                <td style="display:none;" class="@temp.ID">@temp.Booking_time</td>
+
+                <td style="display:none;" class="@temp.ID">@temp.Suggestion</td>
+                <td style="display:none;" class="@temp.ID">@temp.Street</td>
+                <td style="display:none;" class="@temp.ID">@temp.House_number</td>
+                <td style="display:none;" class="@temp.ID">@temp.Zipcode</td>
+                <td style="display:none;" class="@temp.ID">@temp.Location</td>
+                <td style="display:none;" class="@temp.ID">@temp.Phone</td>
+
+
+
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>-->

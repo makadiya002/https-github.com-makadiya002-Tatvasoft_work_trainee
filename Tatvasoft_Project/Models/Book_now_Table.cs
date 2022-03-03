@@ -27,5 +27,9 @@ namespace Tatvasoft_Project.Models
         public int to_check { get; set; }
         public float Total_cost { get; set; }
         public float Discounted_cost { get; set; }
+        public int? Status { get; set; }
+        public string SP_Name { get; set; }
+        public float SP_Ratings { get; set; }
+        public int? SP_ID { get; set; }
     }
 }
