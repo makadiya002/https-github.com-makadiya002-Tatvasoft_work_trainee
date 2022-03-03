@@ -6,6 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,6 +16,25 @@
           href="~/css/style2.css">
 </head>
 <body>
+
+    <div class="modal" id="mymodal2" tabindex="-1" role="dialog" style="width: 100%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <br>
+                    <div style="text-align: center;">
+                        <img src="~/images/Success_img.png" style="width: 60px;height: 60px;">
+                        <br><br>
+                        <div id="modal_msg" style="font-size: 21px; color: rgba(0,0,0,0.8);"></div>
+                        <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <div id="temp_main" style="background-image: url('../images/homepage_main_img.png');">
 
@@ -142,7 +162,7 @@
 
                         <form asp-action="Forgot_password" asp-controller="Helperland" method="post" style="margin-bottom: 15px;">
                             <div class="form-group">
-                                <input required type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                                <input required type="email" asp-for="Email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Email Address">
                             </div>
 
                             <button style="width: 90%;text-align: center;border-radius: 20px;background-color: #3398FF;margin-left: 5%;" type="submit" class="btn">
@@ -465,9 +485,10 @@
 
     @if (ViewBag.msg != null)
     {
-        <script>
-                alert("@ViewBag.msg");
-        </script>
+<script>
+            document.getElementById("modal_msg").innerHTML = "@ViewBag.msg";
+            $('#mymodal2').modal('show');
+</script>
     }
     @if (ViewBag.err_email != null)
     {
@@ -477,9 +498,10 @@
     }
     @if (ViewBag.logout != null)
     {
-        <script>
-                    alert("@ViewBag.logout");
-        </script>
+<script>
+    document.getElementById("modal_msg").innerHTML = "@ViewBag.logout";
+            $('#mymodal2').modal('show');
+</script>
     }
     @if (ViewBag.sugg != null)
     {
@@ -489,39 +511,45 @@
     }
     @if (ViewBag.pass_changed_fp != null)
     {
-        <script>
-                    alert("@ViewBag.pass_changed_fp");
-        </script>
+<script>
+                    document.getElementById("modal_msg").innerHTML = "@ViewBag.pass_changed_fp";
+                    $('#mymodal2').modal('show');
+</script>
     }
     @if (ViewBag.is_address_updated_fm != null)
     {
-        <script>
-                    alert("@ViewBag.is_address_updated_fm");
-        </script>
+<script>
+            document.getElementById("modal_msg").innerHTML = "@ViewBag.is_address_updated_fm";
+                    $('#mymodal2').modal('show');
+</script>
     }
     @if (ViewBag.is_address_deleted_fm != null)
     {
-        <script>
-                    alert("@ViewBag.is_address_deleted_fm");
-        </script>
+<script>
+                    document.getElementById("modal_msg").innerHTML = "@ViewBag.is_address_deleted_fm";
+                    $('#mymodal2').modal('show');
+</script>
     }
     @if (ViewBag.is_service_modified != null)
     {
-        <script>
-                    alert("@ViewBag.is_service_modified");
-        </script>
+<script>
+                   document.getElementById("modal_msg").innerHTML = "@ViewBag.is_service_modified";
+                    $('#mymodal2').modal('show');
+</script>
     }
-    @if(ViewBag.is_service_Cancelled != null)
-            {
-                <script>
-                    alert("@ViewBag.is_service_Cancelled");
-                </script>
-            }
-    @if(ViewBag.is_add_added != null)
-            {
-                <script>
-                    alert("@ViewBag.is_add_added");
-                </script>
-            }
+    @if (ViewBag.is_service_Cancelled != null)
+    {
+<script>
+                     document.getElementById("modal_msg").innerHTML = "@ViewBag.is_service_Cancelled";
+                    $('#mymodal2').modal('show');
+</script>
+    }
+    @if (ViewBag.is_add_added != null)
+    {
+<script>
+             document.getElementById("modal_msg").innerHTML = "@ViewBag.is_add_added";
+                    $('#mymodal2').modal('show');
+</script>
+    }
 </body>
 </html>

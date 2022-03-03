@@ -341,8 +341,8 @@ namespace Tatvasoft_Project.Controllers
             var str = HttpContext.Session.GetString("user");
             var p = _helperlandcontext.Users.Where(x => x.FirstName == str).ToList();
             var user = p.FirstOrDefault().UserId;
-
-            var model_to_pass = _helperlandcontext.UserAddresses.Where(x => x.UserId == user).ToList();
+            var zcode = HttpContext.Session.GetString("zipcode");
+            var model_to_pass = _helperlandcontext.UserAddresses.Where(x => x.UserId == user && x.PostalCode == zcode).ToList();
 
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.UserAddress temp in model_to_pass)
@@ -404,7 +404,8 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext.UserAddresses.Add(obj);
             _helperlandcontext.SaveChanges();
 
-            var model_to_pass = _helperlandcontext.UserAddresses.Where(x => x.UserId == user).ToList();
+            var zcode = HttpContext.Session.GetString("zipcode");
+            var model_to_pass = _helperlandcontext.UserAddresses.Where(x => x.UserId == user && x.PostalCode == zcode).ToList();
 
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach(Models.UserAddress temp in model_to_pass)
