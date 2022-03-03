@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model ContactU;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -173,13 +174,13 @@
 
 
 
-    <form style="margin-top: 30px;">
+    <form asp-action="contact_Form" asp-controller="Customer" method="post" style="margin-top: 30px;">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <input type="text" class="form-control" id="inputEmail4" placeholder="First Name">
+                <input required asp-for="Name" type="text" class="form-control" id="inputEmail4" placeholder="First Name">
             </div>
             <div class="form-group col-md-6">
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Last Name">
+                <input required type="password" class="form-control" id="inputPassword4" placeholder="Last Name">
             </div>
         </div>
         <div class="form-row">
@@ -187,20 +188,20 @@
                 <input type="text" class="form-control" id="inputEmail4" placeholder="+49">
             </div>
             <div class="form-group col-md-5">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Mobile number">
+                <input asp-for="PhoneNumber" type="text" class="form-control" id="inputPassword4" placeholder="Mobile number">
             </div>
             <div class="form-group col-md-6">
-                <input type="Email" class="form-control" id="inputPassword4" placeholder="Email address">
+                <input asp-for="Email" type="Email" class="form-control" id="inputPassword4" placeholder="Email address">
             </div>
         </div>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select asp-for="SubjectType" class="form-control" id="exampleFormControlSelect1">
             <option>Subject</option>
-            <option>Subject 1</option>
-            <option>Subject 2</option>
-            <option>Subject 3</option>
-            <option>Subject 4</option>
+            <option>Login Related Problems</option>
+            <option>Service Feedback</option>
+            <option>Server Problem</option>
+            <option>You need SP, But no one is available</option>
         </select>
-        <textarea style="margin-top: 20px;" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Message"></textarea>
+        <textarea asp-for="Message" style="margin-top: 20px;" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Message"></textarea>
 
         <div class="text-center">
             <button type="submit" class="btn btn-primary con_frm_btn">Submit</button>
@@ -252,6 +253,12 @@
         <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
     </div>
 
+    @if(ViewBag.is_entry_done != null)
+            {
+                <script>
+                    alert("@ViewBag.is_entry_done");
+                </script>
+            }
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

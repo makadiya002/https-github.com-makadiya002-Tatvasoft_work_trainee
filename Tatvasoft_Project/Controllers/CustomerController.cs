@@ -383,6 +383,31 @@ namespace Tatvasoft_Project.Controllers
             }
         }
 
+        public IActionResult contact_Form(Models.ContactU model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            model.IsDeleted = false;
+            _helperlandcontext.ContactUs.Add(model);
+            _helperlandcontext.SaveChanges();
+
+            ViewBag.is_entry_done = "Form Submitted succesfully, we will contact You ASAP";
+            return View("~/Views/Helperland/Contact.cshtml");
+        }
+
+        public IActionResult Bn_Add_Address(Models.UserAddress model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var uuname = HttpContext.Session.GetString("user");
+            model.UserId = _helperlandcontext.Users.Where(x => x.FirstName == uuname).ToList().FirstOrDefault().UserId;
+
+            _helperlandcontext.UserAddresses.Add(model);
+            _helperlandcontext.SaveChanges();
+
+            ViewBag.user = HttpContext.Session.GetString("user");
+            ViewBag.is_add_added = "Address Added Succesfully";
+            return View("~/Views/Home/Index.cshtml");
+        }
+
         public ViewResult demo2()
         {
             return View();
