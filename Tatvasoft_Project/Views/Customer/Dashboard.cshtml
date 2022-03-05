@@ -261,7 +261,25 @@
                         </div>
 
                         <div class="col-3 us_d1 cus_hat_txt">
-                            &nbsp;
+                            @if (temp.SP_ID != 0)
+                            {
+                                <div class="us_d1 cus_hat_txt">
+                                    <div class="cus_ht">
+                                        <button><img src="~/images/cus_hat.png"></button>
+                                    </div>
+                                    <div class="cus_ht_txt">
+                                        <div class="cus_ht_txt1">@temp.SP_Name</div>
+                                        <div class="cus_ht_txt2">
+                                            <img src="~/images/cus_yellow_star.png">
+                                            <img src="~/images/cus_yellow_star.png">
+                                            <img src="~/images/cus_yellow_star.png">
+                                            <img src="~/images/cus_yellow_star.png">
+                                            <img src="~/images/cus_star.png">
+                                            <div>4</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div class="col-2 cus_pay @temp.ID" style="margin-top: 7px;">

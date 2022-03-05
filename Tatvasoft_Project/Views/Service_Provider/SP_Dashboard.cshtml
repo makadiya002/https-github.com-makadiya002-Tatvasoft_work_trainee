@@ -1,0 +1,156 @@
+﻿@model Book_now_Table;
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        .ncc {
+            display: none;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Tables</title>
+
+    <style>
+        li {
+            color: rgba(0,0,0,0.2);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/style2.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <div class="us_table_main">
+
+        <div class="us_table1" style="height:100%;">
+            <div class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
+            <div><a href="#" class="cus_side_items">Upcoming Service</a></div>
+            <div><a href="#" class="cus_side_items">Service History</a></div>
+            <div><a href="#" class="cus_side_items">My Ratings</a></div>
+            <div><a href="#" class="cus_side_items">Block Customer</a></div>
+
+
+        </div>
+
+
+        <div class="us_table2">
+
+            <div class="container-fluid">
+                <table class="table table-fluid" id="myTable3" style="color: rgba(0,0,0,0.7);">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Details</th>
+                            <th>customer Details</th>
+                            <th>Payment</th>
+                            <th>Time Conflict</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var temp in ViewBag.data)
+                        {
+
+
+                            <tr id="@temp.ID">
+                                <td class="@temp.ID"><div style="margin-top: 15px;font-size: 18px;">@temp.ID</div></td>
+                                <td onclick="Set_Modal_Vals(@temp.ID,2)" data-toggle="modal" data-target="#exampleModal1">
+                                    <div class="us_d1">
+                                        <div class="@temp.ID" style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                                        <div class="@temp.ID">@temp.Booking_duration</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (temp.SP_ID != 0)
+                                    {
+                                        <div style="display:flex;">
+                                            <div>
+                                                <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
+                                            </div>
+                                            <div class="cus_ht_txt">
+                                                <div class="cus_ht_txt1">@temp.SP_Name</div>
+                                                <div>@temp.Street @temp.House_number</div>
+                                                <div>@temp.Zipcode, @temp.Location</div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                </td>
+                                <td>
+                                    <div style="font-size: 24px;
+  font-weight: bold;
+  color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
+                                        €@temp.Discounted_cost
+                                    </div>
+                                </td>
+                                <td>
+                                   &nbsp;
+                                </td>
+                                <td onclick="demoo2(@temp.ID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                   <button class="btn btn-primary" style="border-radius:15px;">Accept</button>
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+        </div>
+
+
+            <script type="text/javascript">
+                function demoo2(id1) {
+
+                    var obj = {
+                        "sid": id1,
+                        "spid": @ViewBag.uid
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Service_Provider/Fetch_ES",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+                    document.getElementById(id1).style.display = "none";
+                }
+            </script>
+            <script>
+                $(document).ready(function () {
+                    $('#myTable3').DataTable();
+                    
+                   
+                });
+            </script>
+</body>
+</html>

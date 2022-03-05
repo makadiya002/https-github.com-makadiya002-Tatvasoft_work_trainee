@@ -177,9 +177,25 @@ namespace Tatvasoft_Project.Controllers
                                 }
                                 else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
 
+                                var spid = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == temp.ServiceRequestId && temp.ServiceProviderId != null).ToList();
+                                int? spid3 = 0;
+                                var name = "";
+
+                                var rating = 0;
+                                if (spid.Count > 0)
+                                {
+                                    spid3 = (spid.FirstOrDefault().ServiceProviderId);
+                                    var fname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().FirstName;
+                                    var lname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().LastName;
+                                    name = fname + " " + lname;
+
+
+                                }
+
                                 item.Add(new Models.Book_now_Table
                                 {
-
+                                    SP_ID = spid3,
+                                    SP_Name = name,
                                     ID = temp.ServiceRequestId,
                                     Booking_date = (temp.ServiceStartDate).Date,
                                     Booking_time = (temp.ExtraHours).ToString(),

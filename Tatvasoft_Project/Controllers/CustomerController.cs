@@ -152,7 +152,7 @@ namespace Tatvasoft_Project.Controllers
             var username = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status == null).ToList();
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && (x.Status == null) || x.Status == 3).ToList();
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.ServiceRequest temp in model_to_pass)
             {
@@ -170,10 +170,26 @@ namespace Tatvasoft_Project.Controllers
                         duration = duration + "-" + end_dur.ToString() + ":00";
                     }
                     else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.',':');
-                    
+
+                    var spid = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == temp.ServiceRequestId && temp.ServiceProviderId != null).ToList();
+                    int? spid3 = 0;
+                    var name = "";
+
+                    var rating = 0;
+                    if (spid.Count > 0)
+                    {
+                        spid3 = (spid.FirstOrDefault().ServiceProviderId);
+                        var fname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().FirstName;
+                        var lname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().LastName;
+                        name = fname + " " + lname;
+
+
+                    }
+
                     item.Add(new Models.Book_now_Table
                     {
-
+                        SP_ID = spid3,
+                        SP_Name = name,
                         ID = temp.ServiceRequestId,
                         Booking_date = (temp.ServiceStartDate).Date,
                         Booking_time = (temp.ExtraHours).ToString(),
@@ -280,7 +296,7 @@ namespace Tatvasoft_Project.Controllers
             var username = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status != null).ToList();
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && (x.Status == 1 || x.Status == 2)).ToList();
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.ServiceRequest temp in model_to_pass)
             {
