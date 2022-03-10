@@ -18,13 +18,14 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
 
     <link rel="stylesheet" href="~/css/style2.css" />
 
@@ -33,15 +34,73 @@
 </head>
 <body>
 
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Service Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color: #646464;font-size: 17px;">
+
+
+
+                    <span id="Service_date1" style="font-size: 18px;font-weight: bold;">05/10/2021</span>
+                    <span id="Service_time1">8:00-11:00</span>
+                    <div><span style="font-weight: bold;">Duration:</span> <span id="Service_duration1">3.5 Hrs</span></div>
+                    <hr>
+                    <div><span style="font-weight: bold;">Service Id:</span> <span id="Service_id1">1234</span></div>
+
+                    <div style="display: flex;">
+                        <div style="margin-top: 10px;">Net Amount</div>
+                        <div style="text-align: center;color: #1d7a8c;font-size: 32px;margin-left: 125px;">
+                            <span id="Service_cost1">€63</span>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div><span style="font-weight:bold;">Customer Name:</span> <span id="Cus_name1"></span> </div>
+
+                    <div id="esss" style="font-weight:bold;">Extra Services : </div>
+                    <div id="il1">Inside Laundry</div>
+                    <div id="if1">Inside Fridge</div>
+                    <div id="ic1">Inside Cabinate</div>
+                    <div id="io1">Inside Oven</div>
+                    <div id="iw1">Inside Windows</div>
+                    <div>
+                        <span style="font-weight: bold;">Service Address:</span> <span id="Service_street1">Street</span>
+                        <span id="Service_hn1">House_number</span>
+                        , <span id="Service_zipcode1">zipcode</span>
+                        <span id="Service_city1"> city</span>
+                    </div>
+                    <div><span style="font-weight: bold;">Billing Address:</span> Same as service address</div>
+                    <div><span style="font-weight: bold;">Phone:</span> <span id="Service_phone1">7837468947</span></div>
+                    <div><span style="font-weight: bold;">Email:</span> <span id="Service_email1">hello@gmail.com</span></div>
+                    <hr>
+                    <div><span style="font-weight: bold;">comments</span></div>
+                    <div><span id="Service_comment1">I don't have pets at home</span></div>
+                    <hr>
+
+                    <button id="btn_accept" class="btn btn-primary">Accept</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="us_table_main">
 
         <div class="us_table1" style="height:100%;">
-            <div class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
-            <div><a href="#" class="cus_side_items">Upcoming Service</a></div>
-            <div><a href="#" class="cus_side_items">Service History</a></div>
-            <div><a href="#" class="cus_side_items">My Ratings</a></div>
-            <div><a href="#" class="cus_side_items">Block Customer</a></div>
+            <div id="div_dash" onclick="new_ss()" class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
+            <div id="div_upco" onclick="upcoming_ss()"><a href="#" class="cus_side_items">Upcoming Service</a></div>
+            <div id="div_serv" onclick="serv_hist()"><a href="#" class="cus_side_items">Service History</a></div>
+            <div id="ratings" onclick="Ratings()"><a href="#" class="cus_side_items">My Ratings</a></div>
+            <div id="Block_Cust" onclick="Block_customer()"><a href="#" class="cus_side_items">Block Customer</a></div>
 
 
         </div>
@@ -66,59 +125,255 @@
                         {
 
 
-                            <tr id="@temp.ID">
-                                <td class="@temp.ID"><div style="margin-top: 15px;font-size: 18px;">@temp.ID</div></td>
-                                <td onclick="Set_Modal_Vals(@temp.ID,2)" data-toggle="modal" data-target="#exampleModal1">
-                                    <div class="us_d1">
-                                        <div class="@temp.ID" style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
-                                        <div class="@temp.ID">@temp.Booking_duration</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    @if (temp.SP_ID != 0)
-                                    {
-                                        <div style="display:flex;">
-                                            <div>
-                                                <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
-                                            </div>
-                                            <div class="cus_ht_txt">
-                                                <div class="cus_ht_txt1">@temp.SP_Name</div>
-                                                <div>@temp.Street @temp.House_number</div>
-                                                <div>@temp.Zipcode, @temp.Location</div>
-                                            </div>
+                        <tr id="@temp.ID">
+                            <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                            <td onclick="demoo3(@temp.ID,1)" data-toggle="modal" data-target="#exampleModal2">
+                                <div class="us_d1">
+                                    <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
+                                    <div class="@temp.ID">@temp.Booking_duration</div>
+                                </div>
+                            </td>
+                            <td>
+                                @if (temp.SP_ID != 0)
+                                {
+                                    <div style="display:flex;">
+                                        <div>
+                                            <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
                                         </div>
-                                    }
-                                    else
-                                    {
+                                        <div class="cus_ht_txt">
+                                            <div class="cus_ht_txt1 @temp.ID">@temp.SP_Name</div>
+                                            <div><span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span></div>
+                                            <div><span class="@temp.ID">@temp.Zipcode</span>, <span class="@temp.ID">@temp.Location</span></div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
 
-                                    }
-                                </td>
-                                <td>
-                                    <div style="font-size: 24px;
+                                }
+                            </td>
+                            <td>
+                                <div style="font-size: 24px;
   font-weight: bold;
   color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
-                                        €@temp.Discounted_cost
-                                    </div>
-                                </td>
-                                <td>
-                                   &nbsp;
-                                </td>
-                                <td onclick="demoo2(@temp.ID)" data-toggle="modal" data-target="#exampleModalCenter">
-                                   <button class="btn btn-primary" style="border-radius:15px;">Accept</button>
+                                    €@temp.Discounted_cost
+                                </div>
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td onclick="demoo2(@temp.ID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button class="btn btn-primary" style="border-radius:15px;margin-top:15px;">Accept</button>
 
-                                </td>
+                            </td>
 
-                            </tr>
+                            <div class="@temp.ID" style="display:none;">@temp.Suggestion</div>
+                            <div class="@temp.ID" style="display:none;">@temp.Booking_time</div>
+                            <div class="@temp.ID" style="display:none;">@temp.Phone</div>
+                        </tr>
+
+                            
                         }
                     </tbody>
                 </table>
+
+                <div id="uc_services">Loading...</div>
+                <div id="ser_his">Loading...</div>
+                <div id="rats">Loading...</div>
+                <div id="blo_cus">Loading...</div>
+                
             </div>
 
-            </div>
         </div>
+    </div>
 
 
-            <script type="text/javascript">
+    <script type="text/javascript">
+        document.getElementById("uc_services").style.display = "none";
+        document.getElementById("ser_his").style.display = "none";
+        document.getElementById("rats").style.display = "none";
+        document.getElementById("div_dash").style.backgroundColor = "#146371";
+
+        var val1 = 0;
+        var val2 = 0;
+        var val3 = 0;
+        function upcoming_ss() {
+
+            document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_upco").style.backgroundColor = "#146371";
+            document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
+            document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+
+
+            $('#myTable4').parents('div.dataTables_wrapper').first().show();
+            document.getElementById("uc_services").style.display = "block";
+            document.getElementById("ser_his").style.display = "none";
+            $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+            document.getElementById("myTable3").style.display = "none";
+            document.getElementById("uc_services").style.display = "block";
+            document.getElementById("rats").style.display = "none";
+            document.getElementById("blo_cus").style.display = "none";
+            if (val1 == 0) {
+
+                $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+                $("#uc_services").load('@Url.Action("Upcoming_Services", "Service_Provider")');
+            }
+
+
+        }
+
+        function serv_hist() {
+
+            document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_serv").style.backgroundColor = "#146371";
+            document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+
+
+            $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+            $('#myTable4').parents('div.dataTables_wrapper').first().hide();
+            document.getElementById("rats").style.display = "none";
+            document.getElementById("ser_his").style.display = "block";
+            document.getElementById("blo_cus").style.display = "none";
+            if (val3 == 0) {
+
+                $("#ser_his").load('@Url.Action("Service_History", "Service_Provider")');
+            }
+
+        }
+
+        function new_ss() {
+            if (val2 == 0) {
+
+
+                document.getElementById("div_dash").style.backgroundColor = "#146371";
+                document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
+                document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
+                document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
+                document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+
+                $('#myTable3').parents('div.dataTables_wrapper').first().show();
+                document.getElementById("rats").style.display = "none";
+
+                document.getElementById("myTable3").style.display = "block";
+                document.getElementById("uc_services").style.display = "none";
+                document.getElementById("ser_his").style.display = "none";
+                document.getElementById("blo_cus").style.display = "none";
+            }
+        }
+
+        function Ratings() {
+            document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
+            document.getElementById("ratings").style.backgroundColor = "#146371";
+            document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+
+            $("#rats").load('@Url.Action("Ratings", "Service_Provider")');
+            document.getElementById("rats").style.display = "block";
+            document.getElementById("uc_services").style.display = "none";
+            document.getElementById("ser_his").style.display = "none";
+            document.getElementById("myTable3").style.display = "none";
+            document.getElementById("blo_cus").style.display = "none";
+        }
+
+        function Block_customer() {
+            document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
+            document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Block_Cust").style.backgroundColor = "#146371";
+
+            $("#blo_cus").load('@Url.Action("Block_Customer", "Service_Provider")');
+
+            document.getElementById("rats").style.display = "none";
+            document.getElementById("uc_services").style.display = "none";
+            document.getElementById("ser_his").style.display = "none";
+            document.getElementById("myTable3").style.display = "none";
+            document.getElementById("blo_cus").style.display = "block";
+        }
+
+        function demoo3(id,flag) {
+            alert(id);
+            if (flag == 1) {
+                document.getElementById("btn_accept").style.display = "block";
+            }
+            else {
+                document.getElementById("btn_accept").style.display = "none";
+            }
+
+            var service_date = document.getElementById("Service_date1");
+            var service_time = document.getElementById("Service_time1");
+            var service_duration = document.getElementById("Service_duration1");
+            var service_id = document.getElementById("Service_id1");
+            var service_cost = document.getElementById("Service_cost1");
+            var service_street = document.getElementById("Service_street1");
+            var service_hn = document.getElementById("Service_hn1");
+            var service_zipcode = document.getElementById("Service_zipcode1");
+            var service_city = document.getElementById("Service_city1");
+            var service_phone = document.getElementById("Service_phone1");
+            var service_email = document.getElementById("Service_email1");
+            var service_comment = document.getElementById("Service_comment1");
+            var service_cus_name = document.getElementById("Cus_name1");
+            var inside_ca = document.getElementById("inside_ca");
+            var inside_la = document.getElementById("inside_la");
+            var inside_fr = document.getElementById("inside_fr");
+            var inside_ov = document.getElementById("inside_ov");
+            var inside_wi = document.getElementById("inside_wi");
+
+            service_date.innerHTML = document.getElementsByClassName(id)[4].innerHTML;
+            service_time.innerHTML = document.getElementsByClassName(id)[5].innerHTML;
+            service_duration.innerHTML = document.getElementsByClassName(id)[1].innerHTML + " " + "Hrs.";
+            service_id.innerHTML = document.getElementsByClassName(id)[3].innerHTML;
+            service_cost.innerHTML = document.getElementsByClassName(id)[11].innerHTML;
+            service_street.innerHTML = document.getElementsByClassName(id)[7].innerHTML;
+            service_hn.innerHTML = document.getElementsByClassName(id)[8].innerHTML;
+            service_zipcode.innerHTML = document.getElementsByClassName(id)[9].innerHTML;
+            service_city.innerHTML = document.getElementsByClassName(id)[10].innerHTML;
+            service_comment.innerHTML = document.getElementsByClassName(id)[0].innerHTML;
+            service_phone.innerHTML = document.getElementsByClassName(id)[2].innerHTML;
+            service_cus_name.innerHTML = document.getElementsByClassName(id)[6].innerHTML
+1
+
+            document.getElementById("il1").style.display = "block";
+            document.getElementById("if1").style.display = "block";
+            document.getElementById("ic1").style.display = "block";
+            document.getElementById("io1").style.display = "block";
+            document.getElementById("iw1").style.display = "block";
+                    var obj = {
+                        "ServiceRequestId": id,
+
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Customer/Fetch_Address",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.laundry == 0)
+                                document.getElementById("il1").style.display = "none";
+                            if (data.fridge == 0)
+                                document.getElementById("if1").style.display = "none";
+                            if (data.cabinate == 0)
+                                document.getElementById("ic1").style.display = "none";
+                            if (data.oven == 0)
+                                document.getElementById("io1").style.display = "none";
+                            if (data.windows == 0)
+                                document.getElementById("iw1").style.display = "none";
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+
                 function demoo2(id1) {
 
                     var obj = {
@@ -144,13 +399,13 @@
 
                     document.getElementById(id1).style.display = "none";
                 }
-            </script>
-            <script>
-                $(document).ready(function () {
-                    $('#myTable3').DataTable();
-                    
-                   
-                });
-            </script>
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable3').DataTable();
+
+
+        });
+    </script>
 </body>
 </html>

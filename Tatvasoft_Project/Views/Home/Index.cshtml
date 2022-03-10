@@ -485,10 +485,10 @@
 
     @if (ViewBag.msg != null)
     {
-<script>
+        <script>
             document.getElementById("modal_msg").innerHTML = "@ViewBag.msg";
             $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.err_email != null)
     {
@@ -498,10 +498,10 @@
     }
     @if (ViewBag.logout != null)
     {
-<script>
+        <script>
     document.getElementById("modal_msg").innerHTML = "@ViewBag.logout";
             $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.sugg != null)
     {
@@ -511,45 +511,52 @@
     }
     @if (ViewBag.pass_changed_fp != null)
     {
-<script>
+        <script>
                     document.getElementById("modal_msg").innerHTML = "@ViewBag.pass_changed_fp";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.is_address_updated_fm != null)
     {
-<script>
+        <script>
             document.getElementById("modal_msg").innerHTML = "@ViewBag.is_address_updated_fm";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.is_address_deleted_fm != null)
     {
-<script>
+        <script>
                     document.getElementById("modal_msg").innerHTML = "@ViewBag.is_address_deleted_fm";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.is_service_modified != null)
     {
-<script>
+        <script>
                    document.getElementById("modal_msg").innerHTML = "@ViewBag.is_service_modified";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.is_service_Cancelled != null)
     {
-<script>
+        <script>
                      document.getElementById("modal_msg").innerHTML = "@ViewBag.is_service_Cancelled";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
     }
     @if (ViewBag.is_add_added != null)
     {
-<script>
+        <script>
              document.getElementById("modal_msg").innerHTML = "@ViewBag.is_add_added";
                     $('#mymodal2').modal('show');
-</script>
+        </script>
+    }
+    @if (ViewBag.is_service_accepted != null)
+    {
+        <script>
+             document.getElementById("modal_msg").innerHTML = "@ViewBag.is_service_accepted";
+                    $('#mymodal2').modal('show');
+        </script>
     }
 </body>
 </html>

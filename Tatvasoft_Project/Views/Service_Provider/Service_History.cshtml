@@ -1,0 +1,197 @@
+﻿@model Book_now_Table;
+<html>
+<head>
+
+</head>
+<body>
+
+
+    <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Service Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color: #646464;font-size: 17px;">
+
+
+
+                    <span id="Service_date2" style="font-size: 18px;font-weight: bold;">05/10/2021</span>
+                    <span id="Service_time2">8:00-11:00</span>
+                    <div><span style="font-weight: bold;">Duration:</span> <span id="Service_duration2">3.5 Hrs</span></div>
+                    <hr>
+                    <div><span style="font-weight: bold;">Service Id:</span> <span id="Service_id2">1234</span></div>
+
+                    <div style="display: flex;">
+                        <div style="margin-top: 10px;">Net Amount</div>
+                        <div style="text-align: center;color: #1d7a8c;font-size: 32px;margin-left: 125px;">
+                            <span id="Service_cost2">€63</span>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div><span style="font-weight:bold;">Customer Name:</span> <span id="Cus_name2"></span> </div>
+
+                    <div id="esss" style="font-weight:bold;">Extra Services : </div>
+                    <div id="il2">Inside Laundry</div>
+                    <div id="if2">Inside Fridge</div>
+                    <div id="ic2">Inside Cabinate</div>
+                    <div id="io2">Inside Oven</div>
+                    <div id="iw2">Inside Windows</div>
+                    <div>
+                        <span style="font-weight: bold;">Service Address:</span> <span id="Service_street2">Street</span>
+                        <span id="Service_hn2">House_number</span>
+                        , <span id="Service_zipcode2">zipcode</span>
+                        <span id="Service_city2"> city</span>
+                    </div>
+                    <div><span style="font-weight: bold;">Billing Address:</span> Same as service address</div>
+                    <div><span style="font-weight: bold;">Phone:</span> <span id="Service_phone2">7837468947</span></div>
+                    <div><span style="font-weight: bold;">Email:</span> <span id="Service_email2">hello@gmail.com</span></div>
+                    <hr>
+                    <div><span style="font-weight: bold;">comments</span></div>
+                    <div><span id="Service_comment2">I don't have pets at home</span></div>
+                    <hr>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-fluid" id="myTable5" style="color: rgba(0,0,0,0.7);">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Service Details</th>
+                <th>customer Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var temp in ViewBag.data)
+            {
+
+
+                <tr id="@temp.ID">
+                    <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                    <td onclick="demoo5(@temp.ID)" data-toggle="modal" data-target="#exampleModal4">
+                        <div class="us_d1">
+                            <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
+                            <div class="@temp.ID">@temp.Booking_duration</div>
+                        </div>
+                    </td>
+                    <td>
+                        @if (temp.SP_ID != 0)
+                        {
+                            <div style="display:flex;">
+                                <div>
+                                    <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
+                                </div>
+                                <div class="cus_ht_txt">
+                                    <div class="cus_ht_txt1 @temp.ID">@temp.SP_Name</div>
+                                    <div><span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span></div>
+                                    <div><span class="@temp.ID">@temp.Zipcode</span>, <span class="@temp.ID">@temp.Location</span></div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+
+                        }
+                    </td>
+
+                    <div class="@temp.ID" style="display:none;">€@temp.Discounted_cost</div>
+                    <div class="@temp.ID" style="display:none;">@temp.Suggestion</div>
+                    <div class="@temp.ID" style="display:none;">@temp.Booking_time</div>
+                    <div class="@temp.ID" style="display:none;">@temp.Phone</div>
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function demoo5(id5) {
+            alert(id5);
+
+            var service_date = document.getElementById("Service_date2");
+            var service_time = document.getElementById("Service_time2");
+            var service_duration = document.getElementById("Service_duration2");
+            var service_id = document.getElementById("Service_id2");
+            var service_cost = document.getElementById("Service_cost2");
+            var service_street = document.getElementById("Service_street2");
+            var service_hn = document.getElementById("Service_hn2");
+            var service_zipcode = document.getElementById("Service_zipcode2");
+            var service_city = document.getElementById("Service_city2");
+            var service_phone = document.getElementById("Service_phone2");
+           // var service_email = document.getElementById("Service_email2");
+            var service_comment = document.getElementById("Service_comment2");
+            var service_cus_name = document.getElementById("Cus_name2");
+
+            service_date.innerHTML = document.getElementsByClassName(id5)[5].innerHTML;
+            service_time.innerHTML = document.getElementsByClassName(id5)[6].innerHTML;
+            service_duration.innerHTML = document.getElementsByClassName(id5)[2].innerHTML + " " + "Hrs.";
+            service_id.innerHTML = document.getElementsByClassName(id5)[4].innerHTML;
+            service_cost.innerHTML = document.getElementsByClassName(id5)[0].innerHTML;
+            service_street.innerHTML = document.getElementsByClassName(id5)[8].innerHTML;
+            service_hn.innerHTML = document.getElementsByClassName(id5)[9].innerHTML;
+            service_zipcode.innerHTML = document.getElementsByClassName(id5)[10].innerHTML;
+            service_city.innerHTML = document.getElementsByClassName(id5)[11].innerHTML;
+            service_comment.innerHTML = document.getElementsByClassName(id5)[1].innerHTML;
+            service_phone.innerHTML = document.getElementsByClassName(id5)[3].innerHTML;
+            service_cus_name.innerHTML = document.getElementsByClassName(id5)[7].innerHTML
+            1
+
+            document.getElementById("il2").style.display = "block";
+            document.getElementById("if2").style.display = "block";
+            document.getElementById("ic2").style.display = "block";
+            document.getElementById("io2").style.display = "block";
+            document.getElementById("iw2").style.display = "block";
+            var obj = {
+                "ServiceRequestId": id5,
+
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Customer/Fetch_Address",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.laundry == 0)
+                        document.getElementById("il2").style.display = "none";
+                    if (data.fridge == 0)
+                        document.getElementById("if2").style.display = "none";
+                    if (data.cabinate == 0)
+                        document.getElementById("ic2").style.display = "none";
+                    if (data.oven == 0)
+                        document.getElementById("io2").style.display = "none";
+                    if (data.windows == 0)
+                        document.getElementById("iw2").style.display = "none";
+
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+
+        }
+    </script>
+
+    <script>
+        $('#myTable5').DataTable();
+
+        $('#myTable5').parents('div.dataTables_wrapper').first().show();
+    </script>
+</body>
+</html>
+
+

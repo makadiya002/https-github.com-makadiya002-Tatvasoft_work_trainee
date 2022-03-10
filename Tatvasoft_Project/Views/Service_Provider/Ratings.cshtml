@@ -1,0 +1,99 @@
+﻿@model Book_now_Table;
+<html>
+<head>
+
+</head>
+<body>
+
+   
+
+
+    <table class="table table-fluid" id="myTable6" style="color: rgba(0,0,0,0.7);">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Service Details</th>
+                <th>customer Details</th>
+                <th>Payment</th>
+                <th>Distance</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var temp in ViewBag.data)
+            {
+
+
+            <tr>
+                <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                <td onclick="demoo3(@temp.ID,5)" data-toggle="modal" data-target="#exampleModal2">
+                    <div class="us_d1">
+                        <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
+                        <div class="@temp.ID">@temp.Booking_duration</div>
+                    </div>
+                </td>
+                <td>
+                    @if (temp.SP_ID != 0)
+                    {
+                        <div style="display:flex;">
+                            <div>
+                                <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
+                            </div>
+                            <div class="cus_ht_txt">
+                                <div class="cus_ht_txt1 @temp.ID">@temp.SP_Name</div>
+                                <div><span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span></div>
+                                <div><span class="@temp.ID">@temp.Zipcode</span>, <span class="@temp.ID">@temp.Location</span></div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                    }
+                </td>
+                <td>
+                    <div style="font-size: 24px;
+  font-weight: bold;
+  color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
+                        €@temp.Discounted_cost
+                    </div>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    @if (temp.Is_Date_Smaller == 0)
+                    {
+                        <button onclick="demo_set_ic(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp1"
+                                style="background-color: #ff6b6b; border-radius:5px;border:none; margin-top:20px;
+                        color:white;">
+                            Cancel
+                        </button>
+                    }
+                    else
+                    {
+                        <button onclick="demo_set_if_complete(@temp.ID)" data-toggle="modal" data-target="#exampleModal_complete_sp1"
+                                style="background-color: rgba(0,200,0,0.8); border-radius:5px;border:none; margin-top:20px;
+                        color:white;">
+                            Complete
+                        </button>
+                    }
+                </td>
+
+            </tr>
+
+
+            }
+        </tbody>
+    </table>
+   
+    <script>
+        $('#myTable6').DataTable();
+
+        $('#myTable6').parents('div.dataTables_wrapper').first().show();
+    </script>
+</body>
+</html>
+
+
