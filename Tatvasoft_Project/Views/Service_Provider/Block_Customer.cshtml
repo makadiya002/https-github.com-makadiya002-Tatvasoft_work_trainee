@@ -1,54 +1,69 @@
-﻿<html>
+﻿@model Book_now_Table;
+<html>
 <head>
 
 </head>
 
 <body>
-
     <div style="display: flex;flex-wrap: wrap;">
 
-        <div style="text-align: center;min-height: 200px;width: 230px;border: 1px solid black;">
-            <div style="margin-top: 20px;"><img src="images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
-            <div style="margin-top: 15px;">Gaurang Patel</div>
-            <button style="margin-top: 20px; background-color: #ff6b6b;color: white;
+        @foreach (var temp in ViewBag.all_cus)
+        {
+        <div style="margin-left: 15px; margin-top: 15px; text-align: center; min-height: 200px; width: 210px; border: 1px solid black;">
+            <div style="margin-top: 20px;"><img src="~/images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
+            <div style="margin-top: 15px;">@temp.SP_Name</div>
+          
+                <button class="@temp.SP_ID" id="btn_blc" onclick="btn_val(@temp.SP_ID)" style="margin-top: 20px; background-color: #ff6b6b;color: white;
       border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
-                Block
-            </button>
+                @if(temp.Is_Blocked == 0)
+                {
+                    <span>Block</span>
+                }
+                else
+                {
+                    <span>UnBlock</span>
+                }
+                </button>
+            
+          
+
         </div>
-        <div style="text-align: center;min-height: 200px;width: 230px;border: 1px solid black;">
-            <div style="margin-top: 20px;"><img src="images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
-            <div style="margin-top: 15px;">Gaurang Patel</div>
-            <button id="btn_blc" onclick="btn_val()" style="margin-top: 20px; background-color: #ff6b6b;color: white;
-      border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
-                Block
-            </button>
-        </div>
-        <div style="text-align: center;min-height: 200px;width: 230px;border: 1px solid black;">
-            <div style="margin-top: 20px;"><img src="images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
-            <div style="margin-top: 15px;">Gaurang Patel</div>
-            <button style="margin-top: 20px; background-color: #ff6b6b;color: white;
-      border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
-                Block
-            </button>
-        </div>
-        <div style="text-align: center;min-height: 200px;width: 230px;border: 1px solid black;">
-            <div style="margin-top: 20px;"><img src="images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
-            <div style="margin-top: 15px;">Gaurang Patel</div>
-            <button style="margin-top: 20px; background-color: #ff6b6b;color: white;
-      border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
-                Block
-            </button>
-        </div>
-        <div style="text-align: center;min-height: 200px;width: 230px;border: 1px solid black;">
-            <div style="margin-top: 20px;"><img src="images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
-            <div style="margin-top: 15px;">Gaurang Patel</div>
-            <button style="margin-top: 20px; background-color: #ff6b6b;color: white;
-      border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
-                Block
-            </button>
-        </div>
+        }
 
 
     </div>
+   
+    <script>
+        var i = 0;
+        function btn_val(idd) {
+            if (document.getElementsByClassName(idd)[0].innerText == "Block") {
+                document.getElementsByClassName(idd)[0].innerText = "UnBlock";
+            }
+            else {
+                document.getElementsByClassName(idd)[0].innerText = "Block";
+            }
+            var obj = {
+                "UserId": idd,
+                "TargetUserId": parseInt(@ViewBag.uid)
+
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Service_Provider/Check_Block_Customer",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

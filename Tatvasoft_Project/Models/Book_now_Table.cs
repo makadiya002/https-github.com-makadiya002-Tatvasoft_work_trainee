@@ -32,5 +32,6 @@ namespace Tatvasoft_Project.Models
         public float SP_Ratings { get; set; }
         public int? SP_ID { get; set; }
         public int Is_Date_Smaller { get; set; }
+        public int Is_Blocked { get; set; }
     }
 }

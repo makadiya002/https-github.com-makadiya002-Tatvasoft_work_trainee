@@ -1,99 +1,138 @@
 ﻿@model Book_now_Table;
+<!DOCTYPE html>
 <html>
 <head>
 
+    <style>
+        .ncc {
+            display: none;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Tables</title>
+
+    <style>
+        li {
+            color: rgba(0,0,0,0.2);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
 
-   
 
+    <div class="container-fluid">
+        <table class="table table-fluid" id="myTable10" style="color: #646464;">
+            <thead>
+                <tr>
+                    <th></th>
 
-    <table class="table table-fluid" id="myTable6" style="color: rgba(0,0,0,0.7);">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Service Details</th>
-                <th>customer Details</th>
-                <th>Payment</th>
-                <th>Distance</th>
-                <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var temp in ViewBag.data)
+                {
+                    <tr >
+                        <td style="border:1px solid black;padding-top:10px;padding-bottom:10px;">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div>@temp.ID</div>
+                                    <div style="font-weight: bold;font-size: 17px;">@temp.SP_Name</div>
+                                </div>
+                                <div class="col-4">
+                                    <div style="font-weight: bold;font-size: 17px;">
+                                        <img src="~/images/us_cal.png" style="height: 17px;width: 17px;"> @temp.Booking_date.ToShortDateString()
+                                    </div>
+                                    <div>
+                                        <img src="~/images/us_clock.png" style="height: 17px;width: 17px;"> @temp.Booking_duration
+                                    </div>
+                                </div>
+                                <div class="col-5" style="text-align: right;">
+                                    <div style="font-weight: bold;font-size: 17px;">Ratings</div>
+                                    <div style="text-align: right;">
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var temp in ViewBag.data)
-            {
+                                        @if (temp.SP_Ratings >= 0.5 && temp.SP_Ratings <= 1.5)
+                                        {
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <span> Bad</span>
+                                        }
+                                        else if (temp.SP_Ratings >= 1.5 && temp.SP_Ratings <= 2.5)
+                                        {
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <span> Not Bad</span>
+                                        }
+                                        else if (temp.SP_Ratings >= 2.5 && temp.SP_Ratings <= 3.5)
+                                        {
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <span> Good</span>
+                                        }
+                                        else if (temp.SP_Ratings >= 3.5 && temp.SP_Ratings <= 4.5)
+                                        {
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_star.png">
+                                            <span> Very Good</span>
+                                        }
+                                        else
+                                        {
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <img style="height: 16px;width: 17px;" src="~/images/cus_yellow_star.png">
+                                            <span> Excellent</span>
+                                        }
 
-
-            <tr>
-                <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
-                <td onclick="demoo3(@temp.ID,5)" data-toggle="modal" data-target="#exampleModal2">
-                    <div class="us_d1">
-                        <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
-                        <div class="@temp.ID">@temp.Booking_duration</div>
-                    </div>
-                </td>
-                <td>
-                    @if (temp.SP_ID != 0)
-                    {
-                        <div style="display:flex;">
-                            <div>
-                                <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="cus_ht_txt">
-                                <div class="cus_ht_txt1 @temp.ID">@temp.SP_Name</div>
-                                <div><span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span></div>
-                                <div><span class="@temp.ID">@temp.Zipcode</span>, <span class="@temp.ID">@temp.Location</span></div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
+                            <hr style="color: black;">
+                            <div style="font-weight: bold;font-size: 17px;">Customer Comment</div>
+                            <div>@temp.Suggestion</div>
+                        </td>
 
-                    }
-                </td>
-                <td>
-                    <div style="font-size: 24px;
-  font-weight: bold;
-  color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
-                        €@temp.Discounted_cost
-                    </div>
-                </td>
-                <td>
-                    &nbsp;
-                </td>
-                <td>
-                    @if (temp.Is_Date_Smaller == 0)
-                    {
-                        <button onclick="demo_set_ic(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp1"
-                                style="background-color: #ff6b6b; border-radius:5px;border:none; margin-top:20px;
-                        color:white;">
-                            Cancel
-                        </button>
-                    }
-                    else
-                    {
-                        <button onclick="demo_set_if_complete(@temp.ID)" data-toggle="modal" data-target="#exampleModal_complete_sp1"
-                                style="background-color: rgba(0,200,0,0.8); border-radius:5px;border:none; margin-top:20px;
-                        color:white;">
-                            Complete
-                        </button>
-                    }
-                </td>
-
-            </tr>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
 
-            }
-        </tbody>
-    </table>
-   
+
     <script>
-        $('#myTable6').DataTable();
+        $(document).ready(function () {
+            $('#myTable10').DataTable();
 
-        $('#myTable6').parents('div.dataTables_wrapper').first().show();
+
+        });
     </script>
 </body>
 </html>
-
-

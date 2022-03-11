@@ -358,6 +358,7 @@ namespace Tatvasoft_Project.Controllers
 
                 item.Add(new Models.Book_now_Table
                 {
+                    SP_Ratings = (float)temp2.Ratings,
                     SP_ID = spid3,
                     SP_Name = name,
                     ID = temp.ServiceRequestId,
@@ -380,7 +381,74 @@ namespace Tatvasoft_Project.Controllers
 
         public IActionResult Block_Customer()
         {
+            HashSet<int> All_customers = new HashSet<int>();
+            var username = HttpContext.Session.GetString("user");
+            _helperlandcontext = new HelperlandContext();
+            var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+            var all_ser = _helperlandcontext.ServiceRequests.Where(x => x.ServiceProviderId == userid && x.Status == 1).ToList();
+            
+            foreach(var temp in all_ser)
+            {
+                All_customers.Add(temp.UserId);
+            }
+            List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+            foreach(var i in All_customers)
+            {
+                var uname = _helperlandcontext.Users.Where(x => x.UserId == i).ToList().FirstOrDefault();
+                var name = uname.FirstName + " " + uname.LastName;
+                var is_blocked2 = 0;
+                var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userid && x.UserId == i).ToList();
+                if(is_blocked.Count == 1)
+                {
+                    is_blocked2 = 1;
+                }
+
+                item.Add(new Models.Book_now_Table
+                {
+                    SP_ID = i,
+                    SP_Name = name,
+                    Is_Blocked = is_blocked2
+                });
+            }
+
+            ViewBag.all_cus = item;
+            var unme = HttpContext.Session.GetString("user");
+            ViewBag.uid = _helperlandcontext.Users.Where(x => x.FirstName == unme).ToList().FirstOrDefault().UserId;
             return View();
+        }
+
+        public IActionResult Check_Block_Customer(Models.FavoriteAndBlocked model)
+        {
+            _helperlandcontext = new HelperlandContext();
+           
+            var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == model.TargetUserId && x.UserId == model.UserId).ToList();
+            if(is_blocked.Count == 0)
+            {
+                Models.FavoriteAndBlocked obj2 = new Models.FavoriteAndBlocked();
+                obj2.UserId = model.UserId;
+                obj2.TargetUserId = model.TargetUserId;
+                obj2.IsBlocked = true;
+                obj2.IsFavorite = false;
+
+                _helperlandcontext.FavoriteAndBlockeds.Add(obj2);
+                _helperlandcontext.SaveChanges();
+            }
+            else
+            {
+                var bid = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == model.TargetUserId && x.UserId == model.UserId).ToList().FirstOrDefault().Id;
+                var p = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.Id == bid).ToList().FirstOrDefault();
+                _helperlandcontext.Entry(p).State = EntityState.Deleted;
+                _helperlandcontext.SaveChanges();
+            }
+            var obj = "Hello";
+            try
+            {
+                return Json(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

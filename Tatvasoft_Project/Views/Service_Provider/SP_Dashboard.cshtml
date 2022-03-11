@@ -277,6 +277,8 @@
             document.getElementById("ser_his").style.display = "none";
             document.getElementById("myTable3").style.display = "none";
             document.getElementById("blo_cus").style.display = "none";
+            $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+
         }
 
         function Block_customer() {
@@ -293,6 +295,8 @@
             document.getElementById("ser_his").style.display = "none";
             document.getElementById("myTable3").style.display = "none";
             document.getElementById("blo_cus").style.display = "block";
+            $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+
         }
 
         function demoo3(id,flag) {
