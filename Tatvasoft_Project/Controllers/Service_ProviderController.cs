@@ -30,51 +30,64 @@ namespace Tatvasoft_Project.Controllers
             var username = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().ZipCode;
+
+            var targetuserid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
             var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.ZipCode == userid && x.Status == null).ToList();
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.ServiceRequest temp in model_to_pass)
             {
+
                 if (temp.ServiceRequestId >= 4)
                 {
-                    var duration = (temp.ServiceHours).ToString();
-                    if (duration.Length <= 2)
-                    {
-                        duration += ":00";
-                    }
-                    else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
-                    var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
-                    if (end_dur.ToString().Length <= 2)
-                    {
-                        duration = duration + "-" + end_dur.ToString() + ":00";
-                    }
-                    else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
-
                     var spid = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList();
-                    int? spid3 = 0;
-                    var name = "";
 
-                    //var rating = 0;
-                    if (spid.Count > 0)
+                    var blocked_count = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.UserId == spid.FirstOrDefault().UserId
+                    && x.TargetUserId == targetuserid && x.IsBlocked == true).ToList();
+
+                    if (blocked_count.Count == 0)
                     {
-                        spid3 = (spid.FirstOrDefault().UserId);
-                        var fname = spid.FirstOrDefault().FirstName;
-                        var lname = spid.FirstOrDefault().LastName;
-                        name = fname + " " + lname;
+
+                        var duration = (temp.ServiceHours).ToString();
+                        if (duration.Length <= 2)
+                        {
+                            duration += ":00";
+                        }
+                        else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                        var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                        if (end_dur.ToString().Length <= 2)
+                        {
+                            duration = duration + "-" + end_dur.ToString() + ":00";
+                        }
+                        else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                        int? spid3 = 0;
+                        var name = "";
 
 
+
+                        //var rating = 0;
+                        if (spid.Count > 0)
+                        {
+                            spid3 = (spid.FirstOrDefault().UserId);
+                            var fname = spid.FirstOrDefault().FirstName;
+                            var lname = spid.FirstOrDefault().LastName;
+                            name = fname + " " + lname;
+
+
+                        }
+                        item.Add(new Models.Book_now_Table
+                        {
+                            SP_ID = spid3,
+                            SP_Name = name,
+                            ID = temp.ServiceRequestId,
+                            Booking_date = (temp.ServiceStartDate).Date,
+                            Booking_time = (temp.ExtraHours).ToString(),
+                            Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                            Booking_duration = duration,
+                            Suggestion = temp.Comments,
+                            Status = temp.Status
+                        });
                     }
-                    item.Add(new Models.Book_now_Table
-                    {
-                        SP_ID = spid3,
-                        SP_Name = name,
-                        ID = temp.ServiceRequestId,
-                        Booking_date = (temp.ServiceStartDate).Date,
-                        Booking_time = (temp.ExtraHours).ToString(),
-                        Discounted_cost = float.Parse((temp.SubTotal).ToString()),
-                        Booking_duration = duration,
-                        Suggestion = temp.Comments,
-                        Status = temp.Status
-                    });
                 }
             }
             int i = 0;
@@ -82,17 +95,26 @@ namespace Tatvasoft_Project.Controllers
             {
                 if (temp2.ServiceRequestId >= 4)
                 {
+                    var spid = _helperlandcontext.Users.Where(x => x.UserId == temp2.UserId).ToList();
+
+                    var blocked_count = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.UserId == spid.FirstOrDefault().UserId
+                    && x.TargetUserId == targetuserid && x.IsBlocked == true).ToList();
+
+                    if (blocked_count.Count == 0)
+                    {
 
 
-                    var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
 
-                    //int id = temp2.ServiceId;
-                    item[i].Street = address_obj[0].AddressLine1;
-                    item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
-                    item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
-                    item[i].Location = address_obj.FirstOrDefault().City;
-                    item[i].Phone = address_obj.FirstOrDefault().Mobile;
-                    i++;
+                        var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                        //int id = temp2.ServiceId;
+                        item[i].Street = address_obj[0].AddressLine1;
+                        item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                        item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                        item[i].Location = address_obj.FirstOrDefault().City;
+                        item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                        i++;
+                    }
                 }
             }
 
@@ -113,6 +135,29 @@ namespace Tatvasoft_Project.Controllers
 
             _helperlandcontext.Entry(obj).State = EntityState.Modified;
             _helperlandcontext.SaveChanges();
+
+            var zipcode = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().ZipCode;
+            var zipcode_sps = _helperlandcontext.Users.Where(x => x.ZipCode == zipcode).ToList();
+            var email_sp = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().Email;
+            foreach (var temp in zipcode_sps)
+            {
+                var emailId = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList().FirstOrDefault().Email;
+                if(emailId != email_sp)
+                {
+                    MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", emailId);
+                    mm.Subject = "New Service Request Accepted";
+                    mm.Body = "Service Request with ID " + sid + " is no more Available, It is Accepted By One of the service Provider";
+                        mm.IsBodyHtml = false;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mm);
+                }
+            }
 
             try
             {
