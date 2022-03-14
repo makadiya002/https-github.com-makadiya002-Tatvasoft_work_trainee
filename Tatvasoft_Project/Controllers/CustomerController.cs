@@ -51,6 +51,7 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext = new HelperlandContext();
             var username = HttpContext.Session.GetString("user");
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+            var usertypeid = _helperlandcontext.Users.Where(x => x.FirstName == username).ToList().FirstOrDefault().UserTypeId;
             var model_to_pass = _helperlandcontext.UserAddresses.Where(x => x.UserId == userid).ToList();
 
             List<Models.UserAddress> item = new List<Models.UserAddress>();
@@ -67,6 +68,10 @@ namespace Tatvasoft_Project.Controllers
                 });
             }
 
+            if(usertypeid == 2)
+            {
+                ViewBag.from_SP_side = "Yes";
+            }
             ViewBag.all_address = item;
             return View();
         }

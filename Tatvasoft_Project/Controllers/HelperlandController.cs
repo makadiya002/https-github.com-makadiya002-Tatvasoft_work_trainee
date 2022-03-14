@@ -148,13 +148,16 @@ namespace Tatvasoft_Project.Controllers
             
             if (p.Count == 1)
             {
+                var user = p.FirstOrDefault().FirstName;
+                HttpContext.Session.SetString("user", user);
+
                 bool is_pass_valid = BCrypt.Net.BCrypt.Verify(model.Password, p.FirstOrDefault().Password);
                 if(is_pass_valid)
                 {
                     if (p.FirstOrDefault().UserTypeId == 1)
                     {
-                        var user = p.FirstOrDefault().FirstName;
-                        HttpContext.Session.SetString("user", user);
+                        //var user = p.FirstOrDefault().FirstName;
+                        //HttpContext.Session.SetString("user", user);
                         var username = HttpContext.Session.GetString("user");
                         _helperlandcontext = new HelperlandContext();
                         var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
@@ -231,10 +234,104 @@ namespace Tatvasoft_Project.Controllers
                     }
                     else if (p.FirstOrDefault().UserTypeId == 2)
                     {
-                        var user = p.FirstOrDefault().FirstName;
-                        HttpContext.Session.SetString("user", user);
+                        _helperlandcontext = new HelperlandContext();
+                        var username = HttpContext.Session.GetString("user");
+                        _helperlandcontext = new HelperlandContext();
+                        var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().ZipCode;
+
+                        var targetuserid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+                        var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.ZipCode == userid && x.Status == null).ToList();
+                        List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+                        foreach (Models.ServiceRequest temp in model_to_pass)
+                        {
+
+                            if (temp.ServiceRequestId >= 4)
+                            {
+                                var spid = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList();
+
+                                var blocked_count = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.UserId == spid.FirstOrDefault().UserId
+                                && x.TargetUserId == targetuserid && x.IsBlocked == true).ToList();
+
+                                if (blocked_count.Count == 0)
+                                {
+
+                                    var duration = (temp.ServiceHours).ToString();
+                                    if (duration.Length <= 2)
+                                    {
+                                        duration += ":00";
+                                    }
+                                    else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                                    var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                                    if (end_dur.ToString().Length <= 2)
+                                    {
+                                        duration = duration + "-" + end_dur.ToString() + ":00";
+                                    }
+                                    else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                                    int? spid3 = 0;
+                                    var name = "";
+
+
+
+                                    //var rating = 0;
+                                    if (spid.Count > 0)
+                                    {
+                                        spid3 = (spid.FirstOrDefault().UserId);
+                                        var fname = spid.FirstOrDefault().FirstName;
+                                        var lname = spid.FirstOrDefault().LastName;
+                                        name = fname + " " + lname;
+
+
+                                    }
+                                    item.Add(new Models.Book_now_Table
+                                    {
+                                        SP_ID = spid3,
+                                        SP_Name = name,
+                                        ID = temp.ServiceRequestId,
+                                        Booking_date = (temp.ServiceStartDate).Date,
+                                        Booking_time = (temp.ExtraHours).ToString(),
+                                        Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                                        Booking_duration = duration,
+                                        Suggestion = temp.Comments,
+                                        Status = temp.Status
+                                    });
+                                }
+                            }
+                        }
+                        int i = 0;
+                        foreach (Models.ServiceRequest temp2 in model_to_pass)
+                        {
+                            if (temp2.ServiceRequestId >= 4)
+                            {
+                                var spid = _helperlandcontext.Users.Where(x => x.UserId == temp2.UserId).ToList();
+
+                                var blocked_count = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.UserId == spid.FirstOrDefault().UserId
+                                && x.TargetUserId == targetuserid && x.IsBlocked == true).ToList();
+
+                                if (blocked_count.Count == 0)
+                                {
+
+
+
+                                    var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                                    //int id = temp2.ServiceId;
+                                    item[i].Street = address_obj[0].AddressLine1;
+                                    item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                                    item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                                    item[i].Location = address_obj.FirstOrDefault().City;
+                                    item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                                    i++;
+                                }
+                            }
+                        }
+
                         ViewBag.user = HttpContext.Session.GetString("user");
-                        return View("~/Views/Helperland/Register_sp.cshtml");
+                        ViewBag.data = item;
+                        var unme = HttpContext.Session.GetString("user");
+                        ViewBag.uid = _helperlandcontext.Users.Where(x => x.FirstName == unme).ToList().FirstOrDefault().UserId;
+
+                        return View("~/Views/Service_Provider/SP_Dashboard.cshtml");
                     }
                 }
                 else ViewBag.err = "Something went wrong";

@@ -126,9 +126,13 @@
 
 }
 
-<button class="bn_add_add" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
-    + Add new address
-</button>
+@if (ViewBag.from_SP_side == null)
+{
+    <button class="bn_add_add" type="button" data-toggle="collapse" data-target="#dddd" aria-controls="dddd" aria-expanded="false" aria-label="Toggle">
+        + Add new address
+    </button>
+}
+
 <div class="collapse" id="dddd">
 
     <form asp-action="Bn_Add_Address" asp-controller="Customer" method="post" class="bn_frm_add_add container-fluid">
