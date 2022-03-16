@@ -1,0 +1,284 @@
+﻿@model Book_now_Table;
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="~/css/style2.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://datatables.net/media/css/site-examples.css">
+
+    <!-- buttons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+</head>
+<body>
+
+    <div class="modal fade" id="exampleModal_cancel_sp2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: gray;color: #646464;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-size: 22px;font-weight: bold;" id="exampleModalCenterTitle">Cancel Service Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <form asp-action="Cancel_sr" asp-controller="Customer" method="post">
+                        <label style="font-size: 17px;">Why you want to cancel the service request?</label>
+                        <input asp-for="ID" type="hidden" id="id_cancel3" />
+                        <input type="text" name="" style="width: 100%;height: 100px;">
+                        <button type="submit" class="btn btn-primary"
+                                style="width: 100%;border-radius: 30px;margin-top: 10px;font-size: 17px;" name="">
+                            Cancel Now
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ninth_bdy_main">
+        <nav class="navbar navbar-expand-lg fixed-top"
+             style="background-color: #1fb6ff; ">
+            <a class="ninth_hh" href="#">helperland</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link ninth_admin_user" href="#"><img src="~/images/ninth_admin-user.png"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link admin_name_ninth" href="#">James Smith</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="" class="nav-link ninth_admin_logout" href="#"><img src="~/images/ninth_logout.png"></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+        <div>
+            <button type="button" class="btn navbar-light left_menu_btn_9th" data-toggle="collapse" data-target="#demo">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="demo" class="collapse">
+
+                <ul>
+                    <li>Service Management</li>
+                    <li>User Management</li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="container-fluid" style="display: flex;">
+            <div class="ninth_user_man">Service Requests</div>
+
+
+        </div>
+
+
+        <form>
+            <div class="tenth_form_main container-fluid">
+
+                <div class="tenth_1st">
+                    <input type="text" placeholder="Service ID" name="">
+                </div>
+                <div class="tenth_1st">
+                    <select>
+                        <option>Customer &nbsp;</option>
+                        <option>first</option>
+                        <option>Second</option>
+                        <option>third</option>
+                    </select>
+                </div>
+                <div class="tenth_1st">
+                    <select>
+                        <option>Service Provider &nbsp;</option>
+                        <option>first</option>
+                        <option>Second</option>
+                        <option>third</option>
+                    </select>
+                </div>
+                <div class="tenth_1st">
+                    <select>
+                        <option>Status &nbsp;</option>
+                        <option>Completed</option>
+                        <option>Pending</option>
+                        <option>Cancelled</option>
+                    </select>
+                </div>
+                <div class="tenth_2nd">
+                    <input type="text" placeholder="From Date" onfocus="(this.type='date')">
+                </div>
+                <div class="tenth_2nd">
+                    <input type="text" placeholder="To Date" onfocus="(this.type='date')">
+                </div>
+
+                <button class="tenth_2nd tenth_2nd_btn1">Search</button>
+
+
+                <button class="tenth_2nd tenth_2nd_btn2">Clear</button>
+
+            </div>
+        </form>
+
+        <table id="myTable10" style="width: 97%; color: #646464;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service Date</th>
+                    <th>Customer Details</th>
+                    <th>service Provider</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var temp in ViewBag.data)
+                {
+                    <tr>
+                        <td class="us_d2 tenth_frm_id">@temp.ID</td>
+                        <td class="us_d1 tenth_frm_time">
+                            <div style="font-weight: bold;"><img style="height:17px;width:17px;" src="~/images/us_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                            <div><img style="height:17px;width:17px;" src="~/images/us_clock.png"> @temp.Booking_duration</div>
+                        </td>
+                        <td class="us_d1">
+                            <div>@temp.Customer_Name</div>
+                            <div><img style="height:18px;width: 18px;" src="~/images/us_home.png"> @temp.Street @temp.House_number,@temp.Zipcode @temp.Location</div>
+                        </td>
+
+                        <td class="us_d1 cus_hat_txt" style="margin-top:15px;">
+                            @if (temp.SP_Name != "")
+                            {
+                                <div class="cus_ht">
+                                    <button><img src="~/images/cus_hat.png"></button>
+                                </div>
+                                <div class="cus_ht_txt">
+                                    <div class="cus_ht_txt1">@temp.SP_Name</div>
+                                    <div class="cus_ht_txt2">
+                                        <img src="~/images/cus_yellow_star.png">
+                                        <img src="~/images/cus_yellow_star.png">
+                                        <img src="~/images/cus_yellow_star.png">
+                                        <img src="~/images/cus_yellow_star.png">
+                                        <img src="~/images/cus_star.png">
+                                        <div>4</div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                        
+                        <td style="margin-top:15px;">
+                            @if (temp.Status == null)
+                            {
+                                <div class="tenth_sta_btn tenth_btn_new">
+                                    <button>New</button>
+                                </div>
+                            }
+                            @if (temp.Status == 1)
+                            {
+                                <div class="tenth_sta_btn tenth_btn_completed">
+                                    <button>Completed</button>
+                                </div>
+                            }
+                            @if (temp.Status == 2)
+                            {
+                                <div class="tenth_sta_btn tenth_btn_cancelled">
+                                    <button>Cancelled</button>
+                                </div>
+                            }
+                            @if (temp.Status == 3)
+                            {
+                                <div class="tenth_sta_btn tenth_btn_pending">
+                                    <button>Pending</button>
+                                </div>
+                            }
+                        </td>
+
+                        <td class="cus_pay" style="font-size: 21px;font-weight:bold; color: #1d7a8c;">
+                            €@temp.Discounted_cost
+                        </td>
+
+                        <td class="icon_tenth" style="text-align: right;">
+                            @if (temp.Status == 3 || temp.Status == null)
+                            {
+                                <div class="dropleft">
+                                    <a class="btn btn-secondary" data-toggle="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        </svg>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="height: 150px;">
+                                        <a class="dropdown-item" href="#" style="height: 35px;">Edit & Reschedule</a>
+                                        <a onclick="cancel_setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp2" class="dropdown-item" href="#" style="height: 35px;">Cancel</a>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+        <div class="ninth_footer container-fluid">
+            ©2018 Helperland. All rights reserved.
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable10').DataTable();
+        });
+    </script>
+
+    <script>
+        function cancel_setid(id_can) {
+            document.getElementById("id_cancel3").value = id_can;
+            alert(document.getElementById("id_cancel3").value);
+        }
+    </script>
+
+</body>
+</html>

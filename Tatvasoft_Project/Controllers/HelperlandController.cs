@@ -123,6 +123,7 @@ namespace Tatvasoft_Project.Controllers
             obj.IsActive = true;
             obj.IsDeleted = true;
             obj.IsOnline = true;
+            obj.IsApproved = false;
             _helperlandcontext = new HelperlandContext();
             obj.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
             obj.ResetKey = (Guid.NewGuid()).ToString();
@@ -232,7 +233,7 @@ namespace Tatvasoft_Project.Controllers
                         ViewBag.data = item;
                         return View("~/Views/Customer/Dashboard.cshtml");
                     }
-                    else if (p.FirstOrDefault().UserTypeId == 2)
+                    else if (p.FirstOrDefault().UserTypeId == 2 && p.FirstOrDefault().IsApproved == true)
                     {
                         _helperlandcontext = new HelperlandContext();
                         var username = HttpContext.Session.GetString("user");
@@ -333,6 +334,8 @@ namespace Tatvasoft_Project.Controllers
 
                         return View("~/Views/Service_Provider/SP_Dashboard.cshtml");
                     }
+                    else ViewBag.err2 = "Something went wrong";
+                    return View("~/Views/Home/Index.cshtml");
                 }
                 else ViewBag.err = "Something went wrong";
                 return View("~/Views/Home/Index.cshtml");

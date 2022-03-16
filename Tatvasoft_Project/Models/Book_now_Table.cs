@@ -33,5 +33,6 @@ namespace Tatvasoft_Project.Models
         public int? SP_ID { get; set; }
         public int Is_Date_Smaller { get; set; }
         public int Is_Blocked { get; set; }
+        public string Customer_Name { get; set; }
     }
 }
