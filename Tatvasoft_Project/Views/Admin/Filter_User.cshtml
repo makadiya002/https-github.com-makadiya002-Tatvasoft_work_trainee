@@ -1,0 +1,86 @@
+﻿<html>
+<head>
+
+</head>
+<body>
+
+    <table id="myTable12" style="width: 97%; color: #646464;">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>User Role</th>
+                <th>Registration Date</th>
+                <th>Phone</th>
+                <th>Zipcode</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var temp in ViewBag.All_filtered_rows)
+            {
+                <tr style="min-height:60px;">
+                    <td>
+                        @temp.FirstName
+                    </td>
+                    <td>
+                        @temp.UserTypeId
+                    </td>
+                    <td>
+                        @temp.CreatedDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @temp.Mobile
+                    </td>
+                    <td>
+                        @temp.ZipCode
+                    </td>
+                    <td>
+                        @if (temp.IsActive == true)
+                        {
+                            <div class="status_user_9th"><button class="@temp.UserId" style="width:63px;margin-top:5px;">Active</button></div>
+                        }
+                        else
+                        {
+                            <div class="status_user_9th"><button class="@temp.UserId" style="width: 63px; background-color: rgba(200,0,0,0.7); margin-top: 5px;">Blocked</button></div>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropleft">
+                            <a class="btn btn-secondary" data-toggle="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 25px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                </svg>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="height: 80px;">
+                                @if (temp.UserTypeId == 2 && temp.IsApproved == false)
+                                {
+                                    <a onclick="Approve_sp(@temp.UserId)" class="dropdown-item" href="#" style="height: 20px;">Approve SP</a>
+
+                                }
+                                @if (temp.IsActive == true)
+                                {
+                                    <a onclick="deactivate(@temp.UserId)" class="dropdown-item" href="#" style="height: 15px;">Deactivate</a>
+                                }
+                                else
+                                {
+                                    <a onclick="activate(@temp.UserId)" class="dropdown-item" href="#" style="height: 20px;">Activate</a>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable12').DataTable();
+        });
+    </script>
+
+</body>
+</html>

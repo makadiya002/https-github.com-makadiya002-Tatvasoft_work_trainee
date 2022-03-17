@@ -81,22 +81,17 @@
         </div>
 
 
-        <form>
+        <form style="height:220px;display:flex;flex-wrap:wrap;">
             <div class="ninth_form_main container-fluid">
-                <div class="form_1st">
-                    <select>
-                        <option>User name &nbsp;&nbsp;&nbsp;&nbsp;</option>
-                        <option>first</option>
-                        <option>Second</option>
-                        <option>third</option>
-                    </select>
+                <div class="form_1st" style="margin-bottom: 20px;">
+                   <input id="username" type="text" placeholder="User Name" />
                 </div>
 
                 <div class="form_2nd">
-                    <select>
-                        <option>User role</option>
-                        <option>User</option>
-                        <option>Service Provider</option>
+                    <select id="userrole">
+                        <option value="0">User role</option>
+                        <option value="1">User</option>
+                        <option value="2">Service Provider</option>
                     </select>
                 </div>
 
@@ -105,21 +100,22 @@
                         +49
                     </div>
                     <div>
-                        <input class="form_3rd_i1" type="text" name="" placeholder=" Phone number">
-                        <input class="form_3rd_i2" type="text" name="" placeholder=" Phone no.">
+                        <input id="phoneno1" type="text" placeholder=" Phone number">
                     </div>
                 </div>
 
 
 
 
-                <input class="form_4th" type="text" placeholder="Zipcode" name="">
+                <input id="zipcode" class="form_4th" type="text" placeholder="Zipcode" name="">
+                <br />
+                <input id="date" type="date" style="margin-top:20px;margin-left:20px;"/>
 
 
-                <button class="form_5th">Search</button>
+                <button onclick="search_records()" type="button" style="margin-top:20px;" class="form_5th">Search</button>
 
 
-                <button class="form_6th">Clear</button>
+                <button type="reset" style="margin-top:20px;" class="form_6th">Clear</button>
 
             </div>
         </form>
@@ -196,7 +192,7 @@
             </tbody>
         </table>
 
-
+        <div id="filtered_div"></div>
 
 
 
@@ -207,6 +203,54 @@
         </div>
 
     </div>
+
+    
+    <script>
+        function setHtml(data1) {
+        }
+    </script>
+
+    <script>
+        function search_records() {
+            var username = document.getElementById("username").value;
+            var userrole = document.getElementById("userrole").value;
+            var phoneno1 = document.getElementById("phoneno1").value;
+            //var phoneno2 = document.getElementById("phoneno2").value;
+            var zipcode = document.getElementById("zipcode").value;
+            var date = document.getElementById("date").value;
+
+            //alert(username + " " + userrole + " " + phoneno1 + " " + phoneno2 + " " + zipcode + " " + date);
+            var obj = {
+                "FirstName": username,
+                "UserTypeId": userrole,
+                "Mobile": phoneno1,
+                "ZipCode": zipcode,
+
+                "DateOfBirth": date
+            };
+            document.getElementById("myTable11").style.display = "none";
+            $('#myTable11').parents('div.dataTables_wrapper').first().hide();
+            $('#filtered_div').load("/Admin/Filter_User", { model: obj });
+           /* $.ajax({
+                type: "GET",
+                url: "/Admin/Filter_User",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data2) {
+                    alert(data2.counts);
+                    
+                    setHtml(data2);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });*/
+        }
+    </script>
 
     <script>
         $(document).ready(function () {

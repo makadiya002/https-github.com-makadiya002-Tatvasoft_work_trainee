@@ -195,5 +195,57 @@ namespace Tatvasoft_Project.Controllers
             }
         }
 
+        public IActionResult Filter_User(Models.User model)
+        {
+            _helperlandcontext = new HelperlandContext();
+
+            var filtered_users_fname = _helperlandcontext.Users.Where(x => true).ToList();
+            var filtered_users_mobile = _helperlandcontext.Users.Where(x => true).ToList();
+            var filtered_users_zipcode = _helperlandcontext.Users.Where(x => true).ToList();
+            var filtered_users_type = _helperlandcontext.Users.Where(x => true).ToList();
+            var filtered_users_createddate = _helperlandcontext.Users.Where(x => true).ToList();
+
+            if (model.FirstName != null)
+            {
+                filtered_users_fname = _helperlandcontext.Users.Where(x => x.FirstName.Contains(model.FirstName)).ToList();
+            }
+
+            if(model.Mobile != null)
+            {
+                filtered_users_mobile = _helperlandcontext.Users.Where(x => x.Mobile.Contains(model.Mobile)).ToList();
+            }
+
+            if(model.ZipCode != null)
+            {
+                filtered_users_zipcode = _helperlandcontext.Users.Where(x => x.ZipCode.Contains(model.ZipCode)).ToList();
+            }
+
+            if(model.UserTypeId != 0)
+            {
+                filtered_users_type = _helperlandcontext.Users.Where(x => x.UserTypeId == model.UserTypeId).ToList();
+            }
+
+            if(model.DateOfBirth != null)
+            {
+                filtered_users_createddate = _helperlandcontext.Users.Where(x => x.CreatedDate == model.DateOfBirth).ToList();
+            }
+
+
+            var common_lst1 = filtered_users_fname.Intersect(filtered_users_mobile).ToList();
+            var common_lst2 = filtered_users_zipcode.Intersect(filtered_users_type).ToList();
+
+            var final_lst1 = common_lst1.Intersect(common_lst2).ToList();
+            var final_lst = final_lst1.Intersect(filtered_users_createddate).ToList();
+
+            ViewBag.All_filtered_rows = final_lst;
+            return View();
+            
+        }
+
+        public IActionResult Filter_Services(Models.Book_now_Table model)
+        {
+            return View();
+        }
+
     }
 }
