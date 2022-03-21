@@ -2590,13 +2590,14 @@ form .es_inner_frm {
     width: 25%;
     margin-left: 2%;
     height: 46px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .tenth_2nd {
     width: 25%;
     margin-left: 2%;
     height: 46px;
+    margin-top:20px;
 }
 
     .tenth_1st select, .tenth_1st input, .tenth_2nd input {

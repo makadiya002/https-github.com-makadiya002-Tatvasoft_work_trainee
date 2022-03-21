@@ -35,6 +35,51 @@
 </head>
 <body>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal122" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Email</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Password</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                            </div>
+                        </div>
+                       
+                       
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Check me out
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="exampleModal_cancel_sp2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: gray;color: #646464;">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -110,36 +155,46 @@
         </div>
 
 
-        <form>
+        <form style="height:235px; margin-bottom:20px;">
             <div class="tenth_form_main container-fluid">
 
                 <div class="tenth_1st">
                     <input id="ser_id" type="text" placeholder="Service ID" name="">
                 </div>
                 <div class="tenth_1st">
-                   <input id="cus" type="text" placeholder="Customer" />
+                    <input id="Postal_code" type="text" placeholder="Postal Code" name="">
                 </div>
                 <div class="tenth_1st">
+                    <input id="email" type="email" placeholder="Email" name="">
+                </div>
+                <div class="tenth_1st">
+                    <input id="cus" type="text" placeholder="Customer" />
+                </div>
+                <div class="tenth_1st" style="margin-top:20px;">
                     <input id="ser_pro" type="text" placeholder="Service Provider" />
                 </div>
-                <div class="tenth_1st">
+                <div class="tenth_1st" style="margin-top:20px;">
                     <select id="sta">
                         <option value="0">Status &nbsp;</option>
-                        <option value="1">New</option>
-                        <option value="2">Completed</option>
+                        <option value="10">New</option>
+                        <option value="1">Completed</option>
                         <option value="3">Pending</option>
-                        <option value="4">Cancelled</option>
+                        <option value="2">Cancelled</option>
                     </select>
                 </div>
-                
-                <div class="tenth_2nd">
-                    <input id="dat" type="text" placeholder="Date" onfocus="(this.type='date')">
+
+                <div class="tenth_2nd" style="margin-top:20px;">
+                    <input id="dat" type="text" placeholder="From Date" onfocus="(this.type='date')">
                 </div>
 
-                <button type="button" onclick="filter_services()" class="tenth_2nd tenth_2nd_btn1">Search</button>
+                <div class="tenth_2nd" style="margin-top:20px;">
+                    <input id="to_date" type="text" placeholder="To Date" onfocus="(this.type='date')">
+                </div>
+
+                <button style="margin-top:20px;margin-bottom:20px;" type="button" onclick="filter_services()" class="tenth_2nd tenth_2nd_btn1">Search</button>
 
 
-                <button class="tenth_2nd tenth_2nd_btn2">Clear</button>
+                <button style="margin-top:20px;" class="tenth_2nd tenth_2nd_btn2">Clear</button>
 
             </div>
         </form>
@@ -190,7 +245,7 @@
                                 </div>
                             }
                         </td>
-                        
+
                         <td style="margin-top:15px;">
                             @if (temp.Status == null)
                             {
@@ -233,7 +288,7 @@
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="height: 150px;">
-                                        <a class="dropdown-item" href="#" style="height: 35px;">Edit & Reschedule</a>
+                                        <a class="dropdown-item" href="#" style="height: 35px;" data-toggle="modal" data-target="#exampleModal122">Edit & Reschedule</a>
                                         <a onclick="cancel_setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp2" class="dropdown-item" href="#" style="height: 35px;">Cancel</a>
                                     </div>
                                 </div>
@@ -259,19 +314,22 @@
             var SP = document.getElementById("ser_pro").value;
             var status = document.getElementById("sta").value;
             var date = document.getElementById("dat").value;
+            var Postal_code = document.getElementById("Postal_code").value;
+            var email = document.getElementById("email").value;
+            var to_date = document.getElementById("to_date").value;
 
             var obj = {
                 "Customer_Name": customer,
                 "ID": id,
                 "SP_Name": SP,
                 "Status": status,
-
+                "Zipcode": Postal_code,
                 "Booking_date": date
             };
 
             document.getElementById("myTable10").style.display = "none";
             $('#myTable10').parents('div.dataTables_wrapper').first().hide();
-            $('#filter_ss').load("/Admin/Filter_Services", { model: obj });
+            $('#filter_ss').load("/Admin/Filter_Services", { model: obj, "Email": email, "To_date": to_date });
         }
     </script>
 
