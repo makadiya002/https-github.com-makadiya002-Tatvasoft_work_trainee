@@ -451,5 +451,29 @@ namespace Tatvasoft_Project.Controllers
 
         }
 
+        public IActionResult Edit_Service_Time_Address(Models.Book_now_Table model)
+        {
+            _helperlandcontext = new HelperlandContext();
+
+            var service = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            service.ServiceStartDate = model.Booking_date;
+            service.ServiceHours = double.Parse(model.Booking_time);
+
+            _helperlandcontext.Entry(service).State = EntityState.Modified;
+            _helperlandcontext.SaveChanges();
+
+            var service_address = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+
+            service_address.AddressLine1 = model.Street;
+            service_address.AddressLine2 = model.House_number;
+            service_address.City = model.Location;
+            service_address.PostalCode = model.Zipcode;
+
+            _helperlandcontext.Entry(service_address).State = EntityState.Modified;
+            _helperlandcontext.SaveChanges();
+
+            return RedirectToAction("Service_Page");
+        }
+
     }
 }
