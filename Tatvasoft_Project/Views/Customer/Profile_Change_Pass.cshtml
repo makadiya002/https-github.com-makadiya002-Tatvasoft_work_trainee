@@ -26,11 +26,18 @@
 </div>
 
 <script>
-    var val1 = document.getElementById("formGroupExampleInput2");
-    var val2 = document.getElementById("formGroupExampleInput3");
-    if (val1 != val2) {
-        alert("New Password and Confirm Password must be same");
-        return false;
+    function validate() {
+        var val1 = document.getElementById("formGroupExampleInput2").value;
+        var val2 = document.getElementById("formGroupExampleInput3").value;
+        
+        if (val1 != val2) {
+            alert("New Password and Confirm Password must be same");
+            return false;
+        }
+       
+        return true;
+
     }
-    return true;
+    
+
 </script>

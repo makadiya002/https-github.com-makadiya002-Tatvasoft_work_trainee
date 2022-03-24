@@ -35,6 +35,25 @@
 </head>
 <body>
 
+    <div class="modal" id="mymodal2" tabindex="-1" role="dialog" style="width: 100%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <br>
+                    <div style="text-align: center;">
+                        <img src="~/images/Success_img.png" style="width: 60px;height: 60px;">
+                        <br><br>
+                        <div id="modal_msg" style="font-size: 21px; color: rgba(0,0,0,0.8);"></div>
+                        <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal122" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -72,7 +91,7 @@
                         <a style="" class="nav-link admin_name_ninth" href="#">James Smith</a>
                     </li>
                     <li class="nav-item">
-                        <a style="" class="nav-link ninth_admin_logout" href="#"><img src="~/images/ninth_logout.png"></a>
+                        <a style="" class="nav-link ninth_admin_logout" href="/Helperland/Logout"><img src="~/images/ninth_logout.png"></a>
                     </li>
 
                 </ul>
@@ -86,17 +105,19 @@
             </button>
             <div id="demo" class="collapse">
 
+                
                 <ul>
-                    <li>Service Management</li>
-                    <li>User Management</li>
-
+                    <li><a href="/Admin/Service_Page">Service Management</a></li>
+                    <li><a href="#">User Management</a></li>
                 </ul>
+                 
+               
 
             </div>
         </div>
 
         <div class="container-fluid" style="display: flex;">
-            <div class="ninth_user_man">Service Requests</div>
+            <div class="ninth_user_man">User Management</div>
 
 
         </div>
@@ -104,8 +125,8 @@
 
         <form style="height:220px;display:flex;flex-wrap:wrap;">
             <div class="ninth_form_main container-fluid">
-                <div class="form_1st" style="margin-bottom: 20px;">
-                    <input id="username" type="text" placeholder="User Name" />
+                <div class="form_1st" style="margin-bottom: 20px;margin-right:10px;">
+                    <input style="height:47px;border:1px solid #646464;" id="username" type="text" placeholder="User Name" />
                 </div>
 
                 <div class="form_2nd">
@@ -128,9 +149,9 @@
 
 
 
-                <input id="zipcode" class="form_4th" type="text" placeholder="Zipcode" name="">
+                <input style="border:1px solid #646464;" id="zipcode" class="form_4th" type="text" placeholder="Zipcode" name="">
                 <br />
-                <input id="date" type="date" style="margin-top:20px;margin-left:20px;" />
+                <input id="date" type="date" style="margin-left:20px;height:48px;border:1px solid #646464;" />
 
 
                 <button onclick="search_records()" type="button" style="margin-top:20px;" class="form_5th">Search</button>
@@ -180,7 +201,7 @@
                             }
                             else
                             {
-                                <div class="status_user_9th"><button class="@temp.UserId" style="width:63px;background-color:rgba(200,0,0,0.7);">Blocked</button></div>
+                                <div class="status_user_9th"><button class="@temp.UserId" style="width:63px;background-color:rgba(200,0,0,0.7);">InActive</button></div>
                             }
                         </td>
                         <td>
@@ -317,8 +338,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
+                    alert("Status Changed");
                     location.href = "/Admin/Customer_Page";
+                   
                 },
                 failure: function (response) {
                     alert(response.responseText);
@@ -342,8 +364,11 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
+                    alert("status Changed");
                     location.href = "/Admin/Customer_Page";
+                    
+                        document.getElementById("modal_msg").innerHTML = "Status Chaned Succesfully!";
+                        $('#mymodal2').modal('show');
                 },
                 failure: function (response) {
                     alert(response.responseText);
@@ -355,6 +380,10 @@
 
         }
     </script>
+
+    
+       
+
 
 </body>
 </html>

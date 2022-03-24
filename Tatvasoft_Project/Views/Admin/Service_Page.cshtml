@@ -35,6 +35,25 @@
 </head>
 <body>
 
+    <div class="modal" id="mymodal2" tabindex="-1" role="dialog" style="width: 100%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <br>
+                    <div style="text-align: center;">
+                        <img src="~/images/Success_img.png" style="width: 60px;height: 60px;">
+                        <br><br>
+                        <div id="modal_msg" style="font-size: 21px; color: rgba(0,0,0,0.8);"></div>
+                        <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal122" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -48,7 +67,7 @@
                 <div class="modal-body">
 
                     <form asp-controller="Admin" asp-action="Edit_Service_Time_Address" method="post">
-                        <input type="hidden" asp-for="ID" id="id_sss"/>
+                        <input type="hidden" asp-for="ID" id="id_sss" />
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Date</label>
@@ -138,7 +157,7 @@
 
 
 
-                    <form asp-action="Cancel_sr" asp-controller="Customer" method="post">
+                    <form asp-action="Cancel_sr2" asp-controller="Admin" method="post">
                         <label style="font-size: 17px;">Why you want to cancel the service request?</label>
                         <input asp-for="ID" type="hidden" id="id_cancel3" />
                         <input type="text" name="" style="width: 100%;height: 100px;">
@@ -170,7 +189,7 @@
                         <a style="" class="nav-link admin_name_ninth" href="#">James Smith</a>
                     </li>
                     <li class="nav-item">
-                        <a style="" class="nav-link ninth_admin_logout" href="#"><img src="~/images/ninth_logout.png"></a>
+                        <a style="" class="nav-link ninth_admin_logout"  href="/Helperland/Logout"><img src="~/images/ninth_logout.png"></a>
                     </li>
 
                 </ul>
@@ -185,10 +204,10 @@
             <div id="demo" class="collapse">
 
                 <ul>
-                    <li>Service Management</li>
-                    <li>User Management</li>
-
+                    <li><a href="#">Service Management</a></li>
+                    <li><a href="/Admin/Customer_Page">User Management</a></li>
                 </ul>
+                
 
             </div>
         </div>
@@ -239,7 +258,7 @@
                 <button style="margin-top:20px;margin-bottom:20px;" type="button" onclick="filter_services()" class="tenth_2nd tenth_2nd_btn1">Search</button>
 
 
-                <button style="margin-top:20px;" class="tenth_2nd tenth_2nd_btn2">Clear</button>
+                <button type="reset" style="margin-top:20px;" class="tenth_2nd tenth_2nd_btn2">Clear</button>
 
             </div>
         </form>
@@ -268,8 +287,10 @@
                         </td>
                         <td class="us_d1">
                             <div>@temp.Customer_Name</div>
-                            <div><img style="height:18px;width: 18px;" src="~/images/us_home.png"> <span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span>
-                            , <span class="@temp.ID">@temp.Zipcode</span> <span class="@temp.ID">@temp.Location</span></div>
+                            <div>
+                                <img style="height:18px;width: 18px;" src="~/images/us_home.png"> <span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span>
+                                , <span class="@temp.ID">@temp.Zipcode</span> <span class="@temp.ID">@temp.Location</span>
+                            </div>
                         </td>
 
                         <td class="us_d1 cus_hat_txt" style="margin-top:15px;">
@@ -353,6 +374,14 @@
 
     </div>
 
+    @if (ViewBag.is_updated_address != null)
+    {
+        <script>
+            document.getElementById("modal_msg").innerHTML = "Service Details Edited Succesfull";
+            $('#mymodal2').modal('show');
+        </script>
+    }
+
     <script>
         function set_modalvalues(id_modal_vals) {
             document.getElementById("id_sss").value = id_modal_vals;
@@ -401,6 +430,16 @@
             alert(document.getElementById("id_cancel3").value);
         }
     </script>
+
+    @if (ViewBag.is_updated_address != null)
+    {
+        <script>
+            alert("@ViewBag.is_updated_address");
+        </script>
+    }
+
+    
+
 
 </body>
 </html>

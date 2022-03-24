@@ -84,7 +84,7 @@
                             <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item cus_settings" href="#">Dashboard</a>
-                            <a class="dropdown-item cus_settings" href="/Customer/Profile_details">My Settings</a>
+                            <a class="dropdown-item cus_settings" onclick="my_details()">My Settings</a>
                             <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
                         </div>
                     </div>
@@ -95,6 +95,9 @@
 
 
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+        <div id="id_for_accept" style="display:none;"></div>
+
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -145,7 +148,7 @@
                             <div><span id="Service_comment1">I don't have pets at home</span></div>
                             <hr>
 
-                            <button id="btn_accept" class="btn btn-primary">Accept</button>
+                            <button onclick="set_id_for_accept_pp()" id="btn_accept" class="btn btn-primary">Accept</button>
                         </div>
                         <iframe id="addressid2" style="width:35%;height:200px;border:0;" loading="lazy" allowfullscreen></iframe>
 
@@ -246,36 +249,38 @@
                 <div id="ser_his">Loading...</div>
                 <div id="rats">Loading...</div>
                 <div id="blo_cus">Loading...</div>
+                <div id="div_details2">Loading...</div>
 
             </div>
 
         </div>
 
     </div>
-        <div class="faq_ff_main" style="height:150px;margin:0px;">
-            <div class="faq_ff_2 final_footer">
-                <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
-                <ul>
-                    <li><a style="color: white;" href="/Home">HOME</a></li>
-                    <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
-                    <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
-                    <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
-                    <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
-                    <li><a style="color: white;" href="#">IMPRESSUM</a></li>
-                </ul>
-                <div>
-                    <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
-                    <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
-                </div>
+    <div class="faq_ff_main" style="height:150px;margin:0px;">
+        <div class="faq_ff_2 final_footer">
+            <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <ul>
+                <li><a style="color: white;" href="/Home">HOME</a></li>
+                <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+            </ul>
+            <div>
+                <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
             </div>
-
-            <hr class="prices_hr">
-
-            <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
         </div>
 
+        <hr class="prices_hr">
 
-   
+        <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+    </div>
+
+
+
+
 
 
     <script type="text/javascript">
@@ -288,6 +293,7 @@
         var val2 = 0;
         var val3 = 0;
         function upcoming_ss() {
+            document.getElementById("div_details2").style.display = "none";
 
             document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_upco").style.backgroundColor = "#146371";
@@ -304,16 +310,17 @@
             document.getElementById("uc_services").style.display = "block";
             document.getElementById("rats").style.display = "none";
             document.getElementById("blo_cus").style.display = "none";
-            if (val1 == 0) {
-
+            
                 $('#myTable3').parents('div.dataTables_wrapper').first().hide();
                 $("#uc_services").load('@Url.Action("Upcoming_Services", "Service_Provider")');
-            }
+            
 
 
         }
 
         function serv_hist() {
+
+            document.getElementById("div_details2").style.display = "none";
 
             document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
@@ -327,16 +334,16 @@
             document.getElementById("rats").style.display = "none";
             document.getElementById("ser_his").style.display = "block";
             document.getElementById("blo_cus").style.display = "none";
-            if (val3 == 0) {
-
+           
                 $("#ser_his").load('@Url.Action("Service_History", "Service_Provider")');
-            }
+            
 
         }
 
         function new_ss() {
-            if (val2 == 0) {
+           
 
+                document.getElementById("div_details2").style.display = "none";
 
                 document.getElementById("div_dash").style.backgroundColor = "#146371";
                 document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
@@ -351,10 +358,13 @@
                 document.getElementById("uc_services").style.display = "none";
                 document.getElementById("ser_his").style.display = "none";
                 document.getElementById("blo_cus").style.display = "none";
-            }
+            
         }
 
         function Ratings() {
+
+            document.getElementById("div_details2").style.display = "none";
+
             document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
@@ -372,6 +382,9 @@
         }
 
         function Block_customer() {
+
+            document.getElementById("div_details2").style.display = "none";
+
             document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
             document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
@@ -389,7 +402,8 @@
 
         }
 
-        function demoo3(id,flag) {
+        function demoo3(id, flag) {
+            document.getElementById("id_for_accept").innerHTML = id;
             alert(id);
             if (flag == 1) {
                 document.getElementById("btn_accept").style.display = "block";
@@ -484,20 +498,32 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
+                            if (data.paymentDue == false) {
+                                alert("You can not accept this service because, This service has time conflict with one of the services of your accepted service");
+                            }
+                            else {
+                                alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
+                                document.getElementById(id1).style.display = "none";
+                            }
+                            
                         },
                         failure: function (response) {
                             alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
-
+                            document.getElementById(id1).style.display = "none";
                         },
                         error: function (response) {
                             alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
-
+                            document.getElementById(id1).style.display = "none";
                         }
                     });
 
-                    document.getElementById(id1).style.display = "none";
+                    
                 }
+
+        function set_id_for_accept_pp() {
+            demoo2(document.getElementById("id_for_accept").innerHTML);
+        }
+
     </script>
     <script>
         $(document).ready(function () {
@@ -505,6 +531,21 @@
 
 
         });
+    </script>
+
+    <script>
+            function my_details() {
+                document.getElementById("uc_services").style.display = "none";
+                document.getElementById("ser_his").style.display = "none";
+                document.getElementById("rats").style.display = "none";
+                document.getElementById("blo_cus").style.display = "none";
+                document.getElementById("myTable3").style.display = "none";
+
+                $("#div_details2").load('@Url.Action("Profile_details", "Customer")');
+                document.getElementById("div_details2").style.display = "block";
+
+                $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+        }
     </script>
 
 </body>

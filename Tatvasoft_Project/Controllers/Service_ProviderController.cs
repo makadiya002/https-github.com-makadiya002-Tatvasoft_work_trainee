@@ -129,33 +129,71 @@ namespace Tatvasoft_Project.Controllers
         public IActionResult Fetch_ES(int sid, int spid)
         {
             _helperlandcontext = new HelperlandContext();
+           
             var obj = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == sid).ToList().FirstOrDefault();
-            obj.ServiceProviderId = spid;
-            obj.Status = 3;
+            obj.PaymentDue = true;
 
-            _helperlandcontext.Entry(obj).State = EntityState.Modified;
-            _helperlandcontext.SaveChanges();
+            var all_services = _helperlandcontext.ServiceRequests.Where(x => x.Status == 3 && x.ServiceProviderId == spid).ToList();
+            var services = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == sid).ToList().FirstOrDefault();
+            var service_date = services.ServiceStartDate;
+            var service_start_time = services.ServiceHours;
+            var service_end_time = services.ExtraHours + services.ServiceHours;
 
-            var zipcode = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().ZipCode;
-            var zipcode_sps = _helperlandcontext.Users.Where(x => x.ZipCode == zipcode).ToList();
-            var email_sp = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().Email;
-            foreach (var temp in zipcode_sps)
+            foreach(var tmpp in all_services)
             {
-                var emailId = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList().FirstOrDefault().Email;
-                if(emailId != email_sp)
+                if(tmpp.ServiceStartDate == service_date)
                 {
-                    MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", emailId);
-                    mm.Subject = "New Service Request Accepted";
-                    mm.Body = "Service Request with ID " + sid + " is no more Available, It is Accepted By One of the service Provider";
+                    var start_time = tmpp.ServiceHours;
+                    var end_time = tmpp.ExtraHours + tmpp.ServiceHours;
+                    if(service_start_time >= (start_time-1) && service_start_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time >= (start_time - 1) && service_end_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if(service_start_time < (start_time - 1) && service_end_time > (start_time - 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                }
+            }
+
+            //var obj = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == sid).ToList().FirstOrDefault();
+            
+
+
+            if (obj.PaymentDue == true)
+            {
+                obj.ServiceProviderId = spid;
+                obj.Status = 3;
+
+                _helperlandcontext.Entry(obj).State = EntityState.Modified;
+                _helperlandcontext.SaveChanges();
+
+
+                var zipcode = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().ZipCode;
+                var zipcode_sps = _helperlandcontext.Users.Where(x => x.ZipCode == zipcode).ToList();
+                var email_sp = _helperlandcontext.Users.Where(x => x.UserId == spid).ToList().FirstOrDefault().Email;
+                foreach (var temp in zipcode_sps)
+                {
+                    var emailId = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList().FirstOrDefault().Email;
+                    if (emailId != email_sp)
+                    {
+                        MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", emailId);
+                        mm.Subject = "New Service Request Accepted";
+                        mm.Body = "Service Request with ID " + sid + " is no more Available, It is Accepted By One of the service Provider";
                         mm.IsBodyHtml = false;
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = nc;
-                    smtp.Send(mm);
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = nc;
+                        smtp.Send(mm);
+                    }
                 }
             }
 

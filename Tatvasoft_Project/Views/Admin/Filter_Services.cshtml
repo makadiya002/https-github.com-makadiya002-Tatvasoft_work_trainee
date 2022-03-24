@@ -4,7 +4,7 @@
 </head>
 <body>
 
-
+    
     <table id="myTable13" style="width: 97%; color: #646464;">
         <thead>
             <tr>
@@ -29,7 +29,10 @@
                     </td>
                     <td class="us_d1">
                         <div>@temp.Customer_Name</div>
-                        <div><img style="height:18px;width: 18px;" src="~/images/us_home.png"> @temp.Street @temp.House_number,@temp.Zipcode @temp.Location</div>
+                        <div>
+                            <img style="height:18px;width: 18px;" src="~/images/us_home.png"> <span class="@temp.ID">@temp.Street</span> <span class="@temp.ID">@temp.House_number</span>
+                            , <span class="@temp.ID">@temp.Zipcode</span> <span class="@temp.ID">@temp.Location</span>
+                        </div>
                     </td>
 
                     <td class="us_d1 cus_hat_txt" style="margin-top:15px;">
@@ -94,7 +97,8 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="height: 150px;">
-                                    <a class="dropdown-item" href="#" style="height: 35px;">Edit & Reschedule</a>
+
+                                    <a onclick="set_modalvalues(@temp.ID)" class="dropdown-item" href="#" style="height: 35px;" data-toggle="modal" data-target="#exampleModal122">Edit & Reschedule</a>
                                     <a onclick="cancel_setid(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp2" class="dropdown-item" href="#" style="height: 35px;">Cancel</a>
                                 </div>
                             </div>
@@ -110,6 +114,8 @@
             $('#myTable13').DataTable();
         });
     </script>
+
+   
 
 </body>
 </html>

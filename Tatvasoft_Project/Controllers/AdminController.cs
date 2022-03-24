@@ -472,7 +472,122 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext.Entry(service_address).State = EntityState.Modified;
             _helperlandcontext.SaveChanges();
 
+            //_helperlandcontext = new HelperlandContext();
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => true).ToList();
+            List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+            foreach (Models.ServiceRequest temp in model_to_pass)
+            {
+
+                if (temp.ServiceRequestId >= 4)
+                {
+                    var spid = _helperlandcontext.Users.Where(x => x.UserId == temp.UserId).ToList();
+                    var duration = (temp.ServiceHours).ToString();
+                    if (duration.Length <= 2)
+                    {
+                        duration += ":00";
+                    }
+                    else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                    var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                    if (end_dur.ToString().Length <= 2)
+                    {
+                        duration = duration + "-" + end_dur.ToString() + ":00";
+                    }
+                    else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                    int? spid3 = 0;
+                    var name = "";
+
+                    var name_sp = "";
+                    if (_helperlandcontext.Users.Where(x => x.UserId == temp.ServiceProviderId).ToList().Count > 0)
+                    {
+                        var spid_sp = _helperlandcontext.Users.Where(x => x.UserId == temp.ServiceProviderId).ToList().FirstOrDefault();
+                        var sp_fn = _helperlandcontext.Users.Where(x => x.UserId == spid_sp.UserId).ToList().FirstOrDefault().FirstName;
+                        var sp_ln = _helperlandcontext.Users.Where(x => x.UserId == spid_sp.UserId).ToList().FirstOrDefault().LastName;
+
+                        name_sp = sp_fn + " " + sp_ln;
+                    }
+                    //var rating = 0;
+                    if (spid.Count > 0)
+                    {
+                        spid3 = (spid.FirstOrDefault().UserId);
+                        var fname = spid.FirstOrDefault().FirstName;
+                        var lname = spid.FirstOrDefault().LastName;
+                        name = fname + " " + lname;
+
+
+                    }
+                    item.Add(new Models.Book_now_Table
+                    {
+                        SP_ID = spid3,
+                        Customer_Name = name,
+                        ID = temp.ServiceRequestId,
+                        Booking_date = (temp.ServiceStartDate).Date,
+                        Booking_time = (temp.ExtraHours).ToString(),
+                        Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                        Booking_duration = duration,
+                        Suggestion = temp.Comments,
+                        SP_Name = name_sp,
+                        Status = temp.Status
+                    });
+
+                }
+            }
+            int i = 0;
+            foreach (Models.ServiceRequest temp2 in model_to_pass)
+            {
+                if (temp2.ServiceRequestId >= 4)
+                {
+                    var spid = _helperlandcontext.Users.Where(x => x.UserId == temp2.UserId).ToList();
+
+                    var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                    //int id = temp2.ServiceId;
+                    item[i].Street = address_obj[0].AddressLine1;
+                    item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                    item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                    item[i].Location = address_obj.FirstOrDefault().City;
+                    item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                    i++;
+
+                }
+            }
+
+            ViewBag.data = item;
+            ViewBag.is_updated_address = "Service Details Edited Succesfully!";
+            return View("Views/Admin/Service_Page.cshtml");
+        }
+
+        public IActionResult Cancel_sr2(Models.Book_now_Table model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var q = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            q.Status = 2;
+            _helperlandcontext.Entry(q).State = EntityState.Modified;
+            _helperlandcontext.SaveChanges();
+
+            ViewBag.is_service_Cancelled = "Service Cancelled succesfully!";
+            ViewBag.user = HttpContext.Session.GetString("user");
             return RedirectToAction("Service_Page");
+        }
+
+        public IActionResult Check_Old_Password(Models.Password_Temp model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var user = HttpContext.Session.GetString("user");
+            var p = _helperlandcontext.Users.Where(x => x.FirstName == user).ToList().FirstOrDefault();
+            bool is_pass_valid = BCrypt.Net.BCrypt.Verify(model.Password, p.Password);
+
+            if (is_pass_valid == true) model.Password = "true";
+            else model.Password = "false";
+
+            try
+            {
+                return Json(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }

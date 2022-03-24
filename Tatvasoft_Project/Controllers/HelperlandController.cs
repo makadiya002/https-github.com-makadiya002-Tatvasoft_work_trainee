@@ -145,6 +145,12 @@ namespace Tatvasoft_Project.Controllers
         {
             _helperlandcontext = new HelperlandContext();
             string email = model.Email;
+
+            if(email == "Admin@gmail.com" && model.Password == "Admin")
+            {
+                return Redirect("/Admin/Customer_Page");
+            }
+
             var p = _helperlandcontext.Users.Where(x => x.Email == email).ToList();
             
             if (p.Count == 1)
@@ -155,14 +161,14 @@ namespace Tatvasoft_Project.Controllers
                 bool is_pass_valid = BCrypt.Net.BCrypt.Verify(model.Password, p.FirstOrDefault().Password);
                 if(is_pass_valid)
                 {
-                    if (p.FirstOrDefault().UserTypeId == 1)
+                    if (p.FirstOrDefault().UserTypeId == 1 && p.FirstOrDefault().IsActive == true)
                     {
                         //var user = p.FirstOrDefault().FirstName;
                         //HttpContext.Session.SetString("user", user);
                         var username = HttpContext.Session.GetString("user");
                         _helperlandcontext = new HelperlandContext();
                         var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-                        var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status != 2).ToList();
+                        var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && (x.Status == null) || x.Status == 3).ToList();
                         List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
                         foreach (Models.ServiceRequest temp in model_to_pass)
                         {
@@ -233,7 +239,7 @@ namespace Tatvasoft_Project.Controllers
                         ViewBag.data = item;
                         return View("~/Views/Customer/Dashboard.cshtml");
                     }
-                    else if (p.FirstOrDefault().UserTypeId == 2 && p.FirstOrDefault().IsApproved == true)
+                    else if (p.FirstOrDefault().UserTypeId == 2 && p.FirstOrDefault().IsApproved == true && p.FirstOrDefault().IsActive == true)
                     {
                         _helperlandcontext = new HelperlandContext();
                         var username = HttpContext.Session.GetString("user");
@@ -332,9 +338,11 @@ namespace Tatvasoft_Project.Controllers
                         var unme = HttpContext.Session.GetString("user");
                         ViewBag.uid = _helperlandcontext.Users.Where(x => x.FirstName == unme).ToList().FirstOrDefault().UserId;
 
+
+
                         return View("~/Views/Service_Provider/SP_Dashboard.cshtml");
                     }
-                    else ViewBag.err2 = "Something went wrong";
+                    else ViewBag.err2 = "You my be inactivated By Admin";
                     return View("~/Views/Home/Index.cshtml");
                 }
                 else ViewBag.err = "Something went wrong";

@@ -128,10 +128,10 @@ namespace Tatvasoft_Project.Controllers
 
         public IActionResult Password_Edit(Models.Password_Temp model)
         {
-            var username = HttpContext.Session.GetString("user");
+            var username2 = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
-            var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-            var p = (_helperlandcontext.Users.Where(x => x.UserId == userid).ToList()).FirstOrDefault();
+            var userid2 = (_helperlandcontext.Users.Where(x => x.FirstName == username2).ToList()).FirstOrDefault().UserId;
+            var p = (_helperlandcontext.Users.Where(x => x.UserId == userid2).ToList()).FirstOrDefault();
             bool is_pass_valid = BCrypt.Net.BCrypt.Verify(model.Password, p.Password);
             //Models.User m1 = new Models.User();
             //m1.Email = p.FirstOrDefault().Email;
@@ -146,7 +146,79 @@ namespace Tatvasoft_Project.Controllers
             else
             {
                 ViewBag.is_pass_wrong = "Old Password is incorrect!";
-                return View("~/Views/Customer/Profile_Change_Pass2.cshtml");
+                var username = HttpContext.Session.GetString("user");
+                _helperlandcontext = new HelperlandContext();
+                var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+                var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && (x.Status == null) || x.Status == 3).ToList();
+                List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+                foreach (Models.ServiceRequest temp in model_to_pass)
+                {
+                    if (temp.ServiceRequestId >= 4)
+                    {
+                        var duration = (temp.ServiceHours).ToString();
+                        if (duration.Length <= 2)
+                        {
+                            duration += ":00";
+                        }
+                        else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                        var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                        if (end_dur.ToString().Length <= 2)
+                        {
+                            duration = duration + "-" + end_dur.ToString() + ":00";
+                        }
+                        else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                        var spid = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == temp.ServiceRequestId && temp.ServiceProviderId != null).ToList();
+                        int? spid3 = 0;
+                        var name = "";
+
+                        var rating = 0;
+                        if (spid.Count > 0)
+                        {
+                            spid3 = (spid.FirstOrDefault().ServiceProviderId);
+                            var fname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().FirstName;
+                            var lname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().LastName;
+                            name = fname + " " + lname;
+
+
+                        }
+
+                        item.Add(new Models.Book_now_Table
+                        {
+                            SP_ID = spid3,
+                            SP_Name = name,
+                            ID = temp.ServiceRequestId,
+                            Booking_date = (temp.ServiceStartDate).Date,
+                            Booking_time = (temp.ExtraHours).ToString(),
+                            Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                            Booking_duration = duration,
+                            Suggestion = temp.Comments,
+
+                        });
+                    }
+                }
+                int i = 0;
+                foreach (Models.ServiceRequest temp2 in model_to_pass)
+                {
+                    if (temp2.ServiceRequestId >= 4)
+                    {
+
+
+                        var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                        //int id = temp2.ServiceId;
+                        item[i].Street = address_obj[0].AddressLine1;
+                        item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                        item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                        item[i].Location = address_obj.FirstOrDefault().City;
+                        item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                        i++;
+                    }
+                }
+
+                ViewBag.user = HttpContext.Session.GetString("user");
+                ViewBag.data = item;
+                return View("~/Views/Customer/Dashboard.cshtml");
             }
             ViewBag.pass_changed_fp = "Password Changed Succesfully, You can login again!";
             return View("~/Views/Home/Index.cshtml");
@@ -241,20 +313,20 @@ namespace Tatvasoft_Project.Controllers
 
             ViewBag.is_service_modified = "Details Updated succesfully!";
             ViewBag.user = HttpContext.Session.GetString("user");
-            return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction("Dashboard");
         }
 
         public IActionResult Cancel_sr(Models.Book_now_Table model)
         {
             _helperlandcontext = new HelperlandContext();
-            var p = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
-            p.Status = 2;
-            _helperlandcontext.Entry(p).State = EntityState.Modified;
+            var q = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            q.Status = 2;
+            _helperlandcontext.Entry(q).State = EntityState.Modified;
             _helperlandcontext.SaveChanges();
 
             ViewBag.is_service_Cancelled = "Service Cancelled succesfully!";
             ViewBag.user = HttpContext.Session.GetString("user");
-            return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction("Dashboard");
         }
 
         

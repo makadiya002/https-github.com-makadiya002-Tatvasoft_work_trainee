@@ -34,189 +34,197 @@
         <link rel="stylesheet" type="text/css" href="style3.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="style2.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-        <body>
+    <body>
 
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Rate Your Service Provider</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Rate Your Service Provider</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-                            <div class="us_d1 cus_hat_txt tenth_lw" style="margin-top: 0px;margin-bottom: 0px;">
-                                <div class="cus_ht" style="margin-bottom: 0px;">
-                                    <button style="margin-bottom: 0px;"><img style="margin-bottom: 0px;" src="~/images/cus_hat.png"></button>
-                                </div>
-                                <div class="cus_ht_txt" style="margin-top: 0px;margin-bottom: 0px;">
-                                    <div style="margin-left: 7px;font-size: 19px;color:#646464;">Sandip Patel</div>
-
-                                    <ul style="display:flex;padding:2px;" class="container-fluid">
-                                        <li id="16" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                        <li id="17" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                        <li id="18" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                        <li id="19" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                        <li id="20" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                        <li style="list-style-type: none;margin-left: 7px;color: rgba(0,0,0,0.8);font-size: 17px;" id="avg2">0</li>
-
-                                    </ul>
-                                </div>
+                        <div class="us_d1 cus_hat_txt tenth_lw" style="margin-top: 0px;margin-bottom: 0px;">
+                            <div class="cus_ht" style="margin-bottom: 0px;">
+                                <button style="margin-bottom: 0px;"><img style="margin-bottom: 0px;" src="~/images/cus_hat.png"></button>
                             </div>
+                            <div class="cus_ht_txt" style="margin-top: 0px;margin-bottom: 0px;">
+                                <div style="margin-left: 7px;font-size: 19px;color:#646464;">Sandip Patel</div>
 
+                                <ul style="display:flex;padding:2px;" class="container-fluid">
+                                    <li id="16" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                    <li id="17" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                    <li id="18" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                    <li id="19" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                    <li id="20" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                                    <li style="list-style-type: none;margin-left: 7px;color: rgba(0,0,0,0.8);font-size: 17px;" id="avg2">0</li>
 
-
-
-                            <hr>
-
-                            <ul style="display:flex;padding:2px;" class="container-fluid">
-                                <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
-             color: #646464;font-size: 18px;">On Time Arrival </li>
-                                <li id="1" onclick="Hello(1)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="2" onclick="Hello(2)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="3" onclick="Hello(3)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="4" onclick="Hello(4)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="5" onclick="Hello(5)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-
-                            </ul>
-
-                            <ul style="display:flex;padding:2px;" class="container-fluid">
-
-                                <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
-         color: #646464;font-size: 18px;"> Friendly </li>
-                                <li id="6" onclick="Hello2(6)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="7" onclick="Hello2(7)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="8" onclick="Hello2(8)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="9" onclick="Hello2(9)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="10" onclick="Hello2(10)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-
-                            </ul>
-
-                            <ul style="display:flex;padding: 2px;" class="container-fluid">
-
-                                <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
-        color: #646464;font-size: 18px;">Quality Of Service </li>
-                                <li id="11" onclick="Hello3(11)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="12" onclick="Hello3(12)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="13" onclick="Hello3(13)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="14" onclick="Hello3(14)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-                                <li id="15" onclick="Hello3(15)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
-
-                            </ul>
-
-                            
-                                <label style="margin-left: 7px; list-style-type: none;
-        color: #646464;font-size: 18px;">Feedback On Your Service Provider</label>
-                                <input type="text" id="cmts" style="height: 80px;width: 100%;" name="">
-                                <button onclick="Sub_Rat()" class="btn btn-primary" style="margin-top: 10px;
-        font-size: 17px;border-radius: 15px;">
-                                    Rate
-                                </button>
-                            
-
-
+                                </ul>
+                            </div>
                         </div>
+
+
+
+
+                        <hr>
+
+                        <ul style="display:flex;padding:2px;" class="container-fluid">
+                            <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+             color: #646464;font-size: 18px;">On Time Arrival </li>
+                            <li id="1" onclick="Hello(1)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="2" onclick="Hello(2)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="3" onclick="Hello(3)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="4" onclick="Hello(4)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="5" onclick="Hello(5)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                        </ul>
+
+                        <ul style="display:flex;padding:2px;" class="container-fluid">
+
+                            <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+         color: #646464;font-size: 18px;"> Friendly </li>
+                            <li id="6" onclick="Hello2(6)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="7" onclick="Hello2(7)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="8" onclick="Hello2(8)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="9" onclick="Hello2(9)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="10" onclick="Hello2(10)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                        </ul>
+
+                        <ul style="display:flex;padding: 2px;" class="container-fluid">
+
+                            <li style="margin-left: 7px;margin-right: 10px; list-style-type: none;
+        color: #646464;font-size: 18px;">Quality Of Service </li>
+                            <li id="11" onclick="Hello3(11)" style="list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="12" onclick="Hello3(12)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="13" onclick="Hello3(13)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="14" onclick="Hello3(14)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+                            <li id="15" onclick="Hello3(15)" style="margin-left: 7px;list-style-type: none;"><i class="fa fa-star fa-fw"></i></li>
+
+                        </ul>
+
+
+                        <label style="margin-left: 7px; list-style-type: none;
+        color: #646464;font-size: 18px;">Feedback On Your Service Provider</label>
+                        <input type="text" id="cmts" style="height: 80px;width: 100%;" name="">
+                        <button onclick="Sub_Rat()" class="btn btn-primary" style="margin-top: 10px;
+        font-size: 17px;border-radius: 15px;">
+                            Rate
+                        </button>
+
+
 
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="container-fluid">
-                <table class="table table-fluid" id="myTable" style="color: rgba(0,0,0,0.7);">
-                    <thead>
+        <div class="container-fluid">
+            <table class="table table-fluid" id="myTable" style="color: rgba(0,0,0,0.7);">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Service Details</th>
+                        <th>Service Provider</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var temp in ViewBag.data)
+                    {
                         <tr>
-                            <th>ID</th>
-                            <th>Service Details</th>
-                            <th>Service Provider</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                            <th>Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var temp in ViewBag.data)
-                        {
-                            <tr>
-                                <td class="@temp.ID"><div style="margin-top: 15px;font-size: 18px;">@temp.ID</div></td>
-                                <td onclick="Set_Modal_Vals(@temp.ID,2)" data-toggle="modal" data-target="#exampleModal1">
-                                    <div class="us_d1">
-                                        <div class="@temp.ID" style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
-                                        <div class="@temp.ID">@temp.Booking_duration</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    @if (temp.SP_ID != 0)
-                                    {
-                                        <div class="us_d1 cus_hat_txt">
-                                            <div class="cus_ht">
-                                                <button><img src="~/images/cus_hat.png"></button>
-                                            </div>
-                                            <div class="cus_ht_txt">
-                                                <div class="cus_ht_txt1">@temp.SP_Name</div>
-                                                <div class="cus_ht_txt2">
-                                                    <img src="~/images/cus_yellow_star.png">
-                                                    <img src="~/images/cus_yellow_star.png">
-                                                    <img src="~/images/cus_yellow_star.png">
-                                                    <img src="~/images/cus_yellow_star.png">
-                                                    <img src="~/images/cus_star.png">
-                                                    <div>4</div>
-                                                </div>
+                            <td class="@temp.ID"><div style="margin-top: 15px;font-size: 18px;">@temp.ID</div></td>
+                            <td onclick="Set_Modal_Vals(@temp.ID,2)" data-toggle="modal" data-target="#exampleModal1">
+                                <div class="us_d1">
+                                    <div class="@temp.ID" style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> @temp.Booking_date.ToShortDateString()</div>
+                                    <div class="@temp.ID">@temp.Booking_duration</div>
+                                </div>
+                            </td>
+                            <td>
+                                @if (temp.SP_ID != 0)
+                                {
+                                    <div class="us_d1 cus_hat_txt">
+                                        <div class="cus_ht">
+                                            <button><img src="~/images/cus_hat.png"></button>
+                                        </div>
+                                        <div class="cus_ht_txt">
+                                            <div class="cus_ht_txt1">@temp.SP_Name</div>
+                                            <div class="cus_ht_txt2">
+                                                <img src="~/images/cus_yellow_star.png">
+                                                <img src="~/images/cus_yellow_star.png">
+                                                <img src="~/images/cus_yellow_star.png">
+                                                <img src="~/images/cus_yellow_star.png">
+                                                <img src="~/images/cus_star.png">
+                                                <div>4</div>
                                             </div>
                                         </div>
-                                    }
-                                    else
-                                    {
+                                    </div>
+                                }
+                                else
+                                {
 
-                                    }
-                                </td>
-                                <td>
-                                    <div style="font-size: 24px;
+                                }
+                            </td>
+                            <td>
+                                <div style="font-size: 24px;
   font-weight: bold;
   color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
-                                        €@temp.Discounted_cost
+                                    €@temp.Discounted_cost
+                                </div>
+                            </td>
+                            <td>
+                                @if (temp.Status == 1)
+                                {
+                                    <div>
+                                        <div class="cus_status">
+                                            <button><span class="cus_st_com">Completed</span> <i class="fa fa-check-circle cus_icon" aria-hidden="true"></i></button>
+                                        </div>
                                     </div>
-                                </td>
-                                <td>
-                                    @if (temp.Status == 1)
-                                    {
-                                        <div>
-                                            <div class="cus_status">
-                                                <button><span class="cus_st_com">Completed</span> <i class="fa fa-check-circle cus_icon" aria-hidden="true"></i></button>
-                                            </div>
-                                        </div>
 
-                                    }
-                                    else
-                                    {
-                                        <div class="cus_can" style="margin-top: 7px;">
-                                            <button><span class="cus_cnd">Cancelled</span><i class="fas fa-window-close cus_cls"></i></button>
-                                        </div>
-                                    }
-                                </td>
-                                <td onclick="Set_Rat_Vals(@temp.ID,@temp.SP_ID)" data-toggle="modal" data-target="#exampleModalCenter">
-                                    @if (temp.Status == 1)
-                                    {
-                                        <div class="cus_rate" style="margin-top: 5px;">
-                                            <button style="background-color: #1d7a8c;">Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="cus_rate" style="margin-top: 5px;">
-                                            <button disabled>Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
-                                        </div>
-                                    }
+                                }
+                                else
+                                {
+                                    <div class="cus_can" style="margin-top: 7px;">
+                                        <button><span class="cus_cnd">Cancelled</span><i class="fas fa-window-close cus_cls"></i></button>
+                                    </div>
+                                }
+                            </td>
+                            <td onclick="Set_Rat_Vals(@temp.ID,@temp.SP_ID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                @if (temp.Status == 1)
+                                {
+                                    <div class="cus_rate" style="margin-top: 5px;">
+                                        <button style="background-color: #1d7a8c;">Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="cus_rate" style="margin-top: 5px;">
+                                        <button disabled>Ra<span class="cus_te">te</span> <span class="cus_rt">SP</span></button>
+                                    </div>
+                                }
 
-                                </td>
+                            </td>
 
 
 
 
-                            </tr>
-                        }
+                        </tr>
+                    }
 
 
 
@@ -224,31 +232,31 @@
 
 
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
+        </div>
 
 
-            @foreach (var temp in ViewBag.data)
-            {
+        @foreach (var temp in ViewBag.data)
+        {
 
-                <div style="display:none;" class="@temp.ID ncc">@temp.Booking_time</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Booking_time</div>
 
-                <div style="display:none;" class="@temp.ID ncc">@temp.Suggestion</div>
-                <div style="display:none;" class="@temp.ID ncc">@temp.Street</div>
-                <div style="display:none;" class="@temp.ID ncc">@temp.House_number</div>
-                <div style="display:none;" class="@temp.ID ncc">@temp.Zipcode</div>
-                <div style="display:none;" class="@temp.ID ncc">@temp.Location</div>
-                <div style="display:none;" class="@temp.ID ncc">@temp.Phone</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Suggestion</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Street</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.House_number</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Zipcode</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Location</div>
+            <div style="display:none;" class="@temp.ID ncc">@temp.Phone</div>
 
-            }
+        }
 
-            <script>
-                $(document).ready(function () {
-                    $('#myTable').DataTable();
-                });
-            </script>
-            <script type="text/javascript">
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });
+        </script>
+        <script type="text/javascript">
                 var srid;
                 var rating_to;
 
@@ -346,8 +354,13 @@
                         document.getElementById(i).style.color = "rgba(0,0,0,0.2)";
                     }
                 }
-            </script>
-        </body>
+        </script>
+
+         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+
+    
 </html>
 
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">

@@ -140,7 +140,7 @@
                     <form method="post" asp-action="Booknow_second" asp-controller="Helperland" style="margin-top: 10px;">
                         <div style="display:flex;">
                             <div style="width: 50%;margin-top:10px;">
-                                <input required id="book_date" asp-for="Booking_date" type="date" style="color: rgba(0,0,0,0.8);">
+                                <input required id="book_date" asp-for="Booking_date"  min="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" style="color: rgba(0,0,0,0.8);">
                                 <select id="book_time" asp-for="Booking_time" class="bn_date_tm ml-auto" style="color: rgba(0,0,0,0.8);">
                                     <option value="8.00">8:00 am</option>
                                     <option value="8.30">8:30 am</option>
