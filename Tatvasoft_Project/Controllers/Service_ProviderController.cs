@@ -153,10 +153,17 @@ namespace Tatvasoft_Project.Controllers
                     {
                         obj.PaymentDue = false;
                     }
-                    else if(service_start_time < (start_time - 1) && service_end_time > (start_time - 1))
+                    else if(service_start_time <= (start_time - 1) && service_end_time >= (start_time - 1))
                     {
                         obj.PaymentDue = false;
                     }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    
+                   
+                    
                 }
             }
 
@@ -247,11 +254,24 @@ namespace Tatvasoft_Project.Controllers
 
                     }
                     int is_date_smaller = 0;
-                    if((DateTime.Now.Year > temp.ServiceStartDate.Date.Year) || (DateTime.Now.Month > temp.ServiceStartDate.Month)
-                        || (DateTime.Now.Day > temp.ServiceStartDate.Day))
+                    //if((DateTime.Now.Year > temp.ServiceStartDate.Date.Year) || (DateTime.Now.Month > temp.ServiceStartDate.Month)
+                    //  || (DateTime.Now.Day > temp.ServiceStartDate.Day))
+                    //{
+                    //  is_date_smaller = 1;
+                    //}
+
+                    /*if (DateTime.Now.Year > temp.ServiceStartDate.Date.Year) is_date_smaller = 1;
+                    else if ((DateTime.Now.Month > temp.ServiceStartDate.Month) && DateTime.Now.Year <= temp.ServiceStartDate.Date.Year)
+                        is_date_smaller = 1;
+                    else if ((DateTime.Now.Day > temp.ServiceStartDate.Day) && (DateTime.Now.Month > temp.ServiceStartDate.Month))
+                        is_date_smaller = 1;
+                    */
+
+                    if(DateTime.Compare(DateTime.Now , temp.ServiceStartDate) > 0)
                     {
                         is_date_smaller = 1;
                     }
+
 
                     item.Add(new Models.Book_now_Table
                     {

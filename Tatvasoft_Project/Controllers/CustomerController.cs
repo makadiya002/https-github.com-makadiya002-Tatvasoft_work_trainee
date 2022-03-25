@@ -96,6 +96,7 @@ namespace Tatvasoft_Project.Controllers
 
 
             ViewBag.user = HttpContext.Session.GetString("user");
+            ViewBag.is_details_update = "Details Updated Succesfully!";
             return View("~/Views/Home/Index.cshtml");
         }
 
@@ -112,6 +113,7 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext.SaveChanges();
 
             ViewBag.is_address_updated_fm = "Address updated succesfully!";
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View("~/Views/Home/Index.cshtml");
         }
 
@@ -123,6 +125,7 @@ namespace Tatvasoft_Project.Controllers
             _helperlandcontext.SaveChanges();
 
             ViewBag.is_address_deleted_fm = "Address deleted succesfully!";
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View("~/Views/Home/Index.cshtml");
         }
 
@@ -220,7 +223,8 @@ namespace Tatvasoft_Project.Controllers
                 ViewBag.data = item;
                 return View("~/Views/Customer/Dashboard.cshtml");
             }
-            ViewBag.pass_changed_fp = "Password Changed Succesfully, You can login again!";
+            ViewBag.pass_changed_fp = "Password Changed Succesfully";
+            ViewBag.user = HttpContext.Session.GetString("user");
             return View("~/Views/Home/Index.cshtml");
         }
 
@@ -229,7 +233,17 @@ namespace Tatvasoft_Project.Controllers
             var username = HttpContext.Session.GetString("user");
             _helperlandcontext = new HelperlandContext();
             var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
-            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && (x.Status == null) || x.Status == 3).ToList();
+
+
+            var usertypeid = _helperlandcontext.Users.Where(x => x.UserId == userid).ToList().FirstOrDefault().UserTypeId;
+            if(usertypeid == 2)
+            {
+                return Redirect("/Service_Provider/SP_Dashboard");
+            }
+
+
+
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && ((x.Status == null) || x.Status == 3)).ToList();
             List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
             foreach (Models.ServiceRequest temp in model_to_pass)
             {
@@ -326,6 +340,15 @@ namespace Tatvasoft_Project.Controllers
 
             ViewBag.is_service_Cancelled = "Service Cancelled succesfully!";
             ViewBag.user = HttpContext.Session.GetString("user");
+
+            var fname_user = HttpContext.Session.GetString("user");
+            var usertypeid = _helperlandcontext.Users.Where(x => x.FirstName == fname_user).ToList().FirstOrDefault().UserTypeId;
+
+            if(usertypeid == 2)
+            {
+                return Redirect("/Service_Provider/SP_Dashboard");
+            }
+
             return RedirectToAction("Dashboard");
         }
 

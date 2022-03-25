@@ -562,5 +562,12 @@
                     $('#mymodal2').modal('show');
         </script>
     }
+    @if (ViewBag.is_details_update != null)
+    {
+        <script>
+             document.getElementById("modal_msg").innerHTML = "@ViewBag.is_details_update";
+                    $('#mymodal2').modal('show');
+        </script>
+    }
 </body>
 </html>

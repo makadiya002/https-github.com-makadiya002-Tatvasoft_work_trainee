@@ -487,6 +487,10 @@
 
                 function demoo2(id1) {
 
+                    var actual_val = document.getElementById(id1).innerHTML;
+                    document.getElementById(id1).innerHTML = "Loading...";
+                    
+
                     var obj = {
                         "sid": id1,
                         "spid": @ViewBag.uid
@@ -499,6 +503,7 @@
                         dataType: "json",
                         success: function (data) {
                             if (data.paymentDue == false) {
+                                document.getElementById(id1).innerHTML = actual_val;
                                 alert("You can not accept this service because, This service has time conflict with one of the services of your accepted service");
                             }
                             else {
