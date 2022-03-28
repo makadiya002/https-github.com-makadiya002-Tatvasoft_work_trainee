@@ -493,6 +493,53 @@ namespace Tatvasoft_Project.Controllers
             //ViewBag.third_done = "yes";
             ViewBag.model_to_pass = item;
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
+
+
+
+
+            HashSet<int?> All_SP = new HashSet<int?>();
+            var username = HttpContext.Session.GetString("user");
+            var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+            var all_ser = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status == 1).ToList();
+
+            foreach (var temp in all_ser)
+            {
+                if (temp.ServiceProviderId != null)
+                {
+                    All_SP.Add(temp.ServiceProviderId);
+                }
+            }
+            List<Models.Book_now_Table> item2 = new List<Models.Book_now_Table>();
+
+            foreach (var i in All_SP)
+            {
+                var uname = _helperlandcontext.Users.Where(x => x.UserId == i).ToList().FirstOrDefault();
+                var name = uname.FirstName + " " + uname.LastName;
+                var is_blocked2 = 0;
+                var is_fav = 0;
+                var is_fav2 = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userid && x.UserId == i && x.IsFavorite == true).ToList();
+                if (is_fav2.Count == 1)
+                {
+                    is_fav = 1;
+                }
+                var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userid && x.UserId == i && x.IsBlocked == true).ToList();
+                if (is_blocked.Count == 1)
+                {
+                    is_blocked2 = 1;
+                }
+                if (is_blocked2 == 0 && is_fav == 1)
+                {
+                    item2.Add(new Models.Book_now_Table
+                    {
+                        SP_ID = i,
+                        SP_Name = name,
+                        Is_Blocked = is_blocked2,
+                        Is_Fav = is_fav
+                    });
+                }
+            }
+
+            ViewBag.all_fav_sp = item2;
             return View("Views/Helperland/Booknow.cshtml");
         }
 
@@ -565,6 +612,11 @@ namespace Tatvasoft_Project.Controllers
             ViewBag.third_tab_done = "yes";
             ViewBag.Logged_user = HttpContext.Session.GetString("user");
 
+            if(model.SP_ID != 0)
+            {
+                HttpContext.Session.SetString("SP_ID", (model.SP_ID).ToString());
+            }
+
             return View("Views/Helperland/Booknow.cshtml");
         }
 
@@ -603,6 +655,14 @@ namespace Tatvasoft_Project.Controllers
             {
                 obj.Comments = HttpContext.Session.GetString("Suggestion");
             }
+
+
+            if(HttpContext.Session.GetString("SP_ID") != null)
+            {
+                obj.Status = 3;
+                obj.ServiceProviderId = int.Parse(HttpContext.Session.GetString("SP_ID"));
+            }
+
 
             _helperlandcontext.ServiceRequests.Add(obj);
             _helperlandcontext.SaveChanges();

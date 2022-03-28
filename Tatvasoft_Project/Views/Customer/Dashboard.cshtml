@@ -237,7 +237,7 @@
         <div class="us_table1" style="height:100%;">
             <div id="AllSr" onclick="Get_Asr()" class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
             <div id="CurrSr" onclick="Get_Csr()"><a href="#" class="cus_side_items">Service History</a></div>
-            <div><a href="#" class="cus_side_items">Favourite Pros</a></div>
+            <div id="Fav_pro"><a href="/Customer/Favourite_SP" class="cus_side_items">Favourite Pros</a></div>
 
 
         </div>
@@ -337,6 +337,7 @@
 
             <div id="us_table_inner2">Hi</div>
             <div id="div_pro_det"></div>
+            <div id="favpro"></div>
 
 
         </div>
@@ -379,6 +380,7 @@
             $("#div_pro_det").load('@Url.Action("Profile_details", "Customer")');
             document.getElementById("us_table_inner1").style.display = "none";
             document.getElementById("us_table_inner2").style.display = "none";
+            document.getElementById("favpro").style.display = "none";
             document.getElementById("div_pro_det").style.display = "block";
         }
     </script>
@@ -404,11 +406,14 @@
         });
     </script>
 
+    
+
     <script>
         function Get_Csr() {
             //alert("hello");
             document.getElementById("div_pro_det").style.display = "none";
             document.getElementById("us_table_inner1").style.display = "none";
+            document.getElementById("favpro").style.display = "none";
             document.getElementById("AllSr").style.backgroundColor = "#1d7a8c";
             document.getElementById("CurrSr").style.backgroundColor = "#146371";
             if (val == 0) {
@@ -427,8 +432,19 @@
             document.getElementById("div_pro_det").style.display = "none";
             document.getElementById("us_table_inner1").style.display = "block";
             document.getElementById("us_table_inner2").style.display = "none";
+            document.getElementById("favpro").style.display = "none";
             document.getElementById("CurrSr").style.backgroundColor = "#1d7a8c";
             document.getElementById("AllSr").style.backgroundColor = "#146371";
+        }
+        function Fav_prov() {
+            document.getElementById("div_pro_det").style.display = "none";
+            document.getElementById("us_table_inner1").style.display = "none";
+            document.getElementById("us_table_inner2").style.display = "none";
+            document.getElementById("AllSr").style.backgroundColor = "#1d7a8c";
+            document.getElementById("CurrSr").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Fav_pro").style.backgroundColor = "#146371";
+
+            $("#favpro").load('@Url.Action("Favourite_SP", "Customer")');
         }
     </script>
 

@@ -34,5 +34,6 @@ namespace Tatvasoft_Project.Models
         public int Is_Date_Smaller { get; set; }
         public int Is_Blocked { get; set; }
         public string Customer_Name { get; set; }
+        public int Is_Fav { get; set; }
     }
 }

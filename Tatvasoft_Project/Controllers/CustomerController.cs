@@ -524,6 +524,128 @@ namespace Tatvasoft_Project.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
+        public IActionResult Favourite_SP()
+        {
+            HashSet<int?> All_SP = new HashSet<int?>();
+            var username = HttpContext.Session.GetString("user");
+            _helperlandcontext = new HelperlandContext();
+            var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+            var all_ser = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && x.Status == 1).ToList();
+
+            foreach (var temp in all_ser)
+            {
+                if(temp.ServiceProviderId != null)
+                {
+                    All_SP.Add(temp.ServiceProviderId);
+                }
+            }
+            List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+            foreach (var i in All_SP)
+            {
+                var uname = _helperlandcontext.Users.Where(x => x.UserId == i).ToList().FirstOrDefault();
+                var name = uname.FirstName + " " + uname.LastName;
+                var is_blocked2 = 0;
+                var is_fav = 0;
+                var is_fav2 = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userid && x.UserId == i && x.IsFavorite == true).ToList();
+                if (is_fav2.Count == 1)
+                {
+                    is_fav = 1;
+                }
+                var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == userid && x.UserId == i && x.IsBlocked == true).ToList();
+                if (is_blocked.Count == 1)
+                {
+                    is_blocked2 = 1;
+                }
+
+                item.Add(new Models.Book_now_Table
+                {
+                    SP_ID = i,
+                    SP_Name = name,
+                    Is_Blocked = is_blocked2,
+                    Is_Fav = is_fav
+                });
+            }
+
+            ViewBag.all_SP = item;
+            var unme = HttpContext.Session.GetString("user");
+            ViewBag.uid = _helperlandcontext.Users.Where(x => x.FirstName == unme).ToList().FirstOrDefault().UserId;
+            ViewBag.user = HttpContext.Session.GetString("user");
+            return View();
+        }
+
+        public IActionResult Block_Unblock_SP(Models.ServiceRequest model)
+        {
+            _helperlandcontext = new HelperlandContext();
+
+            var uname = HttpContext.Session.GetString("user");
+            var uid = _helperlandcontext.Users.Where(x => x.FirstName == uname).ToList().FirstOrDefault().UserId;
+            var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == uid && x.UserId == model.ServiceProviderId && x.IsBlocked == true).ToList();
+            if (is_blocked.Count == 0)
+            {
+                Models.FavoriteAndBlocked obj2 = new Models.FavoriteAndBlocked();
+                obj2.UserId = int.Parse(model.ServiceProviderId.ToString());
+                obj2.TargetUserId = uid;
+                obj2.IsBlocked = true;
+                obj2.IsFavorite = false;
+
+                _helperlandcontext.FavoriteAndBlockeds.Add(obj2);
+                _helperlandcontext.SaveChanges();
+            }
+            else
+            {
+                var bid = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == uid && x.UserId == model.ServiceProviderId && x.IsBlocked == true).ToList().FirstOrDefault().Id;
+                var p = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.Id == bid).ToList().FirstOrDefault();
+                _helperlandcontext.Entry(p).State = EntityState.Deleted;
+                _helperlandcontext.SaveChanges();
+            }
+            var obj = "Hello";
+            try
+            {
+                return Json(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+        }
+
+        public IActionResult Make_SP_Fav_Unfav(Models.ServiceRequest model)
+        {
+            _helperlandcontext = new HelperlandContext();
+
+            var uname = HttpContext.Session.GetString("user");
+            var uid = _helperlandcontext.Users.Where(x => x.FirstName == uname).ToList().FirstOrDefault().UserId;
+            var is_blocked = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == uid && x.UserId == model.ServiceProviderId && x.IsFavorite == true).ToList();
+            if (is_blocked.Count == 0)
+            {
+                Models.FavoriteAndBlocked obj2 = new Models.FavoriteAndBlocked();
+                obj2.UserId = int.Parse(model.ServiceProviderId.ToString());
+                obj2.TargetUserId = uid;
+                obj2.IsBlocked = false;
+                obj2.IsFavorite = true;
+
+                _helperlandcontext.FavoriteAndBlockeds.Add(obj2);
+                _helperlandcontext.SaveChanges();
+            }
+            else
+            {
+                var bid = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.TargetUserId == uid && x.UserId == model.ServiceProviderId && x.IsFavorite == true).ToList().FirstOrDefault().Id;
+                var p = _helperlandcontext.FavoriteAndBlockeds.Where(x => x.Id == bid).ToList().FirstOrDefault();
+                _helperlandcontext.Entry(p).State = EntityState.Deleted;
+                _helperlandcontext.SaveChanges();
+            }
+            var obj = "Hello";
+            try
+            {
+                return Json(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public ViewResult demo2()
         {
             return View();

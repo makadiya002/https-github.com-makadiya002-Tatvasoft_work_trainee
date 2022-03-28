@@ -1,0 +1,243 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <!-- Bootstrap CSS -->
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg us_navbar fixed-top">
+        <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto con_nav_ul">
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="/Helperland/Booknow" id="us_nav_item_Book_now">Book now</a>
+                </li>
+                <li class="nav-item active">
+                    <a style="" class="nav-link" href="/Helperland/Prices" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_price">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_war">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="/Helperland/Contact" id="us_nav_item_blog">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
+                </li>
+                <li class="nav-item" style="margin-top: 4px;margin-right: 50px;">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" style="background-color: transparent;margin-top: 0px;border:none;">
+                            <img id="us_nav_pro" src="~/images/us_icon2.png">
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cus_settings" href="#">Dashboard</a>
+                            <a class="dropdown-item cus_settings" onclick="profile_det()">My Settings</a>
+                            <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="us_name" style="margin-top: 100px;">
+        Welcome, <span style="font-weight: bold;">@ViewBag.user</span>
+    </div>
+
+    <div class="us_table_main">
+
+        <div class="us_table1" style="height:100%;">
+            <div><a href="/Customer/Dashboard" class="cus_side_items">Dashboard</a></div>
+            <div><a href="/Customer/Dashboard" class="cus_side_items">Service History</a></div>
+            <div id="Fav_pro"><a href="/Customer/Favourite_SP" class="cus_side_items">Favourite Pros</a></div>
+
+
+        </div>
+
+
+        <div class="us_table2">
+            <div id="us_table_inner1">
+                <div class="cus_sh_main">
+
+                </div>
+                <div style="display:flex;flex-wrap:wrap;">
+                    @foreach (var temp in ViewBag.all_SP)
+                    {
+
+
+
+                        <div style="display: flex;flex-wrap: wrap;margin-left: 10px;">
+
+                            <div style="text-align: center;min-height: 215px;width: 225px;border: 1px solid black;">
+                                <div style="margin-top: 20px;"><img src="~/images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
+                                <div style="margin-top: 15px;">@temp.SP_Name</div>
+                                <div style="display: flex;flex-wrap: wrap;text-align:center;margin-top: 10px;justify-content:space-evenly;">
+                                    @if (temp.Is_Fav == 0)
+                                    {
+                                        <button onclick="make_fav(@temp.SP_ID)"  class="@temp.SP_ID" style="margin-top: 20px; background-color: #1d7a8c;color: white;
+              border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-right: 6px;" type="button">
+                                            Favourite
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                                    <button onclick="make_fav(@temp.SP_ID)" class="@temp.SP_ID" style="margin-top: 20px; background-color: #1d7a8c;color: white;
+                                  border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
+                                                        UnFavourite
+                                                    </button>
+                                    }
+                                    @if (temp.Is_Blocked == 0)
+                                    {
+                                        <button class="@temp.SP_ID" onclick="block_sp(@temp.SP_ID)" style="margin-top: 20px; background-color: #ff6b6b;color: white;
+          border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
+                                            Block
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="@temp.SP_ID" onclick="block_sp(@temp.SP_ID)" style="margin-top: 20px; background-color: #ff6b6b;color: white;
+          border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
+                                            UnBlock
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+            </div>
+
+          
+
+
+        </div>
+    </div>
+
+
+    <div class="faq_ff_main">
+        <div class="faq_ff_2 final_footer">
+            <a href="#"><img class="fin_foo_img_1" src="~/images/white-logo-transparent-background@2x.png"></a>
+            <ul>
+                <li><a style="color: white;" href="/Home">HOME</a></li>
+                <li><a style="color: white;" href="/Helperland/About">ABOUT</a></li>
+                <li><a style="color: white;" href="#">TESTIMONIALS</a></li>
+                <li><a style="color: white;" href="/Helperland/FAQ">FAQS</a></li>
+                <li><a style="color: white;" href="#">INSURANCE POLICY</a></li>
+                <li><a style="color: white;" href="#">IMPRESSUM</a></li>
+            </ul>
+            <div>
+                <a href="#"><img style="height: 18px;width: 9px; margin-top: 50px;margin-right: 20px;margin-bottom: 10px;" src="~/images/fb.png"></a>
+                <a href="#"><img style="height: 18px;width: 18px;margin-top: 50px;margin-bottom: 10px;" src="~/images/insta.png"></a>
+            </div>
+        </div>
+
+        <hr class="prices_hr">
+
+        <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
+    </div>
+
+    <script>
+        function block_sp(id3) {
+           
+             var obj = {
+                "ServiceProviderId": id3
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Customer/Block_Unblock_SP",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+            var innertext = document.getElementsByClassName(id3)[1].innerText;
+            if (innertext == "Block") {
+                document.getElementsByClassName(id3)[1].innerText = "Unblock";
+            }
+            else {
+                document.getElementsByClassName(id3)[1].innerText = "Block";
+            }
+        }
+
+        function make_fav(id4) {
+            var obj = {
+                "ServiceProviderId": id4
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Customer/Make_SP_Fav_Unfav",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+            var innertext = document.getElementsByClassName(id4)[0].innerText;
+            if (innertext == "Favourite") {
+                document.getElementsByClassName(id4)[0].innerText = "UnFavourite";
+            }
+            else {
+                document.getElementsByClassName(id4)[0].innerText = "Favourite";
+            }
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</body>
+</html>

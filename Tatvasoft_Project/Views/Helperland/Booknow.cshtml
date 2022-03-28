@@ -374,31 +374,62 @@
 
 
                     <hr style="margin-top: 16px;margin-bottom: 16px;">
-                    <form asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
-                        <input id="actualid" type="hidden" asp-for="ID" />
-                        <button class="bn_cnt_sl" type="submit">Continue</button>
-                    </form>
+
+
+
+
+                    <div style="display:flex;flex-wrap:wrap;">
+                        @if (ViewBag.all_fav_sp != null)
+                        {
+
+                            foreach (var temp in ViewBag.all_fav_sp)
+                            {
+                                <div style="margin-left: 15px; margin-top: 15px; text-align: center; min-height: 200px; width: 210px; border: 1px solid black;">
+                                    <div style="margin-top: 20px;"><img src="~/images/cus_hat.png" style="height: 60px;width: 70px;border: 1px solid black;padding: 10px;border-radius: 50%;"></div>
+                                    <div style="margin-top: 15px;">@temp.SP_Name</div>
+
+                                    <button class="@temp.SP_ID btn_select" id="btn_blc" onclick="btn_valss(@temp.SP_ID)" style="margin-top: 20px; background-color: #ff6b6b;color: white;
+          border:none;border-radius: 15px;padding-top: 4px;padding-bottom: 4px;padding-left: 6px;padding-right: 6px;" type="button">
+                                        Select
+                                    </button>
+
+
+
+                                </div>
+                            }
+
+                        }
+                    </div>
+
+
+
+
+                        <form onsubmit="return validate_Addresss()" asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
+                            <input id="actualid" type="hidden" asp-for="ID" value="0" />
+                            <input id="sp_idd" type="hidden" value="0" asp-for="SP_ID" />
+                            <button class="bn_cnt_sl" type="submit">Continue</button>
+                        </form>
+                    </div>
+
+                    <div id="bn_payment">
+                        <form asp-action="Booknow_final" asp-controller="Helperland" class="container-fluid" style="width: 97%;">
+                            <div class="form-check">
+                                <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    I accept the terms and conditions , the cancellation policy and the data protection regulations . I confirm that Helperland will start executing the contract before the end of the cancellation period and that I will lose my right of cancellation as a consumer once the contract has been fully performed
+                                </label>
+                            </div>
+                            <hr style="margin-top: 15px;margin-bottom: 25px;">
+                            <input type="text" style="display:none;" id="ip_total_cost" asp-for="Total_cost" />
+                            <input type="text" style="display:none;" id="ip_disc_cost" asp-for="Discounted_cost" />
+                            <button class="bn_bwc_lsst" type="submit">
+                                Book with costs
+                            </button>
+
+                        </form>
+                    </div>
+
                 </div>
-
-                <div id="bn_payment">
-                    <form asp-action="Booknow_final" asp-controller="Helperland" class="container-fluid" style="width: 97%;">
-                        <div class="form-check">
-                            <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                I accept the terms and conditions , the cancellation policy and the data protection regulations . I confirm that Helperland will start executing the contract before the end of the cancellation period and that I will lose my right of cancellation as a consumer once the contract has been fully performed
-                            </label>
-                        </div>
-                        <hr style="margin-top: 15px;margin-bottom: 25px;">
-                        <input type="text" style="display:none;" id="ip_total_cost" asp-for="Total_cost" />
-                        <input type="text" style="display:none;" id="ip_disc_cost" asp-for="Discounted_cost" />
-                        <button class="bn_bwc_lsst" type="submit">
-                            Book with costs
-                        </button>
-
-                    </form>
-                </div>
-
-            </div>
 
 
 
@@ -585,6 +616,31 @@
         <div class="prices_rights" style="">©2018 Helperland. All rights reserved.     &nbsp;&nbsp;Terms and Conditions  |  Privacy Policy</div>
     </div>
     </div>
+
+
+    <script>
+        function btn_valss(iddd) {
+            var x = document.getElementsByClassName("btn_select");
+            for (var i = 0; i < x.length; i++) {
+                x[i].innerText = "Select";
+                x[i].style.backgroundColor = "#ff6b6b";
+            }
+
+            document.getElementsByClassName(iddd)[0].innerText = "Selected";
+            document.getElementsByClassName(iddd)[0].style.backgroundColor = "green";
+            document.getElementById("sp_idd").value = iddd;
+            alert(document.getElementById("sp_idd").value);
+        }
+
+        function validate_Addresss() {
+            if (document.getElementById("actualid").value == 0) {
+                alert("Select Address");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
 
 
     <script type="text/javascript">
