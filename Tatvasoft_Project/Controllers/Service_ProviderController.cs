@@ -553,5 +553,22 @@ namespace Tatvasoft_Project.Controllers
                 throw ex;
             }
         }
+
+        public IActionResult Fatch_All_Services()
+        {
+            _helperlandcontext = new HelperlandContext();
+            var username = HttpContext.Session.GetString("user");
+            var userid = _helperlandcontext.Users.Where(x => x.FirstName == username).ToList().FirstOrDefault().UserId;
+            var all_ss = _helperlandcontext.ServiceRequests.Where(x => x.ServiceProviderId == userid).ToList();
+
+            try
+            {
+                return Json(all_ss);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

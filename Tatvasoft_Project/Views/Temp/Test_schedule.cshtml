@@ -1,0 +1,134 @@
+﻿<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal" id="mymodal002" tabindex="-1" role="dialog" style="width: 100%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <br>
+                    <div style="text-align: center;">
+                        <img src="~/images/Success_img.png" style="width: 60px;height: 60px;">
+                        <br><br>
+                        <div id="modal_msg" style="font-size: 21px; color: rgba(0,0,0,0.8);"></div>
+                        <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <div id="calendar"></div>
+
+    <div onclick="clicked_div()">
+        Click Here to view Calender
+    </div>
+
+    <script>
+        var events = [];
+    </script>
+
+    @foreach(var temp in ViewBag.all_ss)
+            {
+
+<script>
+    //alert("@temp.Comments");
+                    events.push({
+                        title: 'Title',
+                        description: 'Hello Des.',
+                        start: '@temp.Comments',
+                        color: 'blue'
+                    });
+</script>
+            }
+
+    <script>
+
+      
+
+        function clicked_div() {
+
+
+            
+            
+            $('#calendar').fullCalendar({
+                weekends: true,
+                header: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "month,agendaWeek,agendaDay"
+                }, 
+                eventColor: "blue",
+                events: events,
+                eventClick: function (a, b, c) {
+                    $('#mymodal002').modal('show');
+                }
+
+            });
+        }
+
+
+    </script>
+
+
+
+    <!--<div id="calender"></div>
+        <div onclick="GenerateCalender()">Click to see Calendar</div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+
+        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+        <script>
+            function GenerateCalender() {
+
+                $('#calender').fullCalendar('destroy');
+                $('#calender').fullCalendar({
+
+                    header: {
+                        left: "prev,next today",
+                        center: "title",
+                        right: "month,agendaWeek,agendaDay"
+                    },
+                    defaultView: "month",
+                    navLinks: true, // can click day/week names to navigate views
+                    selectable: true,
+                    selectHelper: false,
+                    editable: true,
+                    eventLimit: true, //
+
+                });
+            }
+        </script>
+    -->
+
+</body>
+</html>
