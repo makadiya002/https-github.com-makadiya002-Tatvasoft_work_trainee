@@ -4,6 +4,9 @@
 <html>
 <head>
 
+
+   
+
     <style>
         .ncc {
             display: none;
@@ -166,6 +169,8 @@
         <div class="us_table1" style="height:100%;">
             <div id="div_dash" onclick="new_ss()" class="da_daa"><a href="#" class="cus_side_items">Dashboard</a></div>
             <div id="div_upco" onclick="upcoming_ss()"><a href="#" class="cus_side_items">Upcoming Service</a></div>
+            <div id="div_ser_sche"><a href="/Temp/Test_schedule" class="cus_side_items">Service Schedule</a></div>
+
             <div id="div_serv" onclick="serv_hist()"><a href="#" class="cus_side_items">Service History</a></div>
             <div id="ratings" onclick="Ratings()"><a href="#" class="cus_side_items">My Ratings</a></div>
             <div id="Block_Cust" onclick="Block_customer()"><a href="#" class="cus_side_items">Block Customer</a></div>
@@ -193,15 +198,15 @@
                         {
 
 
-                            <tr id="@temp.ID">
-                                <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
-                                <td onclick="demoo3(@temp.ID,1)" data-toggle="modal" data-target="#exampleModal2">
+                            <tr id="@temp.ID" style="border:1px solid black;">
+                                <td style="border-bottom:1px solid black;border-left:1px solid black;"><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                                <td style="border-bottom:1px solid black;" onclick="demoo3(@temp.ID,1)" data-toggle="modal" data-target="#exampleModal2">
                                     <div class="us_d1">
                                         <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
                                         <div class="@temp.ID">@temp.Booking_duration</div>
                                     </div>
                                 </td>
-                                <td>
+                                <td style="border-bottom:1px solid black;">
                                     @if (temp.SP_ID != 0)
                                     {
                                         <div style="display:flex;">
@@ -220,17 +225,17 @@
 
                                     }
                                 </td>
-                                <td>
+                                <td style="border-bottom:1px solid black;">
                                     <div style="font-size: 24px;
   font-weight: bold;
   color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
                                         €@temp.Discounted_cost
                                     </div>
                                 </td>
-                                <td>
+                                <td style="border-bottom:1px solid black;">
                                     &nbsp;
                                 </td>
-                                <td onclick="demoo2(@temp.ID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                <td style="border-bottom:1px solid black;border-right:1px solid black" onclick="demoo2(@temp.ID)" data-toggle="modal" data-target="#exampleModalCenter">
                                     <button class="btn btn-primary" style="border-radius:15px;margin-top:15px;">Accept</button>
 
                                 </td>
@@ -300,6 +305,7 @@
             document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
             document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
             document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#1d7a8c";
 
 
             $('#myTable4').parents('div.dataTables_wrapper').first().show();
@@ -310,10 +316,10 @@
             document.getElementById("uc_services").style.display = "block";
             document.getElementById("rats").style.display = "none";
             document.getElementById("blo_cus").style.display = "none";
-            
+
                 $('#myTable3').parents('div.dataTables_wrapper').first().hide();
                 $("#uc_services").load('@Url.Action("Upcoming_Services", "Service_Provider")');
-            
+
 
 
         }
@@ -327,6 +333,7 @@
             document.getElementById("div_serv").style.backgroundColor = "#146371";
             document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
             document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#1d7a8c";
 
 
             $('#myTable3').parents('div.dataTables_wrapper').first().hide();
@@ -334,14 +341,14 @@
             document.getElementById("rats").style.display = "none";
             document.getElementById("ser_his").style.display = "block";
             document.getElementById("blo_cus").style.display = "none";
-           
+
                 $("#ser_his").load('@Url.Action("Service_History", "Service_Provider")');
-            
+
 
         }
 
         function new_ss() {
-           
+
 
                 document.getElementById("div_details2").style.display = "none";
 
@@ -349,7 +356,8 @@
                 document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
                 document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
                 document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
-                document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#1d7a8c";
 
                 $('#myTable3').parents('div.dataTables_wrapper').first().show();
                 document.getElementById("rats").style.display = "none";
@@ -358,7 +366,7 @@
                 document.getElementById("uc_services").style.display = "none";
                 document.getElementById("ser_his").style.display = "none";
                 document.getElementById("blo_cus").style.display = "none";
-            
+
         }
 
         function Ratings() {
@@ -370,6 +378,7 @@
             document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
             document.getElementById("ratings").style.backgroundColor = "#146371";
             document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#1d7a8c";
 
             $("#rats").load('@Url.Action("Ratings", "Service_Provider")');
             document.getElementById("rats").style.display = "block";
@@ -390,6 +399,7 @@
             document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
             document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
             document.getElementById("Block_Cust").style.backgroundColor = "#146371";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#1d7a8c";
 
             $("#blo_cus").load('@Url.Action("Block_Customer", "Service_Provider")');
 
@@ -401,6 +411,29 @@
             $('#myTable3').parents('div.dataTables_wrapper').first().hide();
 
         }
+
+
+        function ServiceSchedule() {
+            document.getElementById("div_dash").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_upco").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_serv").style.backgroundColor = "#1d7a8c";
+            document.getElementById("ratings").style.backgroundColor = "#1d7a8c";
+            document.getElementById("Block_Cust").style.backgroundColor = "#1d7a8c";
+            document.getElementById("div_ser_sche").style.backgroundColor = "#146371";
+
+            $('#myTable3').parents('div.dataTables_wrapper').first().hide();
+            $('#myTable4').parents('div.dataTables_wrapper').first().hide();
+            document.getElementById("rats").style.display = "none";
+            document.getElementById("ser_his").style.display = "none";
+            document.getElementById("blo_cus").style.display = "none";
+
+            $("#div_serviceschedule").load('@Url.Action("Test_schedule", "Temp")');
+
+
+
+        }
+
+
 
         function demoo3(id, flag) {
             document.getElementById("id_for_accept").innerHTML = id;
@@ -489,7 +522,7 @@
 
                     var actual_val = document.getElementById(id1).innerHTML;
                     document.getElementById(id1).innerHTML = "Loading...";
-                    
+
 
                     var obj = {
                         "sid": id1,
@@ -510,7 +543,7 @@
                                 alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
                                 document.getElementById(id1).style.display = "none";
                             }
-                            
+
                         },
                         failure: function (response) {
                             alert("Thanks for Accepting Service Request," + "You can See Accepted Services at Upcoming services");
@@ -522,7 +555,7 @@
                         }
                     });
 
-                    
+
                 }
 
         function set_id_for_accept_pp() {

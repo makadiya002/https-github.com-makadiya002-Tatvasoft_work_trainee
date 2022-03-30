@@ -92,14 +92,14 @@
 
 
                 <tr id="@temp.ID">
-                    <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
-                    <td onclick="demoo3(@temp.ID,5)" data-toggle="modal" data-target="#exampleModal2">
+                    <td style="border-bottom:1px solid black;border-left:1px solid black;"><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                    <td style="border-bottom: 1px solid black;" onclick="demoo3(@temp.ID,5)" data-toggle="modal" data-target="#exampleModal2">
                         <div class="us_d1">
                             <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
                             <div class="@temp.ID">@temp.Booking_duration</div>
                         </div>
                     </td>
-                    <td>
+                    <td style="border-bottom: 1px solid black;">
                         @if (temp.SP_ID != 0)
                         {
                             <div style="display:flex;">
@@ -118,17 +118,17 @@
 
                         }
                     </td>
-                    <td>
+                    <td style="border-bottom: 1px solid black;">
                         <div style="font-size: 24px;
   font-weight: bold;
   color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
                             €@temp.Discounted_cost
                         </div>
                     </td>
-                    <td>
+                    <td style="border-bottom: 1px solid black;">
                         &nbsp;
                     </td>
-                    <td>
+                    <td style="border-bottom: 1px solid black;border-right:1px solid black;">
                         @if (temp.Is_Date_Smaller == 0)
                         {
                             <button onclick="demo_set_ic(@temp.ID)" data-toggle="modal" data-target="#exampleModal_cancel_sp1"

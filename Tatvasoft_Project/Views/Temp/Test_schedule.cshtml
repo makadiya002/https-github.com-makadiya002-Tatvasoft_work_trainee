@@ -6,23 +6,72 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
 
+    <link href="~/css/style2.css" rel="stylesheet" />
+    
+
 </head>
 
 <body>
+
+
 
     <!-- Button trigger modal -->
     <!-- Modal -->
     <div class="modal" id="mymodal002" tabindex="-1" role="dialog" style="width: 100%;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Service Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                    <br>
-                    <div style="text-align: center;">
-                        <img src="~/images/Success_img.png" style="width: 60px;height: 60px;">
-                        <br><br>
-                        <div id="modal_msg" style="font-size: 21px; color: rgba(0,0,0,0.8);"></div>
-                        <button style="margin-top: 30px;" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    <div class="modal-body" style="color: #646464;font-size: 17px;">
+
+
+
+                        <div style="width:100%;">
+                            <span id="Service_date1" style="font-size: 18px;font-weight: bold;">05/10/2021</span>
+                            <span id="Service_time1">8:00-11:00</span>
+                            <div><span style="font-weight: bold;">Duration:</span> <span id="Service_duration1">3.5 Hrs</span></div>
+                            <hr>
+                            <div><span style="font-weight: bold;">Service Id:</span> <span id="Service_id1">1234</span></div>
+
+                            <div style="display: flex;">
+                                <div style="margin-top: 10px;">Net Amount</div>
+                                <div style="text-align: center;color: #1d7a8c;font-size: 32px;margin-left: 50px;">
+                                    <span id="Service_cost1">€63</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div><span style="font-weight:bold;">Customer Name:</span> <span id="Cus_name1"></span> </div>
+
+                            <div id="esss" style="font-weight:bold;">Extra Services : </div>
+                            <div id="il1">Inside Laundry</div>
+                            <div id="if1">Inside Fridge</div>
+                            <div id="ic1">Inside Cabinate</div>
+                            <div id="io1">Inside Oven</div>
+                            <div id="iw1">Inside Windows</div>
+                            <div>
+                                <span style="font-weight: bold;">Service Address:</span> <span id="Service_street1">Street</span>
+                                <span id="Service_hn1">House_number</span>
+                                , <span id="Service_zipcode1">zipcode</span>
+                                <span id="Service_city1"> city</span>
+                            </div>
+                            <div><span style="font-weight: bold;">Billing Address:</span> Same as service address</div>
+                            <div><span style="font-weight: bold;">Phone:</span> <span id="Service_phone1">7837468947</span></div>
+                            <div><span style="font-weight: bold;">Email:</span> <span id="Service_email1">hello@gmail.com</span></div>
+                            <hr>
+                            <div><span style="font-weight: bold;">comments</span></div>
+                            <div><span id="Service_comment1">I don't have pets at home</span></div>
+                            <hr>
+
+
+                        </div>
+
+
                     </div>
 
                 </div>
@@ -30,6 +79,100 @@
             </div>
         </div>
     </div>
+
+
+    <nav class="navbar navbar-expand-lg us_navbar fixed-top">
+        <a style="margin-left: 10px; margin-top: 13px;" href="#"><img class="faq_nav_logo" src="~/images/white-logo-transparent-background@2x.png"></a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto con_nav_ul">
+                <li class="nav-item active">
+                    <a style="" class="nav-link" href="/Helperland/Prices" id="us_nav_item_booknow">Prices & Services <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_price">Warranty</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_war">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="/Helperland/Contact" id="us_nav_item_blog">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a style="" class="nav-link" href="#" id="us_nav_item_con"><span style="color: white; margin-right: 5px;">|</span> <img src="~/images/us_icon1.png"><sup class="us_ss">2</sup> <span style="color: white;margin-left: 2px;">|</span></a>
+                </li>
+                <li class="nav-item" style="margin-top: 4px;margin-right: 50px;">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" style="background-color: transparent;margin-top: 0px;border:none;">
+                            <img id="us_nav_pro" src="~/images/us_icon2.png">
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div style="margin-left: 10px;">Welcome,<br>@ViewBag.user</div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cus_settings" href="/Customer/Dashboard">Dashboard</a>
+                            <a class="dropdown-item cus_settings" onclick="my_details()">My Settings</a>
+                            <a class="dropdown-item cus_settings" href="/Helperland/Logout">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    @foreach (var temp in ViewBag.all_ss)
+    {
+
+
+        <div id="@temp.ID" style="display:none;">
+            <div class="@temp.ID" style="display:none;">@temp.Suggestion</div>
+            <div class="@temp.ID" style="display:none;">@temp.Booking_time</div>
+            <div><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></div>
+            <div onclick="demoo3(@temp.ID,1)" data-toggle="modal" data-target="#exampleModal2">
+                <div class="us_d1">
+                    <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
+                    <div class="@temp.ID">@temp.Booking_duration</div>
+                </div>
+            </div>
+            <div>
+                @if (temp.SP_ID != 0)
+                {
+                    <div style="display:flex;">
+                        <div>
+                            <button style="border:none;"><img style="height:20px;width:20px;border:none;padding:0px;" src="~/images/us_home.png"></button>
+                        </div>
+                        <div class="cus_ht_txt">
+                            <div class="cus_ht_txt1 @temp.ID">@temp.SP_Name</div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                }
+            </div>
+            <div>
+                <div style="font-size: 24px;
+  font-weight: bold;
+  color: #1d7a8c;margin-top: 10px;" class="cus_pay @temp.ID">
+                    €@temp.Discounted_cost
+                </div>
+            </div>
+            <div>
+                &nbsp;
+            </div>
+
+
+
+        </div>
+
+
+    }
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -42,7 +185,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
-    <div id="calendar"></div>
+    <div id="calendar" style="margin-top:130px;"></div>
 
     <div onclick="clicked_div()">
         Click Here to view Calender
@@ -52,39 +195,225 @@
         var events = [];
     </script>
 
-    @foreach(var temp in ViewBag.all_ss)
-            {
+    @foreach (var temp in ViewBag.all_ss)
+    {
 
-<script>
-    //alert("@temp.Comments");
+        <script>
+
                     events.push({
-                        title: 'Title',
-                        description: 'Hello Des.',
-                        start: '@temp.Comments',
-                        color: 'blue'
+                        title: '@temp.Booking_duration',
+                        description: '@temp.ID',
+                        start: '@temp.Date_String',
+                        color: '#1d7a8c',
+
                     });
-</script>
-            }
+
+            clicked_div();
+        </script>
+    }
 
     <script>
 
-      
+        $(document).ready(function () {
 
-        function clicked_div() {
-
-
-            
-            
             $('#calendar').fullCalendar({
                 weekends: true,
                 header: {
                     left: "prev,next today",
                     center: "title",
                     right: "month,agendaWeek,agendaDay"
-                }, 
-                eventColor: "blue",
+                },
+                eventColor: "#1d7a8c",
                 events: events,
                 eventClick: function (a, b, c) {
+
+                    document.getElementById("il1").style.display = "block";
+                    document.getElementById("if1").style.display = "block";
+                    document.getElementById("ic1").style.display = "block";
+                    document.getElementById("io1").style.display = "block";
+                    document.getElementById("iw1").style.display = "block";
+
+                    for (var i = 0; i < 7; i++) {
+
+                        var ele = document.getElementsByClassName(a.description)[i].innerHTML;
+                        //alert(ele);
+                    }
+
+                    var obj = {
+                        "ServiceRequestId": a.description
+
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Temp/Fetch_Address_Details",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+
+                            document.getElementById("Service_street1").innerHTML = data.addressLine1;
+                            document.getElementById("Service_hn1").innerHTML = data.addressLine2;
+                            document.getElementById("Service_zipcode1").innerHTML = data.postalCode;
+                            document.getElementById("Service_city1").innerHTML = data.city;
+                            document.getElementById("Service_phone1").innerHTML = data.mobile;
+
+                            var ele = document.getElementsByClassName(a.description);
+                            document.getElementById("Service_date1").innerHTML = ele[3].innerHTML;
+                            document.getElementById("Service_time1").innerHTML = ele[1].innerHTML;
+                            document.getElementById("Service_duration1").innerHTML = ele[4].innerHTML;
+                            document.getElementById("Service_id1").innerHTML = ele[2].innerHTML;
+                            document.getElementById("Service_cost1").innerHTML = ele[6].innerHTML;
+                            document.getElementById("Cus_name1").innerHTML = ele[5].innerHTML;
+                            document.getElementById("Service_comment1").innerHTML = ele[0].innerHTML;
+
+
+                            //alert(data.addressLine1 + " " + data.addressLine2 + " "+data.city+" "+data.postalCode);
+                        },
+                        failure: function (response) {
+                            alert("failed");
+                        },
+                        error: function (response) {
+                            alert("error");
+                        }
+                    });
+
+                    var obj = {
+                        "ServiceRequestId": a.description
+
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Customer/Fetch_Address",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.laundry == 0)
+                                document.getElementById("il1").style.display = "none";
+                            if (data.fridge == 0)
+                                document.getElementById("if1").style.display = "none";
+                            if (data.cabinate == 0)
+                                document.getElementById("ic1").style.display = "none";
+                            if (data.oven == 0)
+                                document.getElementById("io1").style.display = "none";
+                            if (data.windows == 0)
+                                document.getElementById("iw1").style.display = "none";
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+
+                    $('#mymodal002').modal('show');
+                }
+
+            });
+
+        });
+
+        function clicked_div() {
+
+
+
+
+            $('#calendar').fullCalendar({
+                weekends: true,
+                header: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "month,agendaWeek,agendaDay"
+                },
+                eventColor: "#1d7a8c",
+                events: events,
+                eventClick: function (a, b, c) {
+
+                    document.getElementById("il1").style.display = "block";
+                    document.getElementById("if1").style.display = "block";
+                    document.getElementById("ic1").style.display = "block";
+                    document.getElementById("io1").style.display = "block";
+                    document.getElementById("iw1").style.display = "block";
+
+                    for (var i = 0; i < 7; i++) {
+
+                        var ele = document.getElementsByClassName(a.description)[i].innerHTML;
+                        //alert(ele);
+                    }
+
+                    var obj = {
+                        "ServiceRequestId": a.description
+
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Temp/Fetch_Address_Details",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+
+                            document.getElementById("Service_street1").innerHTML = data.addressLine1;
+                            document.getElementById("Service_hn1").innerHTML = data.addressLine2;
+                            document.getElementById("Service_zipcode1").innerHTML = data.postalCode;
+                            document.getElementById("Service_city1").innerHTML = data.city;
+                            document.getElementById("Service_phone1").innerHTML = data.mobile;
+
+                            var ele = document.getElementsByClassName(a.description);
+                            document.getElementById("Service_date1").innerHTML = ele[3].innerHTML;
+                            document.getElementById("Service_time1").innerHTML = ele[1].innerHTML;
+                            document.getElementById("Service_duration1").innerHTML = ele[4].innerHTML;
+                            document.getElementById("Service_id1").innerHTML = ele[2].innerHTML;
+                            document.getElementById("Service_cost1").innerHTML = ele[6].innerHTML;
+                            document.getElementById("Cus_name1").innerHTML = ele[5].innerHTML;
+                            document.getElementById("Service_comment1").innerHTML = ele[0].innerHTML;
+
+
+                            //alert(data.addressLine1 + " " + data.addressLine2 + " "+data.city+" "+data.postalCode);
+                        },
+                        failure: function (response) {
+                            alert("failed");
+                        },
+                        error: function (response) {
+                            alert("error");
+                        }
+                    });
+
+                    var obj = {
+                        "ServiceRequestId": a.description
+
+                    };
+                    $.ajax({
+                        type: "GET",
+                        url: "/Customer/Fetch_Address",
+                        data: obj,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.laundry == 0)
+                                document.getElementById("il1").style.display = "none";
+                            if (data.fridge == 0)
+                                document.getElementById("if1").style.display = "none";
+                            if (data.cabinate == 0)
+                                document.getElementById("ic1").style.display = "none";
+                            if (data.oven == 0)
+                                document.getElementById("io1").style.display = "none";
+                            if (data.windows == 0)
+                                document.getElementById("iw1").style.display = "none";
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+
                     $('#mymodal002').modal('show');
                 }
 

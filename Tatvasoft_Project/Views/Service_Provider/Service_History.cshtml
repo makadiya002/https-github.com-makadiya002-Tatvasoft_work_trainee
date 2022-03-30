@@ -94,14 +94,14 @@
 
 
                 <tr id="@temp.ID">
-                    <td><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
-                    <td onclick="demoo5(@temp.ID)" data-toggle="modal" data-target="#exampleModal4">
+                    <td style="border-bottom: 1px solid black;border-left:1px solid black;"><div style="margin-top: 15px;font-size: 18px;"><span class="@temp.ID">@temp.ID</span></div></td>
+                    <td style="border-bottom: 1px solid black;" onclick="demoo5(@temp.ID)" data-toggle="modal" data-target="#exampleModal4">
                         <div class="us_d1">
                             <div style="font-weight: bold;"><img style="height: 16px;width: 17px;" src="~/images/cus_cal.png"> <span class="@temp.ID">@temp.Booking_date.ToShortDateString()</span></div>
                             <div class="@temp.ID">@temp.Booking_duration</div>
                         </div>
                     </td>
-                    <td>
+                    <td style="border-bottom: 1px solid black;border-right:1px solid black;">
                         @if (temp.SP_ID != 0)
                         {
                             <div style="display:flex;">
