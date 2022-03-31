@@ -118,5 +118,73 @@ namespace Tatvasoft_Project.Controllers
                 throw ex;
             }
         }
+
+        public IActionResult check_Conflict_Book_Service(Models.Book_now_Table model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var useer = HttpContext.Session.GetString("user");
+            //var uidd = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault().ServiceProviderId;
+            var uidd = model.SP_ID;
+            var all_services = _helperlandcontext.ServiceRequests.Where(x => x.Status == 3 && x.ServiceProviderId == uidd).ToList();
+            //var services = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            var service_date = DateTime.Parse(HttpContext.Session.GetString("Booking_date"));
+            var service_start_time = float.Parse(HttpContext.Session.GetString("Booking_time"));
+            var service_end_time = double.Parse(HttpContext.Session.GetString("Booking_duration")) + service_start_time;
+
+            Models.ServiceRequest obj = new Models.ServiceRequest();
+            obj.PaymentDue = true;
+
+            foreach (var tmpp in all_services)
+            {
+                if (tmpp.ServiceStartDate == service_date)
+                {
+                    var start_time = tmpp.ServiceHours;
+                    var end_time = tmpp.ExtraHours + tmpp.ServiceHours;
+                    if (service_start_time >= (start_time - 1) && service_start_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time >= (start_time - 1) && service_end_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (start_time - 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+
+
+
+                }
+            }
+           //Models.ServiceRequest obj = new Models.ServiceRequest();
+            try
+            {
+                return Json(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult Get_Service_Date(Models.ServiceRequest model)
+        {
+            _helperlandcontext = new HelperlandContext();
+            var service = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ServiceRequestId).ToList().FirstOrDefault();
+            var start_date = service.ServiceStartDate.Date.ToShortDateString();
+            try
+            {
+                return Json(start_date);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -14,7 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="~/css/style2.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <title>Hello, world!</title>
 </head>
 <body>
@@ -140,7 +144,7 @@
                     <form method="post" asp-action="Booknow_second" asp-controller="Helperland" style="margin-top: 10px;">
                         <div style="display:flex;">
                             <div style="width: 50%;margin-top:10px;">
-                                <input required id="book_date" asp-for="Booking_date"  min="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" style="color: rgba(0,0,0,0.8);">
+                                <input required id="book_date" asp-for="Booking_date" min="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" style="color: rgba(0,0,0,0.8);">
                                 <select id="book_time" asp-for="Booking_time" class="bn_date_tm ml-auto" style="color: rgba(0,0,0,0.8);">
                                     <option value="8.00">8:00 am</option>
                                     <option value="8.30">8:30 am</option>
@@ -404,32 +408,32 @@
 
 
 
-                        <form onsubmit="return validate_Addresss()" asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
-                            <input id="actualid" type="hidden" asp-for="ID" value="0" />
-                            <input id="sp_idd" type="hidden" value="0" asp-for="SP_ID" />
-                            <button class="bn_cnt_sl" type="submit">Continue</button>
-                        </form>
-                    </div>
-
-                    <div id="bn_payment">
-                        <form asp-action="Booknow_final" asp-controller="Helperland" class="container-fluid" style="width: 97%;">
-                            <div class="form-check">
-                                <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    I accept the terms and conditions , the cancellation policy and the data protection regulations . I confirm that Helperland will start executing the contract before the end of the cancellation period and that I will lose my right of cancellation as a consumer once the contract has been fully performed
-                                </label>
-                            </div>
-                            <hr style="margin-top: 15px;margin-bottom: 25px;">
-                            <input type="text" style="display:none;" id="ip_total_cost" asp-for="Total_cost" />
-                            <input type="text" style="display:none;" id="ip_disc_cost" asp-for="Discounted_cost" />
-                            <button class="bn_bwc_lsst" type="submit">
-                                Book with costs
-                            </button>
-
-                        </form>
-                    </div>
-
+                    <form onsubmit="return validate_Addresss()" asp-controller="Helperland" asp-action="Booknow_select_address" method="post">
+                        <input id="actualid" type="hidden" asp-for="ID" value="0" />
+                        <input id="sp_idd" type="hidden" value="0" asp-for="SP_ID" />
+                        <button class="bn_cnt_sl" type="submit">Continue</button>
+                    </form>
                 </div>
+
+                <div id="bn_payment">
+                    <form asp-action="Booknow_final" asp-controller="Helperland" class="container-fluid" style="width: 97%;">
+                        <div class="form-check">
+                            <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                I accept the terms and conditions , the cancellation policy and the data protection regulations . I confirm that Helperland will start executing the contract before the end of the cancellation period and that I will lose my right of cancellation as a consumer once the contract has been fully performed
+                            </label>
+                        </div>
+                        <hr style="margin-top: 15px;margin-bottom: 25px;">
+                        <input type="text" style="display:none;" id="ip_total_cost" asp-for="Total_cost" />
+                        <input type="text" style="display:none;" id="ip_disc_cost" asp-for="Discounted_cost" />
+                        <button class="bn_bwc_lsst" type="submit">
+                            Book with costs
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
 
 
 
@@ -625,11 +629,42 @@
                 x[i].innerText = "Select";
                 x[i].style.backgroundColor = "#ff6b6b";
             }
+            document.getElementById("sp_idd").value = 0;
+             //alert(document.getElementById("sp_idd").value);
 
-            document.getElementsByClassName(iddd)[0].innerText = "Selected";
-            document.getElementsByClassName(iddd)[0].style.backgroundColor = "green";
-            document.getElementById("sp_idd").value = iddd;
-            alert(document.getElementById("sp_idd").value);
+
+            //conflict code
+            var obj = {
+                "SP_ID": iddd,
+
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Temp/check_Conflict_Book_Service",
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //alert(data.paymentDue);
+
+                    if (data.paymentDue == true) {
+                        document.getElementsByClassName(iddd)[0].innerText = "Selected";
+                        document.getElementsByClassName(iddd)[0].style.backgroundColor = "green";
+                        document.getElementById("sp_idd").value = iddd;
+                    }
+                    else {
+                        alert("Provided Date and Time Conflicts with date and time of Selected Service Provider");
+                    }
+                },
+                failure: function (response) {
+                    alert("Fail");
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+
+
         }
 
         function validate_Addresss() {
@@ -681,8 +716,7 @@
             document.getElementById('payment2').style.display = "none";
         }
         function fun2() {
-            if (first_done == "no")
-            {
+            if (first_done == "no") {
                 fun1();
             }
             else {
@@ -739,7 +773,7 @@
                 fun2();
             }
             else {
-                fun1();ss
+                fun1(); ss
             }
         }
         function as_1() {
@@ -898,7 +932,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -947,15 +981,15 @@
 
         </script>
 
-        if(ViewBag.second_tab_done != null)
-                {
-                    <script>
-                        document.getElementById('data1').style.display = "none";
-                        document.getElementById('data2').style.display = "block";
-                        document.getElementById('time1').style.display = "none";
-                        document.getElementById('time2').style.display = "block";
-                    </script>
-                }
+        if (ViewBag.second_tab_done != null)
+        {
+            <script>
+                document.getElementById('data1').style.display = "none";
+                document.getElementById('data2').style.display = "block";
+                document.getElementById('time1').style.display = "none";
+                document.getElementById('time2').style.display = "block";
+            </script>
+        }
 
 
 
@@ -1016,17 +1050,17 @@
             var total_hrrs = 0.0;
         </script>
 
-        if(ViewBag.third_tab_done != null)
-                {
-                    <script>
-                        document.getElementById('data1').style.display = "none";
-                        document.getElementById('data2').style.display = "block";
-                        document.getElementById('time1').style.display = "none";
-                        document.getElementById('time2').style.display = "block";
-                        document.getElementById('payment1').style.display = "none";
-                        document.getElementById('payment2').style.display = "block";
-                    </script>
-                }
+        if (ViewBag.third_tab_done != null)
+        {
+            <script>
+                document.getElementById('data1').style.display = "none";
+                document.getElementById('data2').style.display = "block";
+                document.getElementById('time1').style.display = "none";
+                document.getElementById('time2').style.display = "block";
+                document.getElementById('payment1').style.display = "none";
+                document.getElementById('payment2').style.display = "block";
+            </script>
+        }
 
         if (ViewBag.laundry != 0)
         {

@@ -318,16 +318,176 @@ namespace Tatvasoft_Project.Controllers
         public IActionResult Modify_Service_dt(Models.Book_now_Table model)
         {
             _helperlandcontext = new HelperlandContext();
-            var p = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
-            p.ServiceStartDate = model.Booking_date;
-            p.ServiceHours = double.Parse(model.Booking_time);
+            var useer = HttpContext.Session.GetString("user");
+            var uidd = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault().ServiceProviderId;
 
-            _helperlandcontext.Entry(p).State = EntityState.Modified;
-            _helperlandcontext.SaveChanges();
+            var all_services = _helperlandcontext.ServiceRequests.Where(x => x.Status == 3 && x.ServiceProviderId == uidd).ToList();
+            var services = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            var service_date = model.Booking_date;
+            var service_start_time = double.Parse(model.Booking_time) ;
+            var service_end_time = services.ExtraHours + double.Parse(model.Booking_time);
 
-            ViewBag.is_service_modified = "Details Updated succesfully!";
+            Models.ServiceRequest obj = new Models.ServiceRequest();
+            obj.PaymentDue = true;
+
+            foreach (var tmpp in all_services)
+            {
+                if (tmpp.ServiceStartDate == service_date && tmpp.ServiceRequestId != model.ID)
+                {
+                    var start_time = tmpp.ServiceHours;
+                    var end_time = tmpp.ExtraHours + tmpp.ServiceHours;
+                    if (service_start_time >= (start_time - 1) && service_start_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time >= (start_time - 1) && service_end_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (start_time - 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+
+
+
+                }
+            }
+
+
+
+            if (obj.PaymentDue == true)
+            {
+                var p = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                p.ServiceStartDate = model.Booking_date;
+                p.ServiceHours = double.Parse(model.Booking_time);
+
+                _helperlandcontext.Entry(p).State = EntityState.Modified;
+                _helperlandcontext.SaveChanges();
+
+                ViewBag.is_service_modified = "Details Updated succesfully!";
+
+                var servic3 = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                if(servic3.ServiceProviderId != null)
+                {
+                    var userr = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                    var userridd = userr.UserId;
+                    var SPID = userr.ServiceProviderId;
+                    var email = _helperlandcontext.Users.Where(x => x.UserId == SPID).ToList().FirstOrDefault().Email;
+
+                    //send mail to user
+                    MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", email);
+                    mm.Subject = "Changes made by customer in Service";
+
+                    mm.Body = "Customer has updated details of service with ID " + model.ID + " And, new date is " + model.Booking_date;
+                    mm.IsBodyHtml = false;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mm);
+
+                }
+            }
+            else
+            {
+                //ViewBag.user = HttpContext.Session.GetString("user");
+                ViewBag.is_conflict = "This service can't be updated to selected date and time, Because it conflicts with date and time of another service of your service Provider";
+            }
+
+            //new added from here
+            var username = HttpContext.Session.GetString("user");
+            _helperlandcontext = new HelperlandContext();
+            var userid = (_helperlandcontext.Users.Where(x => x.FirstName == username).ToList()).FirstOrDefault().UserId;
+
+
+            var usertypeid = _helperlandcontext.Users.Where(x => x.UserId == userid).ToList().FirstOrDefault().UserTypeId;
+            if (usertypeid == 2)
+            {
+                return Redirect("/Service_Provider/SP_Dashboard");
+            }
+
+
+
+            var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => x.UserId == userid && ((x.Status == null) || x.Status == 3)).ToList();
+            List<Models.Book_now_Table> item = new List<Models.Book_now_Table>();
+            foreach (Models.ServiceRequest temp in model_to_pass)
+            {
+                if (temp.ServiceRequestId >= 4)
+                {
+                    var duration = (temp.ServiceHours).ToString();
+                    if (duration.Length <= 2)
+                    {
+                        duration += ":00";
+                    }
+                    else duration = Math.Round(temp.ServiceHours, 2).ToString() + '0';
+                    var end_dur = Math.Round(double.Parse((temp.ServiceHours + temp.ExtraHours).ToString()), 2).ToString();
+                    if (end_dur.ToString().Length <= 2)
+                    {
+                        duration = duration + "-" + end_dur.ToString() + ":00";
+                    }
+                    else duration = (duration + "-" + end_dur.ToString() + '0').Replace('.', ':');
+
+                    var spid = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == temp.ServiceRequestId && temp.ServiceProviderId != null).ToList();
+                    int? spid3 = 0;
+                    var name = "";
+
+                    var rating = 0;
+                    if (spid.Count > 0)
+                    {
+                        spid3 = (spid.FirstOrDefault().ServiceProviderId);
+                        var fname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().FirstName;
+                        var lname = _helperlandcontext.Users.Where(x => x.UserId == spid3).ToList().FirstOrDefault().LastName;
+                        name = fname + " " + lname;
+
+
+                    }
+
+                    item.Add(new Models.Book_now_Table
+                    {
+                        SP_ID = spid3,
+                        SP_Name = name,
+                        ID = temp.ServiceRequestId,
+                        Booking_date = (temp.ServiceStartDate).Date,
+                        Booking_time = (temp.ExtraHours).ToString(),
+                        Discounted_cost = float.Parse((temp.SubTotal).ToString()),
+                        Booking_duration = duration,
+                        Suggestion = temp.Comments,
+
+                    });
+                }
+            }
+            int i = 0;
+            foreach (Models.ServiceRequest temp2 in model_to_pass)
+            {
+                if (temp2.ServiceRequestId >= 4)
+                {
+
+
+                    var address_obj = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == temp2.ServiceRequestId).ToList();
+
+                    //int id = temp2.ServiceId;
+                    item[i].Street = address_obj[0].AddressLine1;
+                    item[i].House_number = address_obj.FirstOrDefault().AddressLine2;
+                    item[i].Zipcode = address_obj.FirstOrDefault().PostalCode;
+                    item[i].Location = address_obj.FirstOrDefault().City;
+                    item[i].Phone = address_obj.FirstOrDefault().Mobile;
+                    i++;
+                }
+            }
+
             ViewBag.user = HttpContext.Session.GetString("user");
-            return RedirectToAction("Dashboard");
+            ViewBag.data = item;
+
+
+            return View("~/Views/Customer/Dashboard.cshtml");
         }
 
         public IActionResult Cancel_sr(Models.Book_now_Table model)

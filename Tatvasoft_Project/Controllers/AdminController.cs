@@ -455,22 +455,122 @@ namespace Tatvasoft_Project.Controllers
         {
             _helperlandcontext = new HelperlandContext();
 
-            var service = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
-            service.ServiceStartDate = model.Booking_date;
-            service.ServiceHours = double.Parse(model.Booking_time);
+            //conflict code from here
+            _helperlandcontext = new HelperlandContext();
+            var useer = HttpContext.Session.GetString("user");
+            var uidd = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault().ServiceProviderId;
 
-            _helperlandcontext.Entry(service).State = EntityState.Modified;
-            _helperlandcontext.SaveChanges();
+            var all_services = _helperlandcontext.ServiceRequests.Where(x => x.Status == 3 && x.ServiceProviderId == uidd).ToList();
+            var services = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            var service_date = model.Booking_date;
+            var service_start_time = double.Parse(model.Booking_time);
+            var service_end_time = services.ExtraHours + double.Parse(model.Booking_time);
 
-            var service_address = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+            Models.ServiceRequest obj = new Models.ServiceRequest();
+            obj.PaymentDue = true;
 
-            service_address.AddressLine1 = model.Street;
-            service_address.AddressLine2 = model.House_number;
-            service_address.City = model.Location;
-            service_address.PostalCode = model.Zipcode;
+            foreach (var tmpp in all_services)
+            {
+                if (tmpp.ServiceStartDate == service_date && tmpp.ServiceRequestId != model.ID)
+                {
+                    var start_time = tmpp.ServiceHours;
+                    var end_time = tmpp.ExtraHours + tmpp.ServiceHours;
+                    if (service_start_time >= (start_time - 1) && service_start_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time >= (start_time - 1) && service_end_time <= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (start_time - 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
+                    else if (service_start_time <= (start_time - 1) && service_end_time >= (end_time + 1))
+                    {
+                        obj.PaymentDue = false;
+                    }
 
-            _helperlandcontext.Entry(service_address).State = EntityState.Modified;
-            _helperlandcontext.SaveChanges();
+
+
+                }
+            }
+
+
+            if (obj.PaymentDue == true)
+            {
+                var service = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                service.ServiceStartDate = model.Booking_date;
+                service.ServiceHours = double.Parse(model.Booking_time);
+
+                _helperlandcontext.Entry(service).State = EntityState.Modified;
+                _helperlandcontext.SaveChanges();
+
+                var service_address = _helperlandcontext.ServiceRequestAddresses.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+
+                service_address.AddressLine1 = model.Street;
+                service_address.AddressLine2 = model.House_number;
+                service_address.City = model.Location;
+                service_address.PostalCode = model.Zipcode;
+
+                _helperlandcontext.Entry(service_address).State = EntityState.Modified;
+                _helperlandcontext.SaveChanges();
+                ViewBag.is_updated_address = "Service Details Edited Succesfully!";
+
+
+
+                //send mail to user and sp
+                var userr = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                var userridd = userr.UserId;
+                var SPID = userr.ServiceProviderId;
+                var email = _helperlandcontext.Users.Where(x => x.UserId == userridd).ToList().FirstOrDefault().Email;
+
+                //send mail to user
+                MailMessage mm = new MailMessage("pmmakadiya1@gmail.com", email);
+                mm.Subject = "Changes made by Admin";
+
+                mm.Body = "Admin has updated details of service with id " + model.ID + " And, new date is " + model.Booking_date;
+                mm.IsBodyHtml = false;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                NetworkCredential nc = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = nc;
+                smtp.Send(mm);
+
+                //send mail to service provider iff assigned
+                if(userr.ServiceProviderId != null)
+                {
+                    var userr2 = _helperlandcontext.ServiceRequests.Where(x => x.ServiceRequestId == model.ID).ToList().FirstOrDefault();
+                    //var userridd2 = userr2.UserId;
+                    var SPID2 = userr2.ServiceProviderId;
+                    var email2 = _helperlandcontext.Users.Where(x => x.UserId == SPID2).ToList().FirstOrDefault().Email;
+
+                    MailMessage mm2 = new MailMessage("pmmakadiya1@gmail.com", email2);
+                    mm2.Subject = "Changes made by Admin";
+
+                    mm2.Body = "Admin has updated details of service with id " + model.ID + " And, new date is " + model.Booking_date;
+                    mm2.IsBodyHtml = false;
+                    SmtpClient smtp2 = new SmtpClient();
+                    smtp2.Host = "smtp.gmail.com";
+                    smtp2.Port = 587;
+                    smtp2.EnableSsl = true;
+                    NetworkCredential nc2 = new NetworkCredential("pmmakadiya1@gmail.com", "123456789@gmail.com");
+                    smtp2.UseDefaultCredentials = true;
+                    smtp2.Credentials = nc2;
+                    smtp2.Send(mm2);
+
+                }
+
+            }
+            else
+            {
+                ViewBag.is_service_conflict = "Can not Edit this service with selected date and time, Because it conflicts with another service of assigned service Provider";
+            }
+
 
             //_helperlandcontext = new HelperlandContext();
             var model_to_pass = _helperlandcontext.ServiceRequests.Where(x => true).ToList();
@@ -552,8 +652,11 @@ namespace Tatvasoft_Project.Controllers
                 }
             }
 
+            //sending mail code
+            
+            
+
             ViewBag.data = item;
-            ViewBag.is_updated_address = "Service Details Edited Succesfully!";
             return View("Views/Admin/Service_Page.cshtml");
         }
 
